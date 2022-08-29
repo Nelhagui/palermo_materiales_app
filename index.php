@@ -23,22 +23,24 @@
             <button id="iniciar">Iniciar sesión</button>
             <button id="registrarme">Registrarme</button>
         </nav>
-        <div class="cont-login" data-show="iniciar">
-            <div class="login">
-                <h1>contenido para loguearme</h1>
-                <input type="text">
-                <input type="text">
-                <textarea name="" id="" cols="30" rows="10"> Hola como estas</textarea>
+        <div class="cont-login-registro">
+            <div class="cont-login" data-show="iniciar">
+                <div class="login">
+                    <h1>contenido para loguearme</h1>
+                    <input type="text">
+                    <input type="text">
+                    <textarea name="" id="" cols="30" rows="10"> Hola como estas</textarea>
+                </div>
             </div>
-        </div>
-        <div class="cont-registro" data-show="registrarme">
-            <div class="registro">
-                <h1>contenido para registrame</h1>
-                <input type="text">
-                <textarea name="" id="" cols="30" rows="10"> Hola como estas</textarea>
-                <input type="text">
-                <input type="text">
-                <textarea name="" id="" cols="30" rows="10"> Hola como estas</textarea>
+            <div class="cont-registro" data-show="registrarme">
+                <div class="registro">
+                    <h1>contenido para registrame</h1>
+                    <input type="text">
+                    <textarea name="" id="" cols="30" rows="10"> Hola como estas</textarea>
+                    <input type="text">
+                    <input type="text">
+                    <textarea name="" id="" cols="30" rows="10"> Hola como estas</textarea>
+                </div>
             </div>
         </div>
         <main>

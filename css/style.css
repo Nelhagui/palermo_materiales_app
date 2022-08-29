@@ -1,3 +1,4 @@
+
 /* header */
 header { height: var(--height-header); background: #e9a107; display: flex; align-items: center; }
 .hamburger {padding-left: 15px;}
@@ -7,35 +8,13 @@ header { height: var(--height-header); background: #e9a107; display: flex; align
 .hamburger.is-active .line:nth-child(3){ -webkit-transform: translateX(-10px) rotate(45deg); -ms-transform: translateX(-10px) rotate(45deg); -o-transform: translateX(-10px) rotate(45deg); transform: translateX(-10px) rotate(45deg);}
 
 /* nav */
-nav { position: absolute; top: var(--height-header); left: -100%; background: #d6aeae; height: calc(100vh - var(--height-header)); width: 100%; transition-duration: .3s; } 
+nav { position: absolute; top: var(--height-header); left: -100%; background: #ffffff; height: calc(100vh - var(--height-header)); width: 100%; transition-duration: .3s; } 
 nav.show {left: 0%; transition-duration: .3s;}
 
 /* login - registro */
+.cont-login-registro { position: absolute; top: 0; height: 100vh; background: #00000061; width: 100%; left: 0; visibility: hidden; opacity: 0; transition-duration: .4s; }
+.cont-login-registro.show {visibility: visible; transition-duration: .4s; opacity: 1;}
+.cont-login, .cont-registro { transition-duration: .2s; position: absolute; display: flex; align-items: end; bottom: -100%; width: 100%; left: 0; overflow: hidden; height: 0%;}
+.cont-login.show, .cont-registro.show { transition-duration: .2s; bottom: 0%; height: 100%; }
+.login, .registro { display: flex; width: 100%; flex-wrap: wrap; flex-direction: column; padding: 20px; background: white; }
 
-.cont-login, .cont-registro {
-    position: absolute;
-    bottom: -100%;
-    left: 0;
-    height: 0vh;
-    overflow: hidden;
-    width: 100%;
-    background: #0000005e;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    transition-duration: .4s
-}
-.cont-login.show, .cont-registro.show {
-    bottom: 0;
-    height: 100vh;
-    transition-duration: .4s;
-}
-/* .cont-login.show, .cont-registro.show {height: 100%; transition-duration: .2s;} */
-
-.registro, .login {
-    display: flex;
-    flex-direction: column;
-    background: white;
-    width: 100%;
-    padding: 20px 20px;
-}
