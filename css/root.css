@@ -1,0 +1,16 @@
+* { 
+    font-size: inherit; 
+    font-weight: inherit;
+    font-style: inherit;
+    color: inherit;
+    padding: 0;
+    margin: 0;
+}
+:root 
+{
+    --color-one: #EC6F66;
+    --color-two: #EC6F66;
+    --height-header: 70px;
+}
+li {list-style: none; }
+a {text-decoration: none;}
