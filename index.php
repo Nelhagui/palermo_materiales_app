@@ -20,26 +20,131 @@
             </div>
         </header>
         <nav>
-            <button id="iniciar">Iniciar sesión</button>
-            <button id="registrarme">Registrarme</button>
+            <div>
+                <img src="" alt="">
+                <h1>Inicia Sesión</h1>
+                <p>Inicia sesión para comenzar a comprar</p>
+                
+                <button data-accion='iniciar'>Iniciar sesión</button>
+                <button data-accion="registrarme">Registrame</button>
+            </div>
+            <ul>
+                <li class="item-menu">
+                    <a href="#home">
+                        <div>
+                            <img src="" alt="">
+                            Home
+                        </div>
+                        <span>></span>
+                    </a>
+                </li>
+                <li class="item-menu">
+                    <a href="#perfil">
+                        <div>
+                            <img src="" alt="">
+                            Perfil
+                        </div>
+                        <span>></span>
+                    </a>
+                </li>
+                <li class="item-menu">
+                    <a href="#productos">
+                        <div>
+                            <img src="" alt="">
+                            Productos
+                        </div>
+                        <span>></span>
+                    </a>
+                </li>
+                <li class="item-menu">
+                    <a href="#cotizar">
+                        <div>
+                            <img src="" alt="">
+                            Cotizar
+                        </div>
+                        <span>></span>
+                    </a>
+                </li>
+                <li class="item-menu">
+                    <a href="#informacion">
+                        <div>
+                            <img src="" alt="">
+                            Información
+                        </div>
+                        <span>></span>
+                    </a>
+                </li>
+                <li class="item-menu">
+                    <a href="#terminos">
+                        <div>
+                            <img src="" alt="">
+                            Terminos y condiciones
+                        </div>
+                        <span>></span>
+                    </a>
+                </li>
+                <li class="item-menu">
+                    <a href="#cerrar-sesion">
+                        <div>
+                            <img src="" alt="">
+                            Cerrar sesión
+                        </div>
+                        <span>></span>
+                    </a>
+                </li>
+            </ul>
         </nav>
         <div class="cont-login-registro">
             <div class="cont-login" data-show="iniciar">
                 <div class="login">
-                    <h1>contenido para loguearme</h1>
-                    <input type="text">
-                    <input type="text">
-                    <textarea name="" id="" cols="30" rows="10"> Hola como estas</textarea>
+                    <form action="">
+                        <h1>Iniciar Sesión</h1>
+                        <p>Ingresa a tu cuenta para continuar</p>
+                        <div>
+                            <label for="">Ingresa tu email</label>
+                            <input type="text">
+                        </div>
+                        <div>
+                            <label for="">Ingresa la contraseña</label>
+                            <input type="password">
+                        </div>
+                        <button>INGRESAR</button>
+                        <a href="">Olvide la contraseña</a>
+                    </form>
+                    <p>¿No posees cuenta de usuario? Registrate ahora</p>
+                    <button data-accion='registrarme'>REGISTRARME</button>
                 </div>
             </div>
             <div class="cont-registro" data-show="registrarme">
                 <div class="registro">
-                    <h1>contenido para registrame</h1>
-                    <input type="text">
-                    <textarea name="" id="" cols="30" rows="10"> Hola como estas</textarea>
-                    <input type="text">
-                    <input type="text">
-                    <textarea name="" id="" cols="30" rows="10"> Hola como estas</textarea>
+                    <form action="">
+                        <h1>Registrame</h1>
+                        <p>Registrate para continuar</p>
+                        <div>
+                            <label for="">Ingresa tu nombre y apellido</label>
+                            <input type="text">
+                        </div>
+                        <div>
+                            <label for="">Ingresa tu telefono/celular</label>
+                            <input type="number">
+                        </div>
+                        <div>
+                            <label for="">Ingresa tu email</label>
+                            <input type="text">
+                        </div>
+                        <div>
+                            <label for="">Ingresa la contraseña</label>
+                            <input type="password">
+                        </div>
+                        <div>
+                            <label for="">Ingresa nuevamente la contraseña</label>
+                            <input type="password">
+                        </div>
+                        <button>CONTINUAR</button>
+                        <a href="">Olvide la contraseña</a>
+                    </form>
+                    <p>¿Ya tenes una cuenta de usuario? Ingresa ahora</p>
+                    <button data-accion='iniciar'>INICIAR SESION</button>
                 </div>
             </div>
         </div>
