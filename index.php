@@ -30,7 +30,7 @@
             </div>
             <ul>
                 <li class="item-menu">
-                    <a href="#home">
+                    <a href="#home" data-link>
                         <div>
                             <img src="" alt="">
                             Home
@@ -39,7 +39,7 @@
                     </a>
                 </li>
                 <li class="item-menu">
-                    <a href="#perfil">
+                    <a href="#perfil" data-link>
                         <div>
                             <img src="" alt="">
                             Perfil
@@ -48,7 +48,7 @@
                     </a>
                 </li>
                 <li class="item-menu">
-                    <a href="#productos">
+                    <a href="#productos" data-link>
                         <div>
                             <img src="" alt="">
                             Productos
@@ -57,7 +57,7 @@
                     </a>
                 </li>
                 <li class="item-menu">
-                    <a href="#cotizar">
+                    <a href="#cotizar" data-link>
                         <div>
                             <img src="" alt="">
                             Cotizar
@@ -66,7 +66,7 @@
                     </a>
                 </li>
                 <li class="item-menu">
-                    <a href="#informacion">
+                    <a href="#informacion" data-link>
                         <div>
                             <img src="" alt="">
                             Información
@@ -75,7 +75,7 @@
                     </a>
                 </li>
                 <li class="item-menu">
-                    <a href="#terminos">
+                    <a href="#terminos" data-link>
                         <div>
                             <img src="" alt="">
                             Terminos y condiciones
@@ -84,7 +84,7 @@
                     </a>
                 </li>
                 <li class="item-menu">
-                    <a href="#cerrar-sesion">
+                    <a href="#cerrar-sesion" data-link>
                         <div>
                             <img src="" alt="">
                             Cerrar sesión

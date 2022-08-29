@@ -1,5 +1,11 @@
 document.querySelector('.hamburger').addEventListener('click', function(){this.classList.toggle('is-active'); document.querySelector('nav').classList.toggle('show')})
 
+document.querySelectorAll('a[data-link]').forEach(element => {
+
+    element.onclick = function(){document.querySelector('.hamburger').classList.toggle('is-active'); document.querySelector('nav').classList.toggle('show')};   
+    
+});
+
 _cerrar_login_registro = function(e){
     if(e.target.classList.contains('cont-login') || e.target.classList.contains('cont-registro'))
     {
