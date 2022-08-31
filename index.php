@@ -30,7 +30,7 @@
             </div>
             <ul>
                 <li class="item-menu">
-                    <a href="#home" data-link>
+                    <a href="#home" data-link="home">
                         <div>
                             <img src="" alt="">
                             Home
@@ -39,7 +39,7 @@
                     </a>
                 </li>
                 <li class="item-menu">
-                    <a href="#perfil" data-link>
+                    <a href="#perfil" data-link="perfil">
                         <div>
                             <img src="" alt="">
                             Perfil
@@ -48,7 +48,7 @@
                     </a>
                 </li>
                 <li class="item-menu">
-                    <a href="#productos" data-link>
+                    <a href="#productos" data-link="productos">
                         <div>
                             <img src="" alt="">
                             Productos
@@ -57,7 +57,7 @@
                     </a>
                 </li>
                 <li class="item-menu">
-                    <a href="#cotizar" data-link>
+                    <a href="#cotizar" data-link="cotizar">
                         <div>
                             <img src="" alt="">
                             Cotizar
@@ -66,7 +66,7 @@
                     </a>
                 </li>
                 <li class="item-menu">
-                    <a href="#informacion" data-link>
+                    <a href="#informacion" data-link="informacion">
                         <div>
                             <img src="" alt="">
                             Información
@@ -75,7 +75,7 @@
                     </a>
                 </li>
                 <li class="item-menu">
-                    <a href="#terminos" data-link>
+                    <a href="#terminos" data-link="terminos">
                         <div>
                             <img src="" alt="">
                             Terminos y condiciones
@@ -149,7 +149,119 @@
             </div>
         </div>
         <main>
-            
+            <div data-seccion="home" class="seccion">
+                <div class="banner">
+                    <img src="" alt="">
+                </div>
+                <div class="op-seccion">
+                    <form action="" method="post" id="form-buscar-prod">
+                        <input type="text" value="" name="buscar" id="buscar-item">
+                    </form>
+                    <button>COTIZADOR ONLINE</button>
+                </div>
+                <div class="btn-categorias">
+                    <p>Productos más buscados</p>
+                    <div>
+                        <button>TECHO</button>
+                        <button>PARED</button>
+                        <button>TERMINACION</button>
+                        <button>IMPERMEABILIDAD</button>
+                    </div>
+                </div>
+                <div>
+                    <section class="lista-items" id="lista-items">
+                        <div class="item">
+                            <div class="img-item"><img src="" alt="">img</div>
+                            <div class="info-item">
+                                <div class="categoria-item">Techo / Construcción húmeda</div>
+                                <div class="valor-item">$956</div>
+                                <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
+                            </div>
+                            <div class="btn-item"><img src="" alt="">img</div>
+                        </div>
+                        <div class="item">
+                            <div class="img-item"><img src="" alt="">img</div>
+                            <div class="info-item">
+                                <div class="categoria-item">Techo / Construcción húmeda</div>
+                                <div class="valor-item">$956</div>
+                                <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
+                            </div>
+                            <div class="btn-item"><img src="" alt="">img</div>
+                        </div>
+                        <div class="item">
+                            <div class="img-item"><img src="" alt="">img</div>
+                            <div class="info-item">
+                                <div class="categoria-item">Techo / Construcción húmeda</div>
+                                <div class="valor-item">$956</div>
+                                <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
+                            </div>
+                            <div class="btn-item"><img src="" alt="">img</div>
+                        </div>
+                        <div class="item">
+                            <div class="img-item"><img src="" alt="">img</div>
+                            <div class="info-item">
+                                <div class="categoria-item">Techo / Construcción húmeda</div>
+                                <div class="valor-item">$956</div>
+                                <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
+                            </div>
+                            <div class="btn-item"><img src="" alt="">img</div>
+                        </div>
+                        <div class="item">
+                            <div class="img-item"><img src="" alt="">img</div>
+                            <div class="info-item">
+                                <div class="categoria-item">Techo / Construcción húmeda</div>
+                                <div class="valor-item">$956</div>
+                                <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
+                            </div>
+                            <div class="btn-item"><img src="" alt="">img</div>
+                        </div>
+                        <div class="item">
+                            <div class="img-item"><img src="" alt="">img</div>
+                            <div class="info-item">
+                                <div class="categoria-item">Techo / Construcción húmeda</div>
+                                <div class="valor-item">$956</div>
+                                <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
+                            </div>
+                            <div class="btn-item"><img src="" alt="">img</div>
+                        </div>
+                        <div class="item">
+                            <div class="img-item"><img src="" alt="">img</div>
+                            <div class="info-item">
+                                <div class="categoria-item">Techo / Construcción húmeda</div>
+                                <div class="valor-item">$956</div>
+                                <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
+                            </div>
+                            <div class="btn-item"><img src="" alt="">img</div>
+                        </div>
+                        <div class="item">
+                            <div class="img-item"><img src="" alt="">img</div>
+                            <div class="info-item">
+                                <div class="categoria-item">Techo / Construcción húmeda</div>
+                                <div class="valor-item">$956</div>
+                                <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
+                            </div>
+                            <div class="btn-item"><img src="" alt="">img</div>
+                        </div>
+                    </section>
+                </div>
+
+                
+            </div>
+            <div data-seccion="perfil" class="seccion">
+                <h1>perfil</h1>
+            </div>
+            <div data-seccion="productos" class="seccion">
+                <h1>productos</h1>
+            </div>
+            <div data-seccion="cotizar" class="seccion">
+                <h1>cotizar</h1>
+            </div>
+            <div data-seccion="informacion" class="seccion">
+                <h1>informacion</h1>
+            </div>
+            <div data-seccion="terminos" class="seccion">
+                <h1>terminos</h1>
+            </div>
         </main>
         <script src="js/app.js"></script>
     </body>

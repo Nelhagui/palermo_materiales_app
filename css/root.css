@@ -6,12 +6,18 @@
     padding: 0;
     margin: 0;
 }
-body { height: 100vh; background: #d2d2d2; }
+body { height: 100vh; background: #f5f3f3; }
 :root 
 {
     --color-one: #EC6F66;
     --color-two: #EC6F66;
-    --height-header: 70px;
+    --height-header: 55px;
+    --height-banner: 100px;
+
+    --height-opc-seccion: 42px;
+    --height-btn-cat: 87px;
+    --padding-lr: 14px;
+
 }
 li {list-style: none; }
 a {text-decoration: none;}
