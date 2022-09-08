@@ -6,18 +6,27 @@
     padding: 0;
     margin: 0;
 }
-body { height: 100vh; background: #f5f3f3; }
+.dinone {display: none !important;}
+body { height: 100vh; background: var(--color-back); }
 :root 
 {
-    --color-one: #EC6F66;
+    --color-one: #dba32b;
     --color-two: #EC6F66;
+    --color-back: #f5f3f3;
     --height-header: 55px;
-    --height-banner: 100px;
+    --height-banner: 140px;
 
-    --height-opc-seccion: 42px;
+    --border-color: gray;
+    --border-radius-btn: 4px;
+
+    --height-opc-seccion: 55px;
     --height-btn-cat: 87px;
-    --padding-lr: 14px;
-
+    --height-btn-ps: 40px;
+    --padding-lr: 1rem;
+}
+::-webkit-scrollbar {
+    display: none !important;
 }
 li {list-style: none; }
 a {text-decoration: none;}
+h1{font-size: 1.5em;}

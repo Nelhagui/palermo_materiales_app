@@ -7,7 +7,7 @@
 /* _________________________________________________________________________________________________________
    ___________________________    FUNCIONES GENERALES    ___________________________________________________
    _________________________________________________________________________________________________________ */
-url_ajax    = 'php/funciones.php';
+url_ajax    = 'https://api.palermomateriales.com.ar/api/';
 metodo_ajax = 'POST';
 var $_cntotal = 0;
 
@@ -27,29 +27,9 @@ NodeList.prototype.remove  = HTMLCollection.prototype.remove = function() {for(v
 /* _________________________________________________________________________________________________________
    ___________________________    FUNCIONES RECIBE DATOS DE PHP    __________________________________________
    _________________________________________________________________________________________________________ */
-   $r.ajax  = function(url, metodo, datos) 
-   {
-      var a = new XMLHttpRequest(); 
-      a.open(metodo, url, true);
-      a.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-      a.send(datos);
-            var _esp = 0;
-            if(datos.indexOf("&")>-1)
-               _esp = datos.split("&")[0].split("=")[1];
-            else
-               _esp = datos.split("=")[1];
-      a.onreadystatechange = function () {
-         if(a.readyState == 4 && a.status != 200)
-             _recibe_errores_ajax(_esp);
-         else if(a.readyState == 4 && a.status == 200)
-         {
-            ((url.indexOf(".html") >-1)) ? j = a.responseText : j = JSON.parse(a.responseText);
-            _recibe_ajax(j,_esp);
-         }
-      };
-   };
+   
 
-   $r.ajax2 = function(_obd) 
+   $r.ajax = function(_obd) 
    {
          var _psa = true;
          if(typeof _obd != "object")
@@ -122,23 +102,7 @@ NodeList.prototype.remove  = HTMLCollection.prototype.remove = function() {for(v
    };
 
 
-   $r.node  = function(url, metodo, datos) 
-   {
-      var a = new XMLHttpRequest(); 
-      a.open(metodo, url, true);
-      a.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-      a.send(datos);
-      a.onreadystatechange = function (j) {
-         if(a.readyState == 4 && a.status == 403)
-            console.log('no-aca-no')
-         else if(a.readyState == 4 && a.status == 200)
-         {
-            console.log("bienvenido")
-            j = JSON.parse(a.responseText);
-            _recibe_ajax(j,j.termina);
-         }
-      };
-   };
+   
 /* _________________________________________________________________________________________________________
    ___________________________    FUNCIONES UTILES DE USO DIARIO    ________________________________________
    _________________________________________________________________________________________________________ */
