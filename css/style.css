@@ -189,9 +189,10 @@ li.item-menu {
     display: flex;
     flex-direction: column;
     padding: 14px 13px 13px 13px;
+    max-width: 41%;
 }
 /* botones */
-.button:active, .link:active {
+.button:active, .link:active, .card-categoria:active, .card-categoria-lista:active  {
     transform: scale(0.98);
 }
 button {
@@ -387,7 +388,7 @@ h1.primary {color: var(--color-one);}
     max-width: 100%;
     padding-bottom: .8rem;
     margin-bottom: .8rem;
-    border-bottom: 1px solid black;
+    border-bottom: .5px solid var(--border-color);
 }
 .card-categoria-lista {
     display: flex;
@@ -398,11 +399,13 @@ h1.primary {color: var(--color-one);}
     padding: .5rem;
     border-radius: var(--border-radius-btn);
     position: relative;
+    transition-duration: .2s;
 }
 .card-categoria-lista p {
     color: white;
     border: .5px solid white;
     padding: .1rem 0.8rem;
+    transition-duration: .2s;
 }
 .card-categoria-lista:first-child {
     margin-left: var(--padding-lr);
@@ -454,14 +457,14 @@ h1.primary {color: var(--color-one);}
     display: flex;
     min-width: max-content;
     background-color: var(--color-back);
-    padding: .8rem;
+    padding: .6rem .8rem;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
     margin-right: .5rem;
 }
-.filtro:first-child, .cont-gral-filtro p{
-    margin-left: 1rem;
+.cont-gral-filtro > p, .cont-filtros > div:first-child {
+    margin-left: .5rem;
 }
 .filtro p {margin-right: var(--padding-lr)}
 
@@ -572,10 +575,12 @@ h1.primary {color: var(--color-one);}
 .resp-add-items-cart {border-top: none!important;}
 .resp-add-items-cart .button.primary {margin-bottom: .5rem;}
 .card-categoria-lista.selected {
-    background-color: rgb(219 163 43 / 56%);
+    background-color: rgb(219 163 43 / 82%);
+    transition-duration: .1s;
 }
 .card-categoria-lista.selected p {
     border: none;
+    transition-duration: .2s;
 }
 /* ver */
 .backImagen {

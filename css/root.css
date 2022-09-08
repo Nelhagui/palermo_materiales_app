@@ -22,7 +22,7 @@ body { height: 100vh; background: var(--color-back); }
     --height-opc-seccion: 55px;
     --height-btn-cat: 87px;
     --height-btn-ps: 40px;
-    --height-filtro: 89px;
+    --height-filtro: 76px;
     --padding-lr: 1rem;
 }
 ::-webkit-scrollbar {
