@@ -2,6 +2,7 @@ $r.dom();
 //variables a utilzar en todo el sistema
 let categorias = [];
 let productos = [];
+let historialFiltros = [];
 let carrito = [];
 let tiempoEnActualizarInfo = 3;
 
@@ -21,8 +22,8 @@ delete _cerrar_login_registro;
 // apertura de login o registro
 _login_registro = function(){
     document.querySelectorAll('[data-show]').forEach(element => { element.classList.remove('show'); });
-    if(this.dataset.accion != "cerrar"){
-        console.log(this.dataset.accion);
+    if(this.dataset.accion != "cerrar")
+    {
         document.querySelector('[data-show="'+this.dataset.accion+'"]').classList.toggle('show');
         document.querySelector('.cont-elementos-emergentes').classList.add('show');
     }
@@ -38,7 +39,6 @@ delete _login_registro;
 document.querySelectorAll('a[data-link]').forEach(element => {
     element.onclick = function()
     {
-        console.log('cargooo')
         document.querySelectorAll('[data-seccion]').forEach(element => { element.classList.remove('show') });
         document.querySelector('[data-seccion="'+this.dataset.link+'"]').classList.add('show');
         switch (this.dataset.link) 
@@ -53,8 +53,6 @@ document.querySelectorAll('a[data-link]').forEach(element => {
                 console.log('productos');
             break;
             case 'cotizar':
-                console.log('cotizar'); 
-                console.log(categorias);
                 if(!contenidoActualizado(categorias)) 
                 {
                     console.log('mando ajax')
@@ -153,15 +151,32 @@ function maquetoCategorias(idElemento, array)
                     let cardCate = document.createElement('div');
                         cardCate.classList.add('card-categoria');
                         cardCate.dataset.idItem = categoria.id;
-                        cardCate.innerHTML = '<p>'+categoria.titulo.toUpperCase()+'</p>\
-                                        <img src="" alt="">';
+                        cardCate.innerHTML = '<p>'+categoria.titulo.toUpperCase()+'</p>';
+
+                        // caja para fondo
+                        let divImg = document.createElement('div');
+                            divImg.classList.add('backImagen');
+                            divImg.style.backgroundImage = 'url('+categoria.foto+')';
+                            // center center no-repeat scroll transparent'
+                            divImg.style.backgroundPosition = "center center";
+                            divImg.style.backgroundSize = "cover";
+                            divImg.style.backgroundRepeat = 'repeat';
+                            divImg.style.filter = "brightness(0.6)"
+                            divImg.style.borderRadius = "var(--border-radius-btn)";
+                            cardCate.appendChild(divImg);
                         cardCate.onclick = function()
                         {
                             //marco el boton seleccionado
-                            document.getElementById('lista-categorias').querySelector('[data-id-item="'+this.dataset.idItem+'"]').classList.add('selected');
+                                document.getElementById('lista-categorias').querySelector('[data-id-item="'+this.dataset.idItem+'"]').classList.add('selected');
+
                             //oculto la lista de cards grandes y muestro las chicas
+                                let data = { 'muestro': ['lista-categorias', 'opciones-subcategorias'], 'oculto': ['categorias-cotizar'] };
+                                ocultoMuestro(data);
                                 // ver como hacer
-                            //traigo la lista de subcategorias de este elmento
+                            
+                                //borro historial de los filtros de subcategorias
+                                borrarHistorialFiltros()
+                                //traigo la lista de subcategorias de este elmento
                                 traerSubcategorias('opciones-subcategorias', 'cotizable', categoria.id)
                                 //armar funcion para traida de subcategorias
 
@@ -172,10 +187,30 @@ function maquetoCategorias(idElemento, array)
                     let cardCate2 = document.createElement('div');
                         cardCate2.classList.add('card-categoria-lista');
                         cardCate2.dataset.idItem = categoria.id;
-                        cardCate2.innerHTML = '<p>'+categoria.titulo.toUpperCase()+'</p>\
-                                        <img src="" alt="">';
+                        cardCate2.innerHTML = '<p>'+categoria.titulo.toUpperCase()+'</p>';
+
+                        // caja para fondo
+                        let divImg2 = document.createElement('div');
+                            divImg2.classList.add('backImagen');
+                            divImg2.style.backgroundImage = 'url('+categoria.foto+')';
+                            // center center no-repeat scroll transparent'
+                            divImg2.style.backgroundPosition = "center center";
+                            divImg2.style.backgroundSize = "cover";
+                            divImg2.style.backgroundRepeat = 'repeat';
+                            divImg2.style.filter = "brightness(0.6)"
+                            divImg2.style.borderRadius = "var(--border-radius-btn)";
+                            cardCate2.appendChild(divImg2);
+
                         cardCate2.onclick = function()
                         {
+                            //cambio el estilo del boton seleccionado y los que no
+                            document.getElementById('lista-categorias').querySelectorAll('.card-categoria-lista').forEach(card => {
+                                card.classList.remove('selected');
+                            });
+                            this.classList.add('selected')
+
+                            //borro historial de los filtros de subcategorias
+                            borrarHistorialFiltros()
                             //traigo la lista de subcategorias de este elemento;
                             traerSubcategorias('opciones-subcategorias', 'cotizable', categoria.id)
                         }
@@ -198,7 +233,6 @@ function traerSubcategorias(idElemento, tipo, idCategoria)
 {
     let procesa_respuesta = function(data)
     {    
-        console.log(data);
         if(!Array.isArray(data))
         {
             alert('No se encontraron categorías, reinicie la app');
@@ -209,13 +243,46 @@ function traerSubcategorias(idElemento, tipo, idCategoria)
             {
                 document.getElementById(idElemento).innerHTML = "";
                 //vero que hacer
-                data.forEach( subcategoria => {
+                data.forEach( item => 
+                {
                     let cardSub = document.createElement('div');
+                    // valido el tipo de elemento que llega. Categoria o Producto combinado tienen diferente maquetado
+                    if(item.tipo == "categoria")
+                    {
                         cardSub.classList.add('opcion-subcategoria');
+                        cardSub.onclick = function() 
+                        {
+                            //muestro los filtros
+                            document.getElementById('cont-filtros').classList.add('show');
+                            addPasosEnFiltro(item);
+                            
+                            traerSubcategorias('opciones-subcategorias', 'cotizable', item.id)
+                        }
                         cardSub.innerHTML = '<div class="icon-opc-sub">\
                                                 <img src="" alt="">\
                                             </div>\
-                                            <p>'+subcategoria.titulo+'</p>';
+                                            <p>'+item.titulo+'</p>';
+
+                    }
+                    else if ( item.tipo == "producto_combinado" ) 
+                    {
+                            cardSub.classList.add('item');
+                            cardSub.innerHTML = '<div class="img-item">\
+                                                    <img src="'+item.foto+'" alt="">\
+                                                </div>\
+                                                <div class="info-item">\
+                                                    <div class="categoria-item">Techo / Construcción húmeda</div>\
+                                                    <div class="titulo-item">'+item.titulo+'</div>\
+                                                </div>';
+                                let btnCotizar = document.createElement('div');
+                                    btnCotizar.classList.add('btn-item', 'cotizar');
+                                    btnCotizar.onclick = function () {
+                                        console.log('quiero vista de cotizar');
+                                    };
+                                    btnCotizar.innerHTML = '<img src="./resources/icon-cotizar.svg" alt="">\
+                                                            <span class="comentario">Cotizar</span>';
+                            cardSub.appendChild(btnCotizar);
+                    }
                     document.getElementById(idElemento).appendChild(cardSub);
                 });
                 
@@ -230,4 +297,48 @@ function traerSubcategorias(idElemento, tipo, idCategoria)
     $r.ajax(_obd);  
     delete procesa_respuesta;
 
+}
+
+function ocultoMuestro(data)
+{
+    if(data.muestro != undefined)
+    {
+        if(data.muestro.length > 0){
+            data.muestro.forEach(element => {
+                document.getElementById(element).classList.remove('dinone');
+            });
+        }
+    } 
+    if(data.oculto != undefined)
+    {
+        if(data.oculto.length > 0)
+        {
+            data.oculto.forEach(element => {
+                document.getElementById(element).classList.add('dinone');
+            });
+        }
+    }
+}
+function addPasosEnFiltro(data)
+{
+    historialFiltros.push(data);
+    let div = document.createElement('div');
+        div.classList.add('filtro');
+            let titulo = document.createElement('p');
+                titulo.innerHTML = data.titulo;
+            let sacarItem = document.createElement('span');
+                sacarItem.innerHTML = 'X';
+        div.appendChild(titulo);
+        div.appendChild(sacarItem);
+    document.getElementById('filtros').appendChild(div);
+    // <div class="filtro">
+    //     <p>Construcción en seco</p>
+    //     <span>X</span>
+    // </div>
+
+}
+function borrarHistorialFiltros(){
+    historialFiltros = [];
+    document.getElementById('cont-filtros').classList.remove('show');
+    document.getElementById('filtros').innerHTML = '';
 }
