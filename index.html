@@ -100,7 +100,7 @@
             </ul>
         </nav>
         <div class="cont-elementos-emergentes">
-            <div class="cont-login" data-show="iniciar">
+            <div class="elemento-emergente" data-show="iniciar">
                 <div class="login">
                     <div class="btn-cerrar" data-accion="cerrar">x</div>
                     <form action="">
@@ -124,7 +124,7 @@
                     <button data-accion='registrarme' class="button secundary">REGISTRARME</button>
                 </div>
             </div>
-            <div class="cont-registro" data-show="registrarme">
+            <div class="elemento-emergente" data-show="registrarme">
                 <div class="registro">
                     <div class="btn-cerrar" data-accion="cerrar">x</div>
                     <form action="">
@@ -159,7 +159,7 @@
                     <button data-accion='iniciar' class="button secundary">INICIAR SESION</button>
                 </div>
             </div>
-            <div class="cont-edit-perfil" data-show="edit-perfil">
+            <div class="elemento-emergente" data-show="edit-perfil">
                 <div class="edit-perfil">
                     <div class="btn-cerrar" data-accion="cerrar">x</div>
                     <form action="">
@@ -193,7 +193,7 @@
                     </form>
                 </div>
             </div>
-            <div class="cont-add-items-cart" data-show="add-items-cart">
+            <div class="elemento-emergente" data-show="add-items-cart">
                 <div class="resp-add-items-cart">
                     <div class="btn-cerrar" data-accion="cerrar">x</div>
                     <img src="" alt="">
@@ -204,13 +204,147 @@
                     
                 </div>
             </div>
+            <div class="elemento-emergente" data-show="abonar-mp">
+                <div class="abononar-mp">
+                    <div class="btn-cerrar" data-accion="cerrar">x</div>
+                    <div>
+                        <h1>Abonar con Mercado Pago</h1>
+                        <span>Complete el formulario con los datos solicitados</span>
+                    </div>
+                    <hr>
+                    <form action="" id="form-mp">
+                        <div class="cont-form">
+                            <label for="">Número de tarjeta</label>
+                            <input type="number">
+                        </div>
+                        <div class="colspan-2">
+                            <div class="cont-form">
+                                <label for="">CVV</label>
+                                <input type="number">
+                            </div>
+                            <div class="cont-form">
+                                <label for="">Vencimiento</label>
+                                <input type="date">
+                            </div>
+                        </div>
+                        <div class="cont-form">
+                            <label for="">Medio de pago</label>
+                            <input type="text">
+                        </div>
+                        <div class="cont-form">
+                            <label for="">Nombre del titular</label>
+                            <input type="text">
+                        </div>
+                        <div class="colspan-2">
+                            <div class="cont-form">
+                                <label for="">Tipo de documento</label>
+                                <select name="tipo_documento" id="tipo_documento">
+                                    <option value="">DNI</option>
+                                    <option value="">Cedula</option>
+                                </select>
+                            </div>
+                            <div class="cont-form">
+                                <label for="">Nro. de documento</label>
+                                <input type="number">
+                            </div>
+                        </div>
+                        <div class="cont-form">
+                            <label for="">Ingresa email</label>
+                            <input type="email">
+                        </div>
+                        <button class="button primary">INGRESAR</button>
+                        <button class="button secundary">REGRESAR</button>
+                        
+                    </form>
+                    
+                </div>
+            </div>
+            <div class="elemento-emergente" data-show="coordinar-mail">
+                <div class="coordi-mail">
+                    <div class="btn-cerrar" data-accion="cerrar">x</div>
+                    <div>
+                        <h1>Abonar con Mercado Pago</h1>
+                        <p>Escribimos a pedidos@palermomateriales.com.ar, haciendo referencia a tu número de orden con 72hs. de anticipación para poder coordinar la forma de pago y la entrega.</p>
+                        <p>También podés hacerlo a través de nuestro WhatsApp (011) 8986-767756 de Lunes a viernes.</p>
+                    </div>
+                    <div>
+                        <button class="button primary">REALIZAR UNA NUEVA COMPRA</button>
+                    </div>
+                    
+                </div>
+            </div>
+            <!-- <div class="elemento-emergente filtros" data-show="filtros">
+                <div class="filtros">
+                    <div class="btn-cerrar" data-accion="cerrar">x</div>
+                    <div>
+                        <img src="" alt="">
+                        <p>Filtrar</p>
+                    </div>
+                    <div class="cont-filtros-pro">
+                        <div class="item-filtro-pro">
+                            <div class="accordion productos">
+                                <div>
+                                    <p>Ordenar por</p>
+                                </div>
+                                <div>
+                                    >
+                                </div>
+                            </div>
+                            <div class="contenido-accordion">
+                                <label class="item-grupo-pro">
+                                    <div>Placa Durlock STD 9.5 1200X3.200</div>
+                                    <input type="checkbox">
+                                </label>
+                                <label class="item-grupo-pro">
+                                    <div>Placa Doble X3.200</div>
+                                    <input type="checkbox">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="item-filtro-pro">
+                            <div class="accordion productos">
+                                <div>
+                                    <p>Categorías</p>
+                                </div>
+                                <div>
+                                    >
+                                </div>
+                            </div>
+                            <div class="contenido-accordion">
+                                <div class="accordion productos">
+                                    <div>
+                                        <p>TECHOS</p>
+                                    </div>
+                                    <div>
+                                        >
+                                    </div>
+                                </div>
+                                <div class="contenido-accordion">
+                                    <label class="item-grupo-pro">
+                                        <div>Techos</div>
+                                        <input type="checkbox">
+                                    </label>
+                                    <label class="item-grupo-pro">
+                                        <div>Placa Doble X3.200</div>
+                                        <input type="checkbox">
+                                    </label>
+                                </div>
+                                <label class="item-grupo-pro">
+                                    <div>Placa Doble X3.200</div>
+                                    <input type="checkbox">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
         </div>
         <main>
             <div data-seccion="home" class="seccion">
                 <div class="banner">
                 </div>
                 <div class="op-seccion">
-                    <form action="" method="post" id="form-buscar-prod">
+                    <form action="" method="post" id="form-buscar-prod-inicio">
                         <div class="search">
                             <input type="text" value="" name="buscar" id="buscar-item" placeholder="buscar producto">
                         </div>
@@ -313,6 +447,109 @@
 
                 
             </div>
+            <div data-seccion="productos" class="seccion show">
+                <div class="banner">
+                </div>
+                <div class="op-seccion">
+                    <form action="" method="post" id="form-buscar-prod">
+                        <div class="search">
+                            <input type="text" value="" name="producto" id="buscar-prod" placeholder="buscar producto">
+                        </div>
+                    </form>
+                    <button class="button primary">COTIZADOR ONLINE</button>
+                </div>
+                <div>
+                    <div class="opt-filtros">
+                        <span>4 Resultados</span>
+                        <div class="conte-filtros">
+                            <img src="" alt="">
+                            <p>Filtrar</p>
+                        </div>
+                    </div>
+                    <section class="lista-items" id="lista-items">
+                        <div class="item">
+                            <div class="img-item"><img src="" alt=""></div>
+                            <div class="info-item">
+                                <div class="categoria-item "></div>
+                                <div class="valor-item "></div>
+                                <div class="titulo-item "></div>
+                                <div class="descripcion-item "></div>
+                            </div>
+                            <div class="btn-item cotizar"><img src="" alt=""></div>
+                        </div>
+                        <div class="item">
+                            <div class="img-item "><img src="" alt=""></div>
+                            <div class="info-item">
+                                <div class="categoria-item "></div>
+                                <div class="valor-item "></div>
+                                <div class="titulo-item "></div>
+                                <div class="descripcion-item "></div>
+                            </div>
+                            <div class="btn-item "><img src="" alt=""></div>
+                        </div>
+                        <div class="item">
+                            <div class="img-item"><img src="" alt=""></div>
+                            <div class="info-item">
+                                <div class="categoria-item"></div>
+                                <div class="valor-item"></div>
+                                <div class="titulo-item"></div>
+                                <div class="descripcion-item"></div>
+                            </div>
+                            <div class="btn-item"><img src="" alt=""></div>
+                        </div>
+                        <div class="item">
+                            <div class="img-item"><img src="" alt="">img</div>
+                            <div class="info-item">
+                                <div class="categoria-item">Techo / Construcción húmeda</div>
+                                <div class="valor-item">$956</div>
+                                <div class="titulo-item">Pintura asfáltica</div>
+                                <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
+                            </div>
+                            <div class="btn-item"><img src="" alt="">img</div>
+                        </div>
+                        <div class="item">
+                            <div class="img-item"><img src="" alt="">img</div>
+                            <div class="info-item">
+                                <div class="categoria-item">Techo / Construcción húmeda</div>
+                                <div class="valor-item">$956</div>
+                                <div class="titulo-item">Pintura asfáltica</div>
+                                <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
+                            </div>
+                            <div class="btn-item"><img src="" alt="">img</div>
+                        </div>
+                        <div class="item">
+                            <div class="img-item"><img src="" alt="">img</div>
+                            <div class="info-item">
+                                <div class="categoria-item">Techo / Construcción húmeda</div>
+                                <div class="valor-item">$956</div>
+                                <div class="titulo-item">Pintura asfáltica</div>
+                                <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
+                            </div>
+                            <div class="btn-item"><img src="" alt="">img</div>
+                        </div>
+                        <div class="item">
+                            <div class="img-item"><img src="" alt="">img</div>
+                            <div class="info-item">
+                                <div class="categoria-item">Techo / Construcción húmeda</div>
+                                <div class="valor-item">$956</div>
+                                <div class="titulo-item">Pintura asfáltica</div>
+                                <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
+                            </div>
+                            <div class="btn-item"><img src="" alt="">img</div>
+                        </div>
+                        <div class="item">
+                            <div class="img-item"><img src="" alt="">img</div>
+                            <div class="info-item">
+                                <div class="categoria-item">Techo / Construcción húmeda</div>
+                                <div class="valor-item">$956</div>
+                                <div class="titulo-item">Pintura asfáltica</div>
+                                <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
+                            </div>
+                            <div class="btn-item"><img src="" alt="">img</div>
+                        </div>
+                    </section>
+                </div>
+            </div>
             <div data-seccion="perfil" class="seccion">
                 <div class="header-perfil">
                     <div class="cont-img-user-per">
@@ -390,7 +627,7 @@
             <div data-seccion="productos" class="seccion">
                 <h1>productos</h1>
             </div>
-            <div data-seccion="cotizar" class="seccion show">
+            <div data-seccion="cotizar" class="seccion">
                 <div class="banner cotizar">
                 </div>
                 <div class="cont-titulo-info-seccion">
@@ -539,10 +776,155 @@
                 </button>
             </div>
             <div data-seccion="informacion" class="seccion">
-                <h1>informacion</h1>
+                <div class="img-info">
+
+                </div>
+                <div>
+                    <div>
+                        <img src="" alt="">
+                        <div class="item-info-per">
+                            <span>Nuestros teléfonos</span>
+                            <p>+549 (011) 2123985 | 8384</p>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="" alt="">
+                        <div class="item-info-per">
+                            <span>Consultas por mail</span>
+                            <p>ventas@palermomateriales.com.ar</p>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="" alt="">
+                        <div class="item-info-per">
+                            <span>Horarios de atención</span>
+                            <p>Lun. a Vier. de 07.30 a 12.00 hs.</p> <br>
+                            <p>y de 13.00 a 17.00 hs.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="" alt="">
+                        <div class="item-info-per">
+                            <span>Ubicación</span>
+                            <p>Av.Juan B.Justo 1700(C1414BHB) CABA, Argentina</p> <br>
+                            <p>Estacionamiento por J.A.Cabrera 5454</p>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="" alt="">
+                        <div class="item-info-per">
+                            <span>Sitio web</span>
+                            <p>www.palermomateriales.com.ar</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div data-seccion="terminos" class="seccion">
                 <h1>terminos</h1>
+            </div>
+            <div data-seccion="carrito" class="seccion">
+                <div class="item-paso">
+                    <div>
+                        <img src="" alt="">
+                        <p>Detalle</p>
+                    </div>
+                    <div>
+                        <img src="" alt="">
+                        <p>Datos</p>
+                    </div>
+                    <div>
+                        <img src="" alt="">
+                        <p>Pagos</p>
+                    </div>
+                </div>
+                <div id="carrito-detalle" class="dinone">
+                    <div>
+                        <div class="cabecera-list-items">
+                            <div>Productos simples</div>
+                            <div>Precio Final</div>
+                        </div>
+                        <div id="resumen-items-carrito">
+                            <div class="accordion">
+                                <div>
+                                    <p>Masilla Durlock multi balde 1.8Kg</p>
+                                    <span>Superficie: 1m2</span>
+                                </div>
+                                <div>
+                                    <p>$650</p>
+                                </div>
+                                <div>
+                                    <img src="" alt="">
+                                    <img src="" alt="">
+                                </div>
+                            </div>
+                            <div class="items-grupo">
+                                <div class="item-grupo">
+                                    <div>Placa Durlock STD 9.5 1200X3.200</div>
+                                    <div>Cantidad: 1</div>
+                                    <div>Precio unitario: $2188</div>
+                                </div>
+                                <div class="item-grupo">
+                                    <div>Placa Durlock STD 9.5 1200X3.200</div>
+                                    <div>Cantidad: 1</div>
+                                    <div>Precio unitario: $2188</div>
+                                </div>
+                            </div>
+                            <div class="accordion">
+                                <div>
+                                    <p>Cementos</p>
+                                    <span>Superficie: 13m2</span>
+                                </div>
+                                <div>
+                                    <p>$2650</p>
+                                </div>
+                                <div>
+                                    <img src="" alt="">
+                                    <img src="" alt="">
+                                </div>
+                            </div>
+                            <div class="items-grupo">
+                                <div class="item-grupo">
+                                    <div>Cemento Avellaneda 80Kg</div>
+                                    <div>Cantidad: 4</div>
+                                    <div>Precio unitario: $1880</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-list-cot">
+                            <p>TOTAL</p>
+                            <p>4</p>
+                            <p>$6608</p>
+                        </div>
+                        <div>
+                            <button class="button secundary">AGREGAR MAS PRODUCTOS</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="carrito-pago">
+                    <div class="cont-cards-ordenes">
+                        <div class="card-solicitud">
+                            <p>Número de orden: #113</p>
+                            <span>|</span>
+                            <p>27/08/1970</p>
+                            <button class="button secundary">Descargar orden</button>
+                        </div>
+                    </div>
+                    <div class="opc-pagos">
+                        <p>Formas de pago</p>
+                        <span>Para coordinar la entraga deberás contactarte a través de WhatsApp (011) 2843-0877 <br> de Lunes a Viernes </span>
+                        <div>
+                            <input type="radio" id="mp" name="metodo-pago">
+                            <label for="mp">Abonar con Mercado Pago</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="metodo-pago" id="mail">
+                            <label for="mail">Coordinar por mail</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-cont-carrito">
+                    <button class="button primary">CONTINUAR</button>
+                </div>
             </div>
         </main>
         <script src="js/app.js"></script>

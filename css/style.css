@@ -41,11 +41,25 @@ li.item-menu:last-child {
 /* login - registro */
 .cont-elementos-emergentes { position: fixed; top: 0; height: 100vh; background: #00000061; width: 100%; left: 0; visibility: hidden; opacity: 0; transition-duration: .4s; z-index: 999;}
 .cont-elementos-emergentes.show {visibility: visible; transition-duration: 0.2s; opacity: 1;}
-.cont-login, .cont-registro, .cont-edit-perfil, .cont-add-items-cart { transition-duration: .3s; position: absolute; display: flex; align-items: end; bottom: -100%; width: 100%; left: 0; overflow: hidden; height: 0%;}
-.cont-login.show, .cont-registro.show, .cont-edit-perfil.show, .cont-add-items-cart.show { 
+.elemento-emergente { transition-duration: .3s; position: absolute; display: flex; align-items: end; bottom: -100%; width: 100%; left: 0; overflow: hidden; height: 0%;}
+.elemento-emergente.show, .cont-registro.show { 
     transition-duration: .3s; 
     bottom: 0%; 
     height: 100%; 
+}
+.elemento-emergente > div {
+    display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-y: scroll;
+    flex-direction: column;
+    position: relative;
+    text-align: center;
+    padding: 30px 40px;
+    background: white;
+    max-height: 100vh;
+    box-sizing: border-box;
+    border-top: 4px solid var(--color-one);
 }
 
 
@@ -220,7 +234,7 @@ button {
 .cont-form label{
     text-align: left;
 }
-.cont-form input {
+.cont-form input, .cont-form select {
     margin-bottom: 15px;
     height: 40px;
 }
@@ -234,7 +248,7 @@ button {
     border-radius: 26px;
 }
 
-input {
+input, select {
     background-color: rgb(246, 246, 246);
     border: .5px solid rgb(187, 187, 187);
     border-radius: 2px;
@@ -250,20 +264,7 @@ label {
     right: 16px;
     padding: 5px;
 }
-.login, .registro, .edit-perfil, .resp-add-items-cart { 
-    display: flex; 
-    width: 100%; 
-    flex-wrap: nowrap; 
-    overflow-y: scroll;
-    flex-direction: column;
-    position: relative;
-    text-align: center;
-    padding: 30px 40px;
-    background: white; 
-    max-height: 100vh;
-    box-sizing: border-box;
-    border-top: 4px solid var(--color-one);
-}
+
 .login .button:last-child, .registro .button:last-child {
     margin-top: 8px;
 }
@@ -273,7 +274,7 @@ label {
 .titulo-contenido {
     margin-bottom: 2.5em;
 }
-.cont-registro hr, .cont-login hr {
+.elemento-emergente hr {
     margin: 15px 0;
     border: 0.2px solid #e6e6e6;
 }
@@ -590,4 +591,78 @@ h1.primary {color: var(--color-one);}
     top: 0;
     left: 0;
     z-index: -1;
+}
+
+/* carrito */
+.accordion {
+    background-color: rgb(255, 255, 255);
+    color: #444;
+    cursor: pointer;
+    border: none;
+    text-align: left;
+    outline: none;
+    transition: 0.4s;
+  }
+  
+  .active, .accordion:hover {
+    background-color: #ccc;
+  }
+  
+  .contenido-accordion {
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+  }
+  .abononar-mp {
+    background: white;
+    position: relative;
+    width: 100%;
+}
+.colspan-2 {
+    display: flex;
+}
+.colspan-2 > div {
+    width: 48.9%;
+}
+.colspan-2 > div:first-child {
+    margin-right: 2px;
+}
+.colspan-2 > div:last-child {
+    margin-left: 2px;
+}
+
+/* seccion productos */
+.opt-filtros-pro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.conte-filtros {
+    display: flex;
+}
+.filtros {
+    border-top: none !important;
+}
+.elemento-emergente.filtros.show > div {
+    padding: 0px;
+}
+.elemento-emergente.filtros.show {
+    align-items: center !important;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+.accordion.productos {
+    display: flex;
+    justify-content: space-between;
+}
+
+.item-grupo-pro {
+    display: flex;
+    justify-content: space-between;
+}
+.opt-filtros {
+    display: flex;
+    justify-content: space-between;
 }

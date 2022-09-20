@@ -8,17 +8,15 @@ let tiempoEnActualizarInfo = 3;
 
 document.querySelector('.hamburger').addEventListener('click', function(){this.classList.toggle('is-active'); document.querySelector('nav').classList.toggle('show')})
 
-_cerrar_login_registro = function(e) {
-    if(e.target.classList.contains('cont-login') || e.target.classList.contains('cont-registro') || e.target.classList.contains('cont-add-items-cart') || e.target.classList.contains('cont-edit-perfil')) {
+_mostrar_elemento_emergente = function(e) {
+    if(e.target.classList.contains('elemento-emergente')) {
         e.target.classList.toggle('show');
         document.querySelector('.cont-elementos-emergentes').classList.toggle('show');
     }
 }
-document.querySelector('.cont-login').addEventListener('click', _cerrar_login_registro, false);
-document.querySelector('.cont-registro').addEventListener('click', _cerrar_login_registro, false);
-document.querySelector('.cont-edit-perfil').addEventListener('click', _cerrar_login_registro, false);
-document.querySelector('.cont-add-items-cart').addEventListener('click', _cerrar_login_registro, false);
-delete _cerrar_login_registro;
+document.querySelector('.elemento-emergente').addEventListener('click', _mostrar_elemento_emergente, false);
+delete _mostrar_elemento_emergente;
+
 // apertura de login o registro
 _login_registro = function(){
     document.querySelectorAll('[data-show]').forEach(element => { element.classList.remove('show'); });
@@ -342,3 +340,19 @@ function borrarHistorialFiltros(){
     document.getElementById('cont-filtros').classList.remove('show');
     document.getElementById('filtros').innerHTML = '';
 }
+
+{
+    let acc = document.getElementsByClassName("accordion");
+    let i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        let panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+        } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+        } 
+        });
+}}
