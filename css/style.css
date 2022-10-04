@@ -372,6 +372,21 @@ h1.primary {color: var(--color-one);}
     background-color: white;
     padding: 1.1rem;
     margin-bottom: .5rem;
+    font-size: 13px;
+}
+.card-solicitud > div {
+    width: 33%;
+    display: flex;
+    align-items: center;
+}
+.cont-cards-solicitudes, .titulo-seccion-solicitud {
+    margin: 9px var(--padding-lr);
+}
+.card-solicitud > div:nth-child(2) {width: 5rem;}
+
+.card-solicitud > div:first-child {
+    min-width: max-content;
+    margin-right: .8rem;
 }
 
 /* cotizar */
