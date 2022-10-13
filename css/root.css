@@ -10,7 +10,7 @@
 body { height: 100vh; background: var(--color-back); }
 :root 
 {
-    --color-one: #dba32b;
+    --color-one: #f1972c;
     --color-two: #EC6F66;
     --color-back: #f5f3f3;
     --height-header: 55px;

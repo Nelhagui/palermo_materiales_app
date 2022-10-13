@@ -8,6 +8,52 @@ main {padding-top: var(--height-header);}
 .hamburger.is-active .line:nth-child(1){-webkit-transform: translateX(-10px) rotate(-45deg);-ms-transform: translateX(-10px) rotate(-45deg);-o-transform: translateX(-10px) rotate(-45deg);transform: translateX(-10px) rotate(-45deg);}
 .hamburger.is-active .line:nth-child(3){ -webkit-transform: translateX(-10px) rotate(45deg); -ms-transform: translateX(-10px) rotate(45deg); -o-transform: translateX(-10px) rotate(45deg); transform: translateX(-10px) rotate(45deg);}
 
+/* spinner */
+.spinner {
+    /* Size */
+    height: 4rem;
+    width: 4rem;
+    /* Create a curve at the top */
+    border: 4px solid #d1d5db;
+    border-top-color: var(--color-one);
+    border-radius: 50%;
+    animation: spinner 800ms linear infinite;
+}
+@keyframes spinner {
+    from {
+        transform: rotate(0deg);}
+    to {
+        transform: rotate(360deg);}
+}
+/* efecto loading */
+.sub-precarga.loading {
+    width: 100%;
+    display: flex;
+    height: 4rem;
+    align-items: center;
+    margin-bottom: .5rem;
+}
+.sub-item-1-loading {
+    width: 4rem;
+    height: 100%;
+    background: lightgrey;
+}
+
+.sub-item-2-loading {
+    height: .7rem;
+    width: 50%;
+    margin-left: 1rem;
+    background: lightgrey;
+    margin-bottom: .5rem;
+}
+.text-loading {
+    min-width: max-content;
+}
+
+.sub-item-2-loading.loa2 {
+    width: 4rem;
+}
+/* fin efecto loading */
 /* nav */
 nav { 
     position: fixed; 
@@ -22,6 +68,7 @@ nav {
     text-align: center; 
     transition-duration: .3s; 
     z-index: 888;
+    padding-top: 70px;
 } 
 nav.show {left: 0%; transition-duration: .3s;}
 .btn-nav-user-accion {
@@ -90,9 +137,7 @@ li.item-menu {
     top: -33px;
     border-radius: 50%;
 }
-.info-nav {
-    margin-top: 57px;
-}
+
 .cont-cont-img-user-per img {
     width: 85px;
     position: absolute;
@@ -227,12 +272,23 @@ li.item-menu {
 .button:active, .link:active, .card-categoria:active, .card-categoria-lista:active  {
     transform: scale(0.98);
 }
-button {
+.button.primary.disabled {
+    background-color: #e1b178;
+}
+.button.primary.disabled:active {
+    transform: inherit !important;
+    background-color: #e1b178;
+}
+
+button, .button {
     border: none;
     background-color: white;
     border-radius: 3px;
     height: var(--height-btn-ps);
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .button.primary, .button.seleccion {
     background-color: var(--color-one);
@@ -255,6 +311,7 @@ button {
 .cont-form input, .cont-form select {
     margin-bottom: 15px;
     height: 40px;
+    padding-left: 0.5rem;
 }
 .search input[type=text] {
     background-image: url(../resources/icon-search.svg);
@@ -399,7 +456,6 @@ h1.primary {color: var(--color-one);}
 }
 .cont-cards-categorias {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
     width: 100%;
 }
@@ -433,7 +489,7 @@ h1.primary {color: var(--color-one);}
 .card-categoria-lista {
     display: flex;
     justify-content: center;
-    width: 80.9%;
+    min-width: max-content;
     box-sizing: border-box;
     margin-right: .7rem;
     padding: .5rem;
@@ -529,6 +585,8 @@ h1.primary {color: var(--color-one);}
     min-width: 30%;
     background-color: white;
     border: .5px solid var(--border-color);
+    display: flex;
+    overflow: hidden;
 }
 .card-cotizar .info-card {
     display: flex;

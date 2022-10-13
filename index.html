@@ -18,11 +18,12 @@
             </div>
         </header>
         <nav>
-            <div class="cont-cont-img-user-per">
+            <div class="cont-cont-img-user-per" data-user>
                 <img src="./resources/user-foto.svg" alt="" class="">
+                <span data-user-info="nombre-apellido"></span>
             </div>
             
-            <div class="info-nav">
+            <div class="info-nav" data-visibilidad="login-no-activo">
                 <div class="estado-login-nav" id="estado-login-nav">
                     <h1>Inicia Sesión</h1>
                     <p class="comentario">Inicia sesión para comenzar a comprar</p>
@@ -31,7 +32,6 @@
                     <button data-accion='iniciar' class="button secundary">Iniciar sesión</button>
                     <button data-accion="registrarme" class="link">Registrame</button>
                 </div>
-                
             </div>
             <ul>
                 <li class="item-menu">
@@ -45,7 +45,7 @@
                         </span>
                     </a>
                 </li>
-                <li class="item-menu">
+                <li class="item-menu dinone" id="item-menu-perfil" data-visibilidad="login-activo">
                     <a href="#perfil" data-link="perfil">
                         <div>
                             <img src="./resources/mi_perfil.svg" alt="">
@@ -100,8 +100,8 @@
                         </span>
                     </a>
                 </li>
-                <li class="item-menu">
-                    <a href="#cerrar-sesion" data-link>
+                <li class="item-menu dinone" id="item-menu-cerrar-sesion" data-visibilidad="login-activo">
+                    <a href="#"  onclick="cerrarSesion()">
                         <div>
                             <img src="./resources/cerrar_sesion.svg" alt="">
                             Cerrar sesión
@@ -117,20 +117,20 @@
             <div class="elemento-emergente" data-show="iniciar">
                 <div class="login">
                     <div class="btn-cerrar" data-accion="cerrar">x</div>
-                    <form action="">
+                    <form action="#" id="form-login">
                         <div class="titulo-contenido">
                             <h1 class="titulo primary">Iniciar Sesión</h1>
                             <p class="comentario">Ingresa a tu cuenta para continuar</p>
                         </div>
                         <div class="cont-form">
                             <label for="">Ingresa tu email</label>
-                            <input type="text">
+                            <input type="text" name="email">
                         </div>
                         <div class="cont-form">
                             <label for="">Ingresa la contraseña</label>
-                            <input type="password">
+                            <input type="password" name="password">
                         </div>
-                        <button class="button primary">INGRESAR</button>
+                        <button class="button primary"  type="submit">INGRESAR</button>
                         <a href="" class="link">Olvide la contraseña</a>
                         <hr>
                     </form>
@@ -141,65 +141,73 @@
             <div class="elemento-emergente" data-show="registrarme">
                 <div class="registro">
                     <div class="btn-cerrar" data-accion="cerrar">x</div>
-                    <form action="">
+                    <form action="" method="post" autocomplete="off" id="form-registro">
                         <div class="titulo-contenido">
                             <h1 class="titulo primary">Registrame</h1>
                             <p class="comentario">Registrate para continuar</p>
                         </div>
                         <div class="cont-form">
-                            <label for="">Ingresa tu nombre y apellido</label>
-                            <input type="text">
+                            <label for="">Ingresa tu apellido</label>
+                            <input type="text" name="apellido" value="" required>
+                        </div>
+                        <div class="cont-form">
+                            <label for="">Ingresa tu nombre</label>
+                            <input type="text" name="nombre" value="" required>
                         </div>
                         <div class="cont-form">
                             <label for="">Ingresa tu telefono/celular</label>
-                            <input type="number">
+                            <input type="number" value="" name="telefono" required>
                         </div>
                         <div class="cont-form">
                             <label for="">Ingresa tu email</label>
-                            <input type="text">
+                            <input type="email" name="email" value="" required>
                         </div>
                         <div class="cont-form">
                             <label for="">Ingresa la contraseña</label>
-                            <input type="password">
+                            <input type="password" name="password" required>
                         </div>
                         <div class="cont-form">
                             <label for="">Ingresa nuevamente la contraseña</label>
-                            <input type="password">
+                            <input type="password" name="password_confirmation" required>
                         </div>  
-                        <button class="button primary">CONTINUAR</button>
+                        <button class="button primary" type="submit" id="btn-sub-regis">CONTINUAR</button>
                         <hr>
                     </form>
                     <p class="comentario">¿Ya tenes una cuenta de usuario? Ingresa ahora</p>
                     <button data-accion='iniciar' class="button secundary">INICIAR SESION</button>
                 </div>
             </div>
-            <div class="elemento-emergente" data-show="edit-perfil">
+            <div class="elemento-emergente" data-show="edit-perfil" data-user>
                 <div class="edit-perfil">
                     <div class="btn-cerrar" data-accion="cerrar">x</div>
-                    <form action="">
+                    <form action="" id="form-edit-perfil" autocomplete="off">
                         <div class="titulo-contenido">
                             <h1 class="titulo primary">Mis datos</h1>
                             <p class="comentario">Ingresa los datos a modificar</p>
                         </div>
                         <div class="cont-form">
-                            <label for="">Nombre y apellido</label>
-                            <input type="text" value="Martín Rodriguez">
+                            <label for="">Nombre</label>
+                            <input type="text" name="nombre" value="" data-user-value>
+                        </div>
+                        <div class="cont-form">
+                            <label for="">Apellido</label>
+                            <input type="text" name="apellido" value="" data-user-value>
                         </div>
                         <div class="cont-form">
                             <label for="">Telefono/Celular</label>
-                            <input type="number" value="1111111111">
+                            <input type="number" value="" name="telefono" data-user-value>
                         </div>
                         <div class="cont-form">
                             <label for="">Email</label>
-                            <input type="email" value="martin.rodriguez@gmail.com">
+                            <input name="email" type="email" value="" data-user-value>
                         </div>
                         <div class="cont-form">
                             <label for="">Contraseña nueva</label>
-                            <input type="password">
+                            <input type="password" name="password" autocomplete="off">
                         </div>
                         <div class="cont-form">
                             <label for="">Repetir contraseña nueva</label>
-                            <input type="password">
+                            <input type="password" name="password_confirmation" autocomplete="off">
                         </div>
                         <button class="button primary">ACEPTAR</button>
                         <br>
@@ -211,10 +219,9 @@
                 <div class="resp-add-items-cart">
                     <div class="btn-cerrar" data-accion="cerrar">x</div>
                     <!-- <img src="./resources/icon-animado-check-ok.gif" alt=""> -->
-                    <video src="./resources/icon-animado-check-ok.mp4" autoplay></video>
                     <p>¡Tu solicitud se ha sumado con éxito al carrito de compras!</p>
                     <br>
-                    <button class="button primary">REALIZAR NUEVA COTIZACION</button>
+                    <a class="button primary" data-link="cotizar" data-accion="cerrar">REALIZAR NUEVA COTIZACION</a>
                     <button class="button secundary">IR A CARRITO DE COMPRA</button>
                     
                 </div>
@@ -462,7 +469,7 @@
 
                 
             </div>
-            <div data-seccion="productos" class="seccion show">
+            <div data-seccion="productos" class="seccion">
                 <div class="banner">
                 </div>
                 <div class="op-seccion">
@@ -565,14 +572,14 @@
                     </section>
                 </div>
             </div>
-            <div data-seccion="perfil" class="seccion">
+            <div data-seccion="perfil" class="seccion" data-user>
                 <div class="header-perfil">
                     <div class="cont-img-user-per">
                         <img src="./resources/user-foto.svg" alt="" class="">
                     </div>
                     <div>
-                        <span>Martín Rodriguez</span>
-                        <span class="comentario">martin.rodriguez@gmail.com.ar</span>
+                        <span data-user-info="nombre-apellido">Martín Rodriguez</span>
+                        <span class="comentario" data-user-info="email">martin.rodriguez@gmail.com.ar</span>
                     </div>
                     <button class="button secundary comentario" data-accion='edit-perfil'>EDITAR DATOS</button>
                 </div>
@@ -581,21 +588,21 @@
                         <img src="./resources/mi_perfil_naranja.svg" alt="">
                         <div class="item-info-per">
                             <span>Nombre y apellido</span>
-                            <p class="comentario">Martín Rodriguez</p>
+                            <p class="comentario" data-user-info="nombre-apellido">Martín Rodriguez</p>
                         </div>
                     </div>
                     <div>
                         <img src="./resources/telefono_naranja.svg" alt="">
                         <div class="item-info-per">
                             <span>Teléfono/Celular</span>
-                            <p class="comentario">11-1111-1111</p>
+                            <p class="comentario" data-user-info="telefono">11-1111-1111</p>
                         </div>
                     </div>
                     <div>
                         <img src="./resources/mail_naranja.svg" alt="">
                         <div class="item-info-per">
                             <span>Email</span>
-                            <p class="comentario">martin.rodriguez@gmail.com</p>
+                            <p class="comentario" data-user-info="email">martin.rodriguez@gmail.com</p>
                         </div>
                     </div>
                     <div>
@@ -678,16 +685,38 @@
                         <div class="backImagen"></div>
                     </div> -->
                 </div>
-                <div class="cont-opciones-subcategorias dinone" id="opciones-subcategorias">
+                
+                <div class="cont-opciones-subcategorias" id="opciones-subcategorias">
+                    <div class="dinone" id="cont-efec-loading-subt">
+                        <div class="sub-precarga loading">
+                            <div class="sub-item-1-loading">
+                            </div>
+                            <div class="text-loading">
+                                <div class="sub-item-2-loading">
+                                </div>
+                                <div class="sub-item-2-loading loa2">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sub-precarga loading">
+                            <div class="sub-item-1-loading">
+                            </div>
+                            <div class="text-loading">
+                                <div class="sub-item-2-loading">
+                                </div>
+                                <div class="sub-item-2-loading loa2">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="cont-resultados-opciones-sub" class="dinone">
+
+                    </div>    
+                    
                     <!-- subcategorias -->
-                    <div class="opcion-subcategoria">
-                        <div class="icon-opc-sub">
-                            
-                        </div>
-                        <p></p>
-                    </div>
+                    
                     <!-- productos combinados -->
-                    <p>3 Resultados</p>
+                    <!-- <p>3 Resultados</p>
                     <div class="item">
                         <div class="img-item"><img src="" alt=""></div>
                         <div class="info-item">
@@ -707,7 +736,7 @@
                             <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
                         </div>
                         <div class="btn-item"><img src="" alt=""></div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="cont-gral-filtro comentario" id="cont-filtros">
                     <p class="comentario">Filtros aplicados</p>
@@ -722,28 +751,29 @@
             <div data-seccion="cotizar-calculo" class="seccion seccion-cotizar-calculo">
                 <div class="card-cotizar">
                     <div class="cont-img">
-                        <img src="" alt="">
+                        <img src="" alt="" id="img-cot-cal">
                     </div>
                     <div class="info-card">
                         <div class="titulo-cod">
-                            <h2>Masilla Durlock multi balde 1.8 kg</h2>
-                            <span class="comentario">(1986)</span>
+                            <h2 id="titulo-cot-cal">Masilla Durlock multi balde 1.8 kg</h2>
+                            <span class="comentario" id="cod-cot-cal">(1986)</span>
                         </div>
-                        <p class="comentario">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas quia blanditiis minus illum obcaecati! Incidunt, delectus necessitatibus! Fugiat</p>
+                        <p class="comentario" id="descrip-cot-cal">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas quia blanditiis minus illum obcaecati! Incidunt, delectus necessitatibus! Fugiat</p>
                     </div>
                 </div>
                 <div class="cont-input-cotizar">
                     <p class="comentario">Ingrese metro cuadrado</p>
-                    <form action="#" method="post" class="cont-set-cant">
+                    <form action="#" method="post" class="cont-set-cant" id="form-envio-coti-combinado">
                         <div class="btn-set-cant" >
-                            <span  data-set-cant="subir" data-id-input="mt-cuadrados-cot">+</span>
-                            <input type="number" value="2" id="mt-cuadrados-cot">
                             <span  data-set-cant="bajar" data-id-input="mt-cuadrados-cot">-</span>
+                            <input type="number" value="1" id="mt-cuadrados-cot" name="cantidad">
+                            <input type="hidden" value="" id="id-prodcombi-coti" name="producto_combinado_id">
+                            <span  data-set-cant="subir" data-id-input="mt-cuadrados-cot">+</span>
                         </div>
                         <button class="button primary" type="submit">COTIZAR</button>
                     </form>
                 </div>
-                <div class="cont-resul-calc-conti">
+                <div class="cont-resul-calc-conti dinone">
                     <div class="cabecera-list-items">
                         <div>Productos simples</div>
                         <div>Cantidad</div>
@@ -755,35 +785,15 @@
                             <p>1</p>
                             <p>$1456</p>
                         </div>
-                        <div class="item-list-res">
-                            <p>Placa durlock STD 9.5 1200x2400</p>
-                            <p>1</p>
-                            <p>$1456</p>
-                        </div>
-                        <div class="item-list-res">
-                            <p>Placa durlock STD 9.5 1200x2400</p>
-                            <p>1</p>
-                            <p>$1456</p>
-                        </div>
-                        <div class="item-list-res">
-                            <p>Placa durlock STD 9.5 1200x2400</p>
-                            <p>1</p>
-                            <p>$1456</p>
-                        </div>
-                        <div class="item-list-res">
-                            <p>Placa durlock STD 9.5 1200x2400</p>
-                            <p>1</p>
-                            <p>$1456</p>
-                        </div>
                     </div>
                     <div class="footer-list-cot">
                         <p>TOTAL</p>
-                        <p>4</p>
-                        <p>$6608</p>
+                        <p id="total-items-cot">4</p>
+                        <p id="total-cot">$6608</p>
                     </div>
                 </div>
                 
-                <button class="btn-add-cart" data-accion='add-items-cart'>
+                <button class="btn-add-cart dinone" data-accion='add-items-cart' id="btn-add-cart-resul-coti">
                     AGREGAR AL CARRITO
                 </button>
             </div>
