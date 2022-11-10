@@ -8,6 +8,7 @@
    ___________________________    FUNCIONES GENERALES    ___________________________________________________
    _________________________________________________________________________________________________________ */
 url_ajax    = 'https://test.api.palermomateriales.com.ar/api/';
+url_public = 'https://test.api.palermomateriales.com.ar/';
 metodo_ajax = 'POST';
 var $_cntotal = 0;
 
@@ -95,6 +96,10 @@ NodeList.prototype.remove  = HTMLCollection.prototype.remove = function() {for(v
                         _obd.recibe(error);
                   }
                }
+            }
+            else if(a.readyState == 4 && a.status !== 200)
+            {
+               _obd.recibe(a.status);
             }
          };
 

@@ -16,6 +16,16 @@
                 <span class="line"></span>
                 <span class="line"></span>
             </div>
+            <div class="titulo-header">
+                <p>Palermo</p>
+                <p>Materiales</p>
+            </div>
+            <div>
+                <div class="cont-icon-cart-noti">
+                    <span id="cant-items-cart" class="dinone"></span>
+                    <img src="./resources/carrito_blanco.svg" alt="">
+                </div>
+            </div>
         </header>
         <nav>
             <div class="cont-cont-img-user-per" data-user>
@@ -124,14 +134,14 @@
                         </div>
                         <div class="cont-form">
                             <label for="">Ingresa tu email</label>
-                            <input type="text" name="email">
+                            <input type="text" name="email" id="email-login" required>
                         </div>
                         <div class="cont-form">
                             <label for="">Ingresa la contraseña</label>
-                            <input type="password" name="password">
+                            <input type="password" name="password" id="pass-login" required>
                         </div>
                         <button class="button primary"  type="submit">INGRESAR</button>
-                        <a href="" class="link">Olvide la contraseña</a>
+                        <!-- <a href="" class="link">Olvide la contraseña</a> -->
                         <hr>
                     </form>
                     <p class="comentario">¿No posees cuenta de usuario? Registrate ahora</p>
@@ -222,7 +232,7 @@
                     <p>¡Tu solicitud se ha sumado con éxito al carrito de compras!</p>
                     <br>
                     <a class="button primary" data-link="cotizar" data-accion="cerrar">REALIZAR NUEVA COTIZACION</a>
-                    <button class="button secundary">IR A CARRITO DE COMPRA</button>
+                    <a class="button secundary" type="button" data-link="carrito" data-accion="cerrar">IR A CARRITO DE COMPRA</a>
                     
                 </div>
             </div>
@@ -672,13 +682,13 @@
                     </div>
                 </div>
                 <div class="cont-cards-categorias" id="categorias-cotizar">
-                    <div class="card-categoria loading">
+                    <div class="card-categoria">
                     </div>
-                    <div class="card-categoria loading">
+                    <div class="card-categoria">
                     </div>
-                    <div class="card-categoria loading">
+                    <div class="card-categoria">
                     </div>
-                    <div class="card-categoria loading">
+                    <div class="card-categoria">
                     </div>
                     <!-- <div class="card-categoria" data-id-item="1">
                         <p>TECHO</p>
@@ -806,123 +816,118 @@
                         <img src="" alt="">
                         <div class="item-info-per">
                             <span>Nuestros teléfonos</span>
-                            <p>+549 (011) 2123985 | 8384</p>
+                            <div id="nuestros-telefonos">
+                                <p>Cargando...</p>
+                            </div>
                         </div>
                     </div>
                     <div>
                         <img src="" alt="">
                         <div class="item-info-per">
                             <span>Consultas por mail</span>
-                            <p>ventas@palermomateriales.com.ar</p>
+                            <div id="consultas-por-mail">
+                                <p>ventas@palermomateriales.com.ar</p>
+                            </div>
                         </div>
                     </div>
                     <div>
                         <img src="" alt="">
                         <div class="item-info-per">
                             <span>Horarios de atención</span>
-                            <p>Lun. a Vier. de 07.30 a 12.00 hs.</p> <br>
-                            <p>y de 13.00 a 17.00 hs.</p>
+                            <div id="horarios-de-atencion">
+                                <p>Lun. a Vier. de 07.30 a 12.00 hs.</p> <br>
+                                <p>y de 13.00 a 17.00 hs.</p>
+                            </div>
                         </div>
                     </div>
                     <div>
                         <img src="" alt="">
                         <div class="item-info-per">
                             <span>Ubicación</span>
-                            <p>Av.Juan B.Justo 1700(C1414BHB) CABA, Argentina</p> <br>
-                            <p>Estacionamiento por J.A.Cabrera 5454</p>
+                            <div id="ubicaciones">
+                                <p>Av.Juan B.Justo 1700(C1414BHB) CABA, Argentina</p> <br>
+                                <p>Estacionamiento por J.A.Cabrera 5454</p>
+                            </div>
                         </div>
                     </div>
                     <div>
                         <img src="" alt="">
                         <div class="item-info-per">
                             <span>Sitio web</span>
-                            <p>www.palermomateriales.com.ar</p>
+                            <p id="sitio-web">www.palermomateriales.com.ar</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div data-seccion="terminos" class="seccion">
                 <h1>terminos</h1>
+                <p id="terminos-condiciones"></p>
             </div>
-            <div data-seccion="carrito" class="seccion">
+            <div data-seccion="carrito" class="seccion show">
                 <div class="item-paso">
-                    <div>
-                        <img src="" alt="">
+                    <div class="paso-actual" data-paso="detalle">
+                        <img src="./resources/detalle.svg" alt="">
                         <p>Detalle</p>
                     </div>
-                    <div>
-                        <img src="" alt="">
+                    <div data-paso="datos">
+                        <img src="./resources/carrito_datos.svg" alt="" >
                         <p>Datos</p>
                     </div>
-                    <div>
-                        <img src="" alt="">
+                    <div data-paso="pago">
+                        <img src="./resources/carrito_pago.svg" alt="" >
                         <p>Pagos</p>
                     </div>
                 </div>
-                <div id="carrito-detalle" class="dinone">
-                    <div>
-                        <div class="cabecera-list-items">
-                            <div>Productos simples</div>
-                            <div>Precio Final</div>
-                        </div>
-                        <div id="resumen-items-carrito">
-                            <div class="accordion">
-                                <div>
-                                    <p>Masilla Durlock multi balde 1.8Kg</p>
-                                    <span>Superficie: 1m2</span>
-                                </div>
-                                <div>
-                                    <p>$650</p>
-                                </div>
-                                <div>
-                                    <img src="" alt="">
-                                    <img src="" alt="">
-                                </div>
-                            </div>
-                            <div class="items-grupo">
-                                <div class="item-grupo">
-                                    <div>Placa Durlock STD 9.5 1200X3.200</div>
-                                    <div>Cantidad: 1</div>
-                                    <div>Precio unitario: $2188</div>
-                                </div>
-                                <div class="item-grupo">
-                                    <div>Placa Durlock STD 9.5 1200X3.200</div>
-                                    <div>Cantidad: 1</div>
-                                    <div>Precio unitario: $2188</div>
-                                </div>
-                            </div>
-                            <div class="accordion">
-                                <div>
-                                    <p>Cementos</p>
-                                    <span>Superficie: 13m2</span>
-                                </div>
-                                <div>
-                                    <p>$2650</p>
-                                </div>
-                                <div>
-                                    <img src="" alt="">
-                                    <img src="" alt="">
-                                </div>
-                            </div>
-                            <div class="items-grupo">
-                                <div class="item-grupo">
-                                    <div>Cemento Avellaneda 80Kg</div>
-                                    <div>Cantidad: 4</div>
-                                    <div>Precio unitario: $1880</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="footer-list-cot">
-                            <p>TOTAL</p>
-                            <p>4</p>
-                            <p>$6608</p>
-                        </div>
-                        <div>
-                            <button class="button secundary">AGREGAR MAS PRODUCTOS</button>
+                <div class="cont-table dinone" id="cont-carrito-detalle">
+                    <table class="table-thead">
+                        <tr class="tr-thead">
+                            <th colspan="2">Productos simples</th>
+                            <th colspan="2">Precio final</th>
+                        </tr>
+                    </table>
+                    <div id="carrito-detalle">
+                        <table class="item-accordion">
+                            <tr class="item-combinado">
+                                <td colspan="2">Masilla durlock multi balde 1.8KG </td>
+                                <td>$179 86</td>
+                                <td class="icon-opciones">
+                                    <div>
+                                        <img class="btn-del" src="./resources/icon-eliminar.svg" alt="">
+                                        <img class="btn-show" src="./resources/flecha-derecha.svg" alt="" onclick="verContenidoAccordion(this)">
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="contenido-accordion">
+                            <table class="grupo-items">
+                                <tr class="detalle">
+                                    <td>Piedra partida </td>
+                                    <td>Cant.: 2</td>
+                                    <td colspan="2">Precio: $42769</td>
+                                </tr>
+                                <tr class="detalle">
+                                    <td>Placa durlock plata simil STD 9.5 1200x2400</td>
+                                    <td>Cant.: 1</td>
+                                    <td colspan="2">Precio: $7679</td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
+                    <table class="tfoot">
+                        <tr>
+                          <td colspan="2">Total</td>
+                          <td colspan="2" id="valor_total_carrito">$6608</td>
+                        </tr>
+                    </table>
+                    <table class="btn-add-produc">
+                        <tr>
+                            <td>
+                                <a class="button secundary" type="button" data-link="cotizar" >AGREGAR MÁS PRODUCTOS</a>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-                <div id="carrito-pago">
+                <div id="carrito-pago" class="dinone">
                     <div class="cont-cards-ordenes">
                         <div class="card-solicitud">
                             <p>Número de orden: #113</p>
@@ -934,18 +939,16 @@
                     <div class="opc-pagos">
                         <p>Formas de pago</p>
                         <span>Para coordinar la entraga deberás contactarte a través de WhatsApp (011) 2843-0877 <br> de Lunes a Viernes </span>
-                        <div>
-                            <input type="radio" id="mp" name="metodo-pago">
-                            <label for="mp">Abonar con Mercado Pago</label>
-                        </div>
-                        <div>
-                            <input type="radio" name="metodo-pago" id="mail">
-                            <label for="mail">Coordinar por mail</label>
-                        </div>
+                        <label for="mp" class="opcion-pago button secundary"> 
+                            <input type="radio" id="mp" name="metodo-pago"> Abonar con Mercado Pago
+                        </label>
+                        <label for="mail" class="opcion-pago button secundary"> 
+                            <input type="radio" name="metodo-pago" id="mail"> Coordinar por mail
+                        </label>
                     </div>
                 </div>
                 <div class="btn-cont-carrito">
-                    <button class="button primary">CONTINUAR</button>
+                    <button class="button primary" id="btn-continuar-pasos-carrito">CONTINUAR</button>
                 </div>
             </div>
         </main>

@@ -1,10 +1,62 @@
 $r.dom();
 //variables a utilzar en todo el sistema
 let categorias = [];
-let productos = [];
+let productoSeleccionado = {};
 let historialFiltros = [];
-let carrito = [];
+$r.cls('carrito', JSON.stringify([]));
 let tiempoEnActualizarInfo = 3;
+
+//carga iniciar
+{
+    procesa_respuesta_inicial = function(data)
+    {
+        if(data.hasOwnProperty('terminos'))
+        {
+            document.getElementById('terminos-condiciones').innerHTML = data.terminos;
+        }
+        if(data.hasOwnProperty('informacion'))
+        {
+            let informacion = data.informacion;
+
+            document.getElementById("nuestros-telefonos").innerHTML = '';
+            informacion.telefonos.forEach(telefono => {
+                let p = document.createElement('p');
+                    p.innerHTML = telefono;
+                    document.getElementById("nuestros-telefonos").appendChild(p);
+            });
+
+            document.getElementById("consultas-por-mail").innerHTML = '';
+            informacion.emails.forEach(email => {
+                let p = document.createElement('p');
+                    p.innerHTML = email;
+                    document.getElementById("consultas-por-mail").appendChild(p);
+            });
+
+            document.getElementById("horarios-de-atencion").innerHTML = '';
+            informacion.horarios.forEach(horario => {
+                let p = document.createElement('p');
+                    p.innerHTML = horario;
+                    document.getElementById("horarios-de-atencion").appendChild(p);
+            });
+
+            document.getElementById("ubicaciones").innerHTML = '';
+            informacion.ubicaciones.forEach(ubicacion => {
+                let p = document.createElement('p');
+                    p.innerHTML = ubicacion;
+                    document.getElementById("ubicaciones").appendChild(p);
+            });
+
+            document.getElementById("sitio-web").innerHTML = informacion.sitio;
+
+        }
+
+    }
+    let _obd = {"url": url_public+'contenido-app.json', "metodo": 'GET', "datos": 'h=categorias', "recibe": procesa_respuesta_inicial };
+    $r.ajax(_obd);  
+    delete procesa_respuesta_inicial;
+}
+
+//fin carga inicial
 
 //valido sesion del usuario
 validoSesion();
@@ -55,7 +107,6 @@ document.querySelectorAll('a[data-link]').forEach(element => {
             case 'cotizar':
                 if(!contenidoActualizado(categorias)) 
                 {
-                    console.log('mando ajax')
                     let procesa_respuesta = function(data)
                     {    console.log('respuesta')
                         if(!Array.isArray(data))
@@ -88,13 +139,26 @@ document.querySelectorAll('a[data-link]').forEach(element => {
                 document.querySelector('.cont-resul-calc-conti').classList.add('dinone');
                 document.getElementById('btn-add-cart-resul-coti').classList.add('dinone');
                 document.getElementById('mt-cuadrados-cot').value = 1;
+                document.getElementById('lista-categorias').querySelectorAll('.card-categoria-lista').forEach(item => {item.classList.remove('selected');})
+                
                 borrarHistorialFiltros()
 
                 // si no hay categorías descargadas pre
 
             break;
             case 'informacion':
-                console.log('informacion');   
+                
+            break;
+            case 'carrito':
+                {
+                    let carrito = $r.gls('carrito');
+                    if(carrito.length > 0)
+                    {
+                        mostrarItemsCarrito(carrito);
+                    }
+                    else
+                        alert('no hay elementos en el carrito de compras');
+                }
             break;
             case 'terminos':
                 console.log('terminos');
@@ -117,14 +181,19 @@ document.querySelectorAll('a[data-link]').forEach(element => {
 });
 
 // seteo de cantidades
-document.querySelectorAll('span[data-set-cant]').forEach(bton => {
-    bton.onclick = function() {
+document.querySelectorAll('span[data-set-cant]').forEach(bton => 
+{
+    bton.onclick = function() 
+    {
         let valueActual = document.getElementById(this.dataset.idInput).value
-        if(this.dataset.setCant == 'subir'){
+        if(this.dataset.setCant == 'subir')
+        {
             valueActual = Number(Number(valueActual)+1);
         }
-        else if(this.dataset.setCant == 'bajar'){
-            if(valueActual>1){
+        else if(this.dataset.setCant == 'bajar')
+        {
+            if(valueActual>1)
+            {
                 valueActual = Number(Number(valueActual)-1);
             }
         }
@@ -146,7 +215,8 @@ function contenidoActualizado(array)
             respuesta = true;
         delete tiempoActual, tiempoArray, tiempoTranscu;
     }
-    if(respuesta === false){
+    if(respuesta === false)
+    {
         categorias = []; // vacio para que vuelvan a consultar
     }
     return respuesta;
@@ -379,8 +449,8 @@ function addPasosEnFiltro(data, dataClick = false)
     // </div>
 
 }
-function borrarHistorialFiltros(){
-    console.log('ejecuto')
+function borrarHistorialFiltros()
+{
     historialFiltros = [];
     document.getElementById('cont-filtros').classList.remove('show');
     document.getElementById('filtros').innerHTML = '';
@@ -402,58 +472,71 @@ function sacarBtnsFiltros(nroBtn){
 
 // accordion
 {
-    let acc = document.getElementsByClassName("accordion");
-    let i;
-
-    for (i = 0; i < acc.length; i++) 
+    function verContenidoAccordion(elemento)
     {
-        acc[i].addEventListener("click", function() 
+        elemento.classList.toggle("active");
+        let panel = elemento.parentElement.parentElement.parentElement.parentElement.parentElement.nextElementSibling;
+
+        if (panel.style.maxHeight) 
         {
-            this.classList.toggle("active");
-            let panel = this.nextElementSibling;
-            if (panel.style.maxHeight) 
-            {
-                panel.style.maxHeight = null;
-            } 
-            else 
-            {
-                panel.style.maxHeight = panel.scrollHeight + "px";
-            } 
-        });
+            panel.style.maxHeight = null;
+        } 
+        else 
+        {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+        }    
     }
 }
 
-//login
-_envio_login = function(event){
-    event.preventDefault();
-    document.getElementById('form-login').querySelector('button[type="submit"]').disabled = true;
-    document.getElementById('form-login').querySelector('button[type="submit"]').classList.add('disabled');
-    document.getElementById('form-login').querySelector('button[type="submit"]').innerHTML = 'Iniciando...';
-    document.getElementById('form-login').querySelectorAll('input').forEach(input => {
-        input.disabled = true;
-    })
+//
 
-    const procesa_respuesta_login = function(data)
+//login
+_envio_login = function(event)
+{
+    event.preventDefault();
+    let error = 0;
+    let email = document.getElementById('email-login').value;
+    let pass = document.getElementById('pass-login').value;
+    if(email == '')
+        error = "Ingrese email";
+    if(pass == '')
+        error = "Ingrese contraseña";
+    if(error === 0)
     {
-        document.getElementById('form-login').querySelector('button[type="submit"]').disabled = false;
-        document.getElementById('form-login').querySelector('button[type="submit"]').classList.remove('disabled');
-        document.getElementById('form-login').querySelector('button[type="submit"]').innerHTML = 'INGRESAR';
+        document.getElementById('form-login').querySelector('button[type="submit"]').disabled = true;
+        document.getElementById('form-login').querySelector('button[type="submit"]').classList.add('disabled');
+        document.getElementById('form-login').querySelector('button[type="submit"]').innerHTML = 'Iniciando...';
         document.getElementById('form-login').querySelectorAll('input').forEach(input => {
-            input.disabled = false;
+            input.disabled = true;
         })
-        if(data.user !== undefined)
+    
+        const procesa_respuesta_login = function(data)
         {
-            $r.cls('user', JSON.stringify(data.user));
-            $r.cls('token', data.token);
-            mostrarDatosUsuario();
+            console.log(data);
+            if(data == 404)
+            {
+                alert('El usuario no se encuentra en nuestros registros')   
+            }
+            document.getElementById('form-login').querySelector('button[type="submit"]').disabled = false;
+            document.getElementById('form-login').querySelector('button[type="submit"]').classList.remove('disabled');
+            document.getElementById('form-login').querySelector('button[type="submit"]').innerHTML = 'INGRESAR';
+            document.getElementById('form-login').querySelectorAll('input').forEach(input => {
+                input.disabled = false;
+            })
+            if(data.user !== undefined)
+            {
+                $r.cls('user', JSON.stringify(data.user));
+                $r.cls('token', data.token);
+                mostrarDatosUsuario();
+            }
         }
-        else{
-            console.log('error');
-        }
+        var _obd = {"url": url_ajax+'auth/login', "metodo": 'POST', "datos": 'h=login&'+$r.serialize(document.getElementById('form-login')), "recibe": procesa_respuesta_login };
+        $r.ajax(_obd);  
+        delete procesa_respuesta_login;
+    } else {
+        alert(error);
     }
-    var _obd = {"url": url_ajax+'auth/login', "metodo": 'POST', "datos": 'h=login&'+$r.serialize(document.getElementById('form-login')), "recibe": procesa_respuesta_login };
-    $r.ajax(_obd);  
-    delete procesa_respuesta_login;
+    
     
 }
 document.getElementById('form-login').addEventListener('submit', _envio_login, false);
@@ -590,7 +673,9 @@ function cerrarSesion(){
 }
 
 //cotizacion
-_envio_coti_combi = function(event){
+_envio_coti_combi = function(event)
+{
+    productoSeleccionado = {};
     document.querySelector('.cont-resul-calc-conti').classList.add('dinone')
     document.getElementById('items-resul-cotizacion').innerHTML= "";
     event.preventDefault();
@@ -609,11 +694,15 @@ _envio_coti_combi = function(event){
         document.getElementById('form-envio-coti-combinado').querySelectorAll('input').forEach(input => {
             input.disabled = false;
         })
-        if(data.hasOwnProperty('producto_combinado')) {
-            if(data.producto_combinado.hasOwnProperty('productos_simples')) {
+        if(data.hasOwnProperty('producto_combinado')) 
+        {
+            if(data.producto_combinado.hasOwnProperty('productos_simples')) 
+            {
                 let cantidad_productos_simples = 0;
-                if(data.producto_combinado.productos_simples.length > 0){
-                    data.producto_combinado.productos_simples.forEach(producto_simple => {
+                if(data.producto_combinado.productos_simples.length > 0)
+                {
+                    data.producto_combinado.productos_simples.forEach(producto_simple => 
+                    {
                         cantidad_productos_simples = cantidad_productos_simples + producto_simple.cantidad;
                         let div = document.createElement('div');
                             div.classList.add('item-list-res');
@@ -622,10 +711,14 @@ _envio_coti_combi = function(event){
                                             <p>$${producto_simple.precio_x_unidad}</p>`;
                         document.getElementById('items-resul-cotizacion').appendChild(div);    
                     });
+                    productoSeleccionado = data;
                     document.getElementById('total-cot').innerHTML = data.subtotal;
                     document.getElementById('total-items-cot').innerHTML = cantidad_productos_simples;
                     document.getElementById('btn-add-cart-resul-coti').classList.remove('dinone')
                     document.querySelector('.cont-resul-calc-conti').classList.remove('dinone')
+                }
+                else{
+                    alert('este producto no contiene stock');
                 }
             }  
         }
@@ -640,3 +733,167 @@ _envio_coti_combi = function(event){
 document.getElementById('form-envio-coti-combinado').addEventListener('submit', _envio_coti_combi, false);
 delete _envio_coti_combi;
 
+//sacar producto de  
+function sacarProductoDeCarrito(idElmente)
+{
+    let carrito = $r.gls('carrito');
+    let newCarrito = [];
+    if(carrito.length > 0 )
+    {
+        carrito.forEach(item => {
+            if(item.id !== idElmente)
+                newCarrito.push(item);
+        });
+        if(newCarrito.length > 0)
+        {
+            document.getElementById('cant-items-cart').innerHTML = newCarrito.length;
+            document.getElementById('cant-items-cart').classList.remove('dinone');
+        }
+        else {
+            document.getElementById('cant-items-cart').innerHTML = '';
+            document.getElementById('cant-items-cart').classList.add('dinone');
+        }
+        $r.cls('carrito', JSON.stringify(newCarrito));
+        mostrarItemsCarrito($r.gls('carrito'));
+    }
+}
+
+//add carrito
+function addCart(producto)
+{
+    let newCart = [];
+    let cart = $r.gls('carrito');
+
+    if(cart.some(item => item.producto_combinado_id === producto.producto_combinado_id))
+    {
+        if(cart.some(item => item.cantidad === producto.cantidad)) // no cambia nada
+        {
+            alert('El producto ya se encuentra en el carrito');
+            return
+        }
+        else // cambia alguna variable
+        {
+            newCart =  cart.map( item => {
+                                return item.producto_combinado_id == producto.producto_combinado_id ? producto : item;
+                            });
+        }
+    }
+    else {
+        newCart = [producto,...cart];
+    }
+    if(newCart.length > 0)
+    {
+        document.getElementById('cant-items-cart').innerHTML = newCart.length;
+        document.getElementById('cant-items-cart').classList.remove('dinone');
+    }
+    $r.cls('carrito', JSON.stringify(newCart));
+}
+document.getElementById('btn-add-cart-resul-coti').addEventListener('click', function(){addCart(productoSeleccionado)}, false);
+
+//maquetar items carrito
+function mostrarItemsCarrito(productos)
+{
+    let total = 0;
+    document.getElementById('carrito-detalle').innerHTML = '';
+    productos.forEach(item => 
+    {
+        total = total + item.subtotal
+        let elementAccordion = document.createElement('table') 
+        
+            // elementAccordion.onclick = function(){verContenidoAccordion(this)};
+            elementAccordion.classList.add('item-accordion');
+            elementAccordion.innerHTML = `<tr class="item-combinado">
+                                                <td colspan="2">${item.producto_combinado.titulo} </td>
+                                                <td>$${item.monto}</td>
+                                                <td class="icon-opciones">
+                                                    <div>
+                                                        <img class="btn-del" src="./resources/icon-eliminar.svg" alt="" onclick="sacarProductoDeCarrito(${item.id})">
+                                                        <img class="btn-show" src="./resources/flecha-derecha.svg" alt="" onclick="verContenidoAccordion(this)">
+                                                    </div>
+                                                </td>
+                                            </tr>`;
+        
+        let productosSimples = item.producto_combinado.productos_simples;
+        let contenedorProductos = document.createElement('div');
+            contenedorProductos.classList.add('contenido-accordion');
+        let tablaContenidoProductos = document.createElement('table');
+            tablaContenidoProductos.classList.add('grupo-items');
+            contenedorProductos.appendChild(tablaContenidoProductos);
+        productosSimples.forEach(producto => 
+        {
+            let trElement = document.createElement('tr');
+                trElement.classList.add('detalle');
+                trElement.innerHTML = `<td>${producto.alias} </td>
+                                        <td>Cant.: ${producto.cantidad}</td>
+                                        <td colspan="2">Precio: $${producto.precio_x_unidad}</td>`
+            
+            tablaContenidoProductos.appendChild(trElement);
+        });
+    
+        document.getElementById('carrito-detalle').appendChild(elementAccordion);
+        document.getElementById('carrito-detalle').appendChild(contenedorProductos);
+        
+    });
+    document.getElementById('valor_total_carrito').innerHTML = '$'+total.toFixed(2);
+    document.getElementById('cont-carrito-detalle').classList.remove('dinone');
+}
+
+
+
+//pasos carrito
+_siguienteCarrito = function()
+{
+    let carrito = $r.gls('carrito');
+    if(carrito.length > 0)
+    {
+        if($r.vls('user'))
+        {
+            let paso_actual = document.querySelector('.paso-actual').getAttribute('data-paso');
+            document.getElementById('carrito-pago').classList.remove('dinone');
+            document.getElementById('cont-carrito-detalle').classList.add('dinone');
+            document.querySelector('.item-paso').querySelector('[dta-paso]')
+        }
+        else
+        {
+            document.querySelector('[data-show="iniciar"]').classList.add('show');
+            document.querySelector('.cont-elementos-emergentes').classList.add('show');
+        }
+    }
+    else {
+        alert('no hay productos en el carrito');
+    }
+}
+document.getElementById('btn-continuar-pasos-carrito').addEventListener('click', _siguienteCarrito, false);
+delete _siguienteCarrito;
+
+ver_carrito = function()
+{
+    if(document.querySelector('[data-seccion="carrito"').classList.contains('show') == false)
+    {
+        console.log('muestro');
+        let carrito = $r.gls('carrito');
+        if(carrito.length > 0)
+        {
+            mostrarItemsCarrito(carrito);
+            document.querySelectorAll('[data-seccion]').forEach(seccion => 
+            {
+                if(seccion.getAttribute('data-seccion') == 'carrito')
+                {
+                    seccion.classList.add('show');
+                }
+                else
+                {
+                    seccion.classList.remove('show');
+                }
+            });
+        }
+        else 
+        {
+            alert('No hay productos en el carrito');
+        }
+    } else {
+        console.log('no muestro');
+    }
+}
+document.querySelector('.cont-icon-cart-noti').addEventListener('click', ver_carrito, false);
+delete ver_carrito;

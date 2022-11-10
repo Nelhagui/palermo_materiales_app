@@ -5,6 +5,10 @@
     color: inherit;
     padding: 0;
     margin: 0;
+    border-spacing: 0;
+}
+table{
+    width: 100%;
 }
 .dinone {display: none !important;}
 body { height: 100vh; background: var(--color-back); }
@@ -16,7 +20,7 @@ body { height: 100vh; background: var(--color-back); }
     --height-header: 55px;
     --height-banner: 107px;
 
-    --border-color: gray;
+    --border-color: #c3c3c3;
     --border-radius-btn: 4px;
 
     --height-opc-seccion: 55px;
