@@ -65,6 +65,12 @@ NodeList.prototype.remove  = HTMLCollection.prototype.remove = function() {for(v
 
          // identificacion del content type
           (typeof _obd.contentType == "undefined") ? a.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") : a.setRequestHeader("Content-Type", _obd.contentType);
+
+          // identificacion de autorizacion 
+         if(window.localStorage.getItem('token') !== null)
+         {
+            (typeof _obd.authorization == "undefined") ? a.setRequestHeader("Authorization", 'Bearer '+ window.localStorage.getItem('token')) : a.setRequestHeader("Authorization", _obd.authorization);
+         }
          
             
             // prepara el envio de datos.

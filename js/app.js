@@ -528,6 +528,15 @@ _envio_login = function(event)
                 $r.cls('user', JSON.stringify(data.user));
                 $r.cls('token', data.token);
                 mostrarDatosUsuario();
+                //verifico si se esta logueando en el proceso del carrito, si es así muestro el siguiente paso
+                if(document.querySelector('[data-paso="detalle"]').classList.contains('paso-actual')){
+                    document.getElementById('cont-carrito-detalle').classList.add('dinone');
+                    document.getElementById('carrito-pago').classList.remove('dinone');
+                    document.querySelector('[data-paso="detalle"]').classList.remove('paso-actual')
+                    document.querySelector('[data-paso="pago"]').classList.add('paso-actual')
+
+                }
+
             }
         }
         var _obd = {"url": url_ajax+'auth/login', "metodo": 'POST', "datos": 'h=login&'+$r.serialize(document.getElementById('form-login')), "recibe": procesa_respuesta_login };
@@ -848,10 +857,23 @@ _siguienteCarrito = function()
     {
         if($r.vls('user'))
         {
-            let paso_actual = document.querySelector('.paso-actual').getAttribute('data-paso');
-            document.getElementById('carrito-pago').classList.remove('dinone');
-            document.getElementById('cont-carrito-detalle').classList.add('dinone');
-            document.querySelector('.item-paso').querySelector('[dta-paso]')
+            // tengo que enviar la cotización para generar la orden
+            // https://test.api.palermomateriales.com.ar/api/orden?cotizaciones=[{{array_de_id_de_cotizaciones}}]
+            let arrayCotizacion = carrito.map(item => item.id);
+            
+            _enviar_cotizacion = function(data)
+            {
+                console.log(data);
+                document.getElementById('descargar_orden_compra_actual').setAttribute('href', url_public+"uploads/"+data.pdf);
+                document.getElementById('cont-carrito-detalle').classList.add('dinone');
+                document.getElementById('carrito-pago').classList.remove('dinone');
+                document.querySelector('[data-paso="detalle"]').classList.remove('paso-actual')
+                document.querySelector('[data-paso="pago"]').classList.add('paso-actual')
+
+            }
+            var _obd = {"url": url_ajax+'orden', "metodo": 'POST', "datos": "h=_crea_orden&cotizaciones="+arrayCotizacion, "recibe": _enviar_cotizacion };
+            $r.ajax(_obd);  
+            delete _enviar_cotizacion;
         }
         else
         {
