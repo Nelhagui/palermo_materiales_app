@@ -61,7 +61,23 @@ let tiempoEnActualizarInfo = 3;
 //valido sesion del usuario
 validoSesion();
 
-document.querySelector('.hamburger').addEventListener('click', function(){this.classList.toggle('is-active'); document.querySelector('nav').classList.toggle('show')})
+/*document.querySelector('.hamburger').addEventListener('click', function(){
+    this.classList.toggle('is-active'); 
+    document.querySelector('nav').classList.toggle('show');
+    document.getElementById("myDIV").style.display = "none";
+});*/
+
+document.querySelector('.hamburger').addEventListener('click', function(){
+    if(this.classList.toggle('is-active')){; 
+    document.querySelector('nav').classList.toggle('show');
+    document.getElementById("myDIV").style.display = "none";
+    }
+    else
+    {
+         document.getElementById("myDIV").style.display = "block";
+    }
+});
+
 
 _mostrar_elemento_emergente = function(e) {
     if(e.target.classList.contains('elemento-emergente')) {
@@ -237,7 +253,7 @@ function maquetoCategorias(idElemento, array)
                     let cardCate = document.createElement('div');
                         cardCate.classList.add('card-categoria');
                         cardCate.dataset.idItem = categoria.id;
-                        cardCate.innerHTML = '<p>'+categoria.titulo.toUpperCase()+'</p>';
+                        cardCate.innerHTML = '<p class="text-bajada">'+categoria.titulo.toUpperCase()+'</p>';
 
                         // caja para fondo
                         let divImg = document.createElement('div');
@@ -273,7 +289,7 @@ function maquetoCategorias(idElemento, array)
                     let cardCate2 = document.createElement('div');
                         cardCate2.classList.add('card-categoria-lista');
                         cardCate2.dataset.idItem = categoria.id;
-                        cardCate2.innerHTML = '<p>'+categoria.titulo.toUpperCase()+'</p>';
+                        cardCate2.innerHTML = '<p class="text-bajada">'+categoria.titulo.toUpperCase()+'</p>';
 
                         // caja para fondo
                         let divImg2 = document.createElement('div');
@@ -348,9 +364,9 @@ function traerSubcategorias(idElemento, tipo, idCategoria)
                             traerSubcategorias('cont-resultados-opciones-sub', 'cotizable', item.id)
                         }
                         cardSub.innerHTML = '<div class="icon-opc-sub">\
-                                                <img src="" alt="">\
+                                                <img class="img_cotizar" src="./resources/detalle.svg" alt="">\
                                             </div>\
-                                            <p>'+item.titulo+'</p>';
+                                            <p class="text-bajada">'+item.titulo+'</p>';
 
                     }
                     else if ( item.tipo == "producto_combinado" ) 
@@ -812,8 +828,8 @@ function mostrarItemsCarrito(productos)
             // elementAccordion.onclick = function(){verContenidoAccordion(this)};
             elementAccordion.classList.add('item-accordion');
             elementAccordion.innerHTML = `<tr class="item-combinado">
-                                                <td colspan="2">${item.producto_combinado.titulo} </td>
-                                                <td>$${item.monto}</td>
+                                                <td class="text-bajada" colspan="2">${item.producto_combinado.titulo} </td>
+                                                <td class="text-bajada">$${item.monto}</td>
                                                 <td class="icon-opciones">
                                                     <div>
                                                         <img class="btn-del" src="./resources/icon-eliminar.svg" alt="" onclick="sacarProductoDeCarrito(${item.id})">
@@ -832,9 +848,9 @@ function mostrarItemsCarrito(productos)
         {
             let trElement = document.createElement('tr');
                 trElement.classList.add('detalle');
-                trElement.innerHTML = `<td>${producto.alias} </td>
-                                        <td>Cant.: ${producto.cantidad}</td>
-                                        <td colspan="2">Precio: $${producto.precio_x_unidad}</td>`
+                trElement.innerHTML = `<td class="text-bajada">${producto.alias} </td>
+                                        <td class="text-bajada">Cant.: ${producto.cantidad}</td>
+                                        <td class="text-bajada" colspan="2">Precio: $${producto.precio_x_unidad}</td>`
             
             tablaContenidoProductos.appendChild(trElement);
         });
@@ -919,3 +935,18 @@ ver_carrito = function()
 }
 document.querySelector('.cont-icon-cart-noti').addEventListener('click', ver_carrito, false);
 delete ver_carrito;
+
+/*slider banner*/
+var swiper = new Swiper(".mySwiper3", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });

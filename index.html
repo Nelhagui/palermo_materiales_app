@@ -7,6 +7,7 @@
         <title>Palermo Materiales</title>
         <link rel="stylesheet" href="css/root.css">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" async type="text/css" href="./css/swiper-bundle.min.css">
         <script src="r/r.js"></script>
     </head>
     <body>
@@ -16,9 +17,8 @@
                 <span class="line"></span>
                 <span class="line"></span>
             </div>
-            <div class="titulo-header">
-                <p>Palermo</p>
-                <p>Materiales</p>
+            <div id="myDIV" class="titulo-header">
+                <img class="logo_p" src="./resources/logo/logo.png" alt="" class="">
             </div>
             <div>
                 <div class="cont-icon-cart-noti">
@@ -30,12 +30,12 @@
         <nav>
             <div class="cont-cont-img-user-per" data-user>
                 <img src="./resources/user-foto.svg" alt="" class="">
-                <span data-user-info="nombre-apellido"></span>
+                <span class="text-bajada" data-user-info="nombre-apellido"></span>
             </div>
             
             <div class="info-nav" data-visibilidad="login-no-activo">
                 <div class="estado-login-nav" id="estado-login-nav">
-                    <h1>Inicia Sesión</h1>
+                    <h1 class="title-p">Inicia Sesión</h1>
                     <p class="comentario">Inicia sesión para comenzar a comprar</p>
                 </div>
                 <div class="btn-nav-user-accion">
@@ -46,7 +46,7 @@
             <ul>
                 <li class="item-menu">
                     <a href="#home" data-link="home">
-                        <div>
+                        <div class="texto-nav">
                             <img src="./resources/home.svg" alt="">
                             Home
                         </div>
@@ -57,7 +57,7 @@
                 </li>
                 <li class="item-menu dinone" id="item-menu-perfil" data-visibilidad="login-activo">
                     <a href="#perfil" data-link="perfil">
-                        <div>
+                        <div class="texto-nav">
                             <img src="./resources/mi_perfil.svg" alt="">
                             Perfil
                         </div>
@@ -68,7 +68,7 @@
                 </li>
                 <li class="item-menu">
                     <a href="#productos" data-link="productos">
-                        <div>
+                        <div class="texto-nav">
                             <img src="./resources/productos.svg" alt="">
                             Productos
                         </div>
@@ -79,7 +79,7 @@
                 </li>
                 <li class="item-menu">
                     <a href="#cotizar" data-link="cotizar">
-                        <div>
+                        <div class="texto-nav">
                             <img src="./resources/cotizar.svg" alt="">
                             Cotizar
                         </div>
@@ -90,7 +90,7 @@
                 </li>
                 <li class="item-menu">
                     <a href="#informacion" data-link="informacion">
-                        <div>
+                        <div class="texto-nav">
                             <img src="./resources/informacion.svg" alt="">
                             Información
                         </div>
@@ -101,7 +101,7 @@
                 </li>
                 <li class="item-menu">
                     <a href="#terminos" data-link="terminos">
-                        <div>
+                        <div class="texto-nav">
                             <img src="./resources/terminos.svg" alt="">
                             Terminos y condiciones
                         </div>
@@ -112,7 +112,7 @@
                 </li>
                 <li class="item-menu dinone" id="item-menu-cerrar-sesion" data-visibilidad="login-activo">
                     <a href="#"  onclick="cerrarSesion()">
-                        <div>
+                        <div class="texto-nav">
                             <img src="./resources/cerrar_sesion.svg" alt="">
                             Cerrar sesión
                         </div>
@@ -229,7 +229,7 @@
                 <div class="resp-add-items-cart">
                     <div class="btn-cerrar" data-accion="cerrar">x</div>
                     <!-- <img src="./resources/icon-animado-check-ok.gif" alt=""> -->
-                    <p>¡Tu solicitud se ha sumado con éxito al carrito de compras!</p>
+                    <p class="text-bajada">¡Tu solicitud se ha sumado con éxito al carrito de compras!</p>
                     <br>
                     <a class="button primary" data-link="cotizar" data-accion="cerrar">REALIZAR NUEVA COTIZACION</a>
                     <a class="button secundary" type="button" data-link="carrito" data-accion="cerrar">IR A CARRITO DE COMPRA</a>
@@ -374,6 +374,32 @@
         <main>
             <div data-seccion="home" class="seccion">
                 <div class="banner">
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div>
+                                    <img class="palermo_img" src="./resources/img/images.jpg">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></span>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                    <div class="frente_transp">
+                    </div>
+                    <div class="banner-text-contain">
+                        <span class="text-banner">DESCUBRÍ NUESTROS</span>
+                        <span class="text-banner-amarillo">ÚLTIMOS PRODUCTOS</span>
+                        <div class="btn_descuento">
+                            <img class="img-desc" src="./resources/Descuentos.png">
+                            <span class="btn-text">APROVECHA LOS DESCUENTOS</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
                 </div>
                 <div class="op-seccion">
                     <form action="" method="post" id="form-buscar-prod-inicio">
@@ -393,9 +419,9 @@
                     </div>
                 </div>
                 <div>
-                    <section class="lista-items" id="lista-items">
-                        <div class="item">
-                            <div class="img-item"><img src="" alt=""></div>
+                    <!--<section class="lista-items" id="lista-items">
+                        <!--<div class="item">
+                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
                             <div class="info-item">
                                 <div class="categoria-item "></div>
                                 <div class="valor-item "></div>
@@ -405,82 +431,118 @@
                             <div class="btn-item cotizar"><img src="" alt=""></div>
                         </div>
                         <div class="item">
-                            <div class="img-item "><img src="" alt=""></div>
+                            <div class="img-item "><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
                             <div class="info-item">
                                 <div class="categoria-item "></div>
                                 <div class="valor-item "></div>
                                 <div class="titulo-item "></div>
                                 <div class="descripcion-item "></div>
                             </div>
-                            <div class="btn-item "><img src="" alt=""></div>
+                            <div class="btn-item "><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
                         </div>
                         <div class="item">
-                            <div class="img-item"><img src="" alt=""></div>
+                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
                             <div class="info-item">
                                 <div class="categoria-item"></div>
                                 <div class="valor-item"></div>
                                 <div class="titulo-item"></div>
                                 <div class="descripcion-item"></div>
                             </div>
-                            <div class="btn-item"><img src="" alt=""></div>
-                        </div>
-                        <div class="item">
-                            <div class="img-item"><img src="" alt="">img</div>
+                            <div class="btn-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
+                        </div>-->
+                       <!-- <div class="item">
+                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
                             <div class="info-item">
                                 <div class="categoria-item">Techo / Construcción húmeda</div>
                                 <div class="valor-item">$956</div>
                                 <div class="titulo-item">Pintura asfáltica</div>
                                 <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
                             </div>
-                            <div class="btn-item"><img src="" alt="">img</div>
+                                <div class="btn-item">
+                                    <img class="palermo_img_btn" src="./resources/Agregar_alcarrito.png" alt="">
+                                    <span class="agregar-text">Agregar</span>
+                                </div>    
                         </div>
                         <div class="item">
-                            <div class="img-item"><img src="" alt="">img</div>
+                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
                             <div class="info-item">
                                 <div class="categoria-item">Techo / Construcción húmeda</div>
                                 <div class="valor-item">$956</div>
                                 <div class="titulo-item">Pintura asfáltica</div>
                                 <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
                             </div>
-                            <div class="btn-item"><img src="" alt="">img</div>
+                                <div class="btn-item">
+                                    <img class="palermo_img_btn" src="./resources/Agregar_alcarrito.png" alt="">
+                                    <span class="agregar-text">Agregar</span>
+                                </div>    
                         </div>
                         <div class="item">
-                            <div class="img-item"><img src="" alt="">img</div>
+                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
                             <div class="info-item">
                                 <div class="categoria-item">Techo / Construcción húmeda</div>
                                 <div class="valor-item">$956</div>
                                 <div class="titulo-item">Pintura asfáltica</div>
                                 <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
                             </div>
-                            <div class="btn-item"><img src="" alt="">img</div>
+                                <div class="btn-item">
+                                    <img class="palermo_img_btn" src="./resources/Agregar_alcarrito.png" alt="">
+                                    <span class="agregar-text">Agregar</span>
+                                </div>    
                         </div>
                         <div class="item">
-                            <div class="img-item"><img src="" alt="">img</div>
+                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
                             <div class="info-item">
                                 <div class="categoria-item">Techo / Construcción húmeda</div>
                                 <div class="valor-item">$956</div>
                                 <div class="titulo-item">Pintura asfáltica</div>
                                 <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
                             </div>
-                            <div class="btn-item"><img src="" alt="">img</div>
+                                <div class="btn-item">
+                                    <img class="palermo_img_btn" src="./resources/Agregar_alcarrito.png" alt="">
+                                    <span class="agregar-text">Agregar</span>
+                                </div>    
                         </div>
                         <div class="item">
-                            <div class="img-item"><img src="" alt="">img</div>
+                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
                             <div class="info-item">
                                 <div class="categoria-item">Techo / Construcción húmeda</div>
                                 <div class="valor-item">$956</div>
                                 <div class="titulo-item">Pintura asfáltica</div>
                                 <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
                             </div>
-                            <div class="btn-item"><img src="" alt="">img</div>
+                                <div class="btn-item">
+                                    <img class="palermo_img_btn" src="./resources/Agregar_alcarrito.png" alt="">
+                                    <span class="agregar-text">Agregar</span>
+                                </div>    
                         </div>
-                    </section>
-                </div>
-
-                
+                    </section>-->
+                </div> 
             </div>
             <div data-seccion="productos" class="seccion">
                 <div class="banner">
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div>
+                                    <img class="palermo_img" src="./resources/img/images.jpg">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></span>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="frente_transp">
+                        </div>
+                        <div class="banner-text-contain">
+                            <span class="text-banner">DESCUBRÍ NUESTROS</span>
+                            <span class="text-banner-amarillo">ÚLTIMOS PRODUCTOS</span>
+                            <div class="btn_descuento">
+                                <img class="img-desc" src="./resources/Descuentos.png">
+                                <span class="btn-text">APROVECHA LOS DESCUENTOS</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="op-seccion">
                     <form action="" method="post" id="form-buscar-prod">
@@ -492,15 +554,15 @@
                 </div>
                 <div>
                     <div class="opt-filtros">
-                        <span>4 Resultados</span>
+                        <span class="text-filtros">4 Resultados</span>
                         <div class="conte-filtros">
-                            <img src="" alt="">
-                            <p>Filtrar</p>
+                            <img class="img-filtros" src="./resources/Filtrar.png" alt="">
+                            <p class="text-filtros">Filtrar</p>
                         </div>
                     </div>
                     <section class="lista-items" id="lista-items">
-                        <div class="item">
-                            <div class="img-item"><img src="" alt=""></div>
+                        <!--<div class="item">
+                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
                             <div class="info-item">
                                 <div class="categoria-item "></div>
                                 <div class="valor-item "></div>
@@ -510,74 +572,89 @@
                             <div class="btn-item cotizar"><img src="" alt=""></div>
                         </div>
                         <div class="item">
-                            <div class="img-item "><img src="" alt=""></div>
+                            <div class="img-item "><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
                             <div class="info-item">
                                 <div class="categoria-item "></div>
                                 <div class="valor-item "></div>
                                 <div class="titulo-item "></div>
                                 <div class="descripcion-item "></div>
                             </div>
-                            <div class="btn-item "><img src="" alt=""></div>
+                            <div class="btn-item "><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
                         </div>
                         <div class="item">
-                            <div class="img-item"><img src="" alt=""></div>
+                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
                             <div class="info-item">
                                 <div class="categoria-item"></div>
                                 <div class="valor-item"></div>
                                 <div class="titulo-item"></div>
                                 <div class="descripcion-item"></div>
                             </div>
-                            <div class="btn-item"><img src="" alt=""></div>
-                        </div>
+                            <div class="btn-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
+                        </div>-->
                         <div class="item">
-                            <div class="img-item"><img src="" alt="">img</div>
+                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
                             <div class="info-item">
                                 <div class="categoria-item">Techo / Construcción húmeda</div>
                                 <div class="valor-item">$956</div>
                                 <div class="titulo-item">Pintura asfáltica</div>
                                 <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
                             </div>
-                            <div class="btn-item"><img src="" alt="">img</div>
+                                <div class="btn-item">
+                                    <img class="palermo_img_btn" src="./resources/Agregar_alcarrito.png" alt="">
+                                    <span class="agregar-text">Agregar</span>
+                                </div>    
                         </div>
                         <div class="item">
-                            <div class="img-item"><img src="" alt="">img</div>
+                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
                             <div class="info-item">
                                 <div class="categoria-item">Techo / Construcción húmeda</div>
                                 <div class="valor-item">$956</div>
                                 <div class="titulo-item">Pintura asfáltica</div>
                                 <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
                             </div>
-                            <div class="btn-item"><img src="" alt="">img</div>
+                                <div class="btn-item">
+                                    <img class="palermo_img_btn" src="./resources/Agregar_alcarrito.png" alt="">
+                                    <span class="agregar-text">Agregar</span>
+                                </div>    
                         </div>
                         <div class="item">
-                            <div class="img-item"><img src="" alt="">img</div>
+                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
                             <div class="info-item">
                                 <div class="categoria-item">Techo / Construcción húmeda</div>
                                 <div class="valor-item">$956</div>
                                 <div class="titulo-item">Pintura asfáltica</div>
                                 <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
                             </div>
-                            <div class="btn-item"><img src="" alt="">img</div>
+                                <div class="btn-item">
+                                    <img class="palermo_img_btn" src="./resources/Agregar_alcarrito.png" alt="">
+                                    <span class="agregar-text">Agregar</span>
+                                </div>    
                         </div>
                         <div class="item">
-                            <div class="img-item"><img src="" alt="">img</div>
+                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
                             <div class="info-item">
                                 <div class="categoria-item">Techo / Construcción húmeda</div>
                                 <div class="valor-item">$956</div>
                                 <div class="titulo-item">Pintura asfáltica</div>
                                 <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
                             </div>
-                            <div class="btn-item"><img src="" alt="">img</div>
+                                <div class="btn-item">
+                                    <img class="palermo_img_btn" src="./resources/Agregar_alcarrito.png" alt="">
+                                    <span class="agregar-text">Agregar</span>
+                                </div>    
                         </div>
                         <div class="item">
-                            <div class="img-item"><img src="" alt="">img</div>
+                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
                             <div class="info-item">
                                 <div class="categoria-item">Techo / Construcción húmeda</div>
                                 <div class="valor-item">$956</div>
                                 <div class="titulo-item">Pintura asfáltica</div>
                                 <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
                             </div>
-                            <div class="btn-item"><img src="" alt="">img</div>
+                                <div class="btn-item">
+                                    <img class="palermo_img_btn" src="./resources/Agregar_alcarrito.png" alt="">
+                                    <span class="agregar-text">Agregar</span>
+                                </div>    
                         </div>
                     </section>
                 </div>
@@ -659,30 +736,63 @@
             </div>
             <div data-seccion="cotizar" class="seccion">
                 <div class="banner cotizar">
+                    <div class="swiper mySwiper3">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div>
+                                    <img class="palermo_img" src="./resources/img/cotizar.jpg">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div>
+                                    <img class="palermo_img" src="./resources/img/cotizar.jpg">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div>
+                                    <img class="palermo_img" src="./resources/img/cotizar.jpg">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></span>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="frente_transp">
+                        </div>
+                        <div class="banner-text-contain">
+                            <span class="text-banner-coti">COTIZADOR</span>
+                            <span class="text-banner-coti-amarillo">ONLINE</span>
+                            <div class="bajada-contain">
+                                <span class="text-bajada block">¿Querés saber cuánto material necesitás cubrir?</span>
+                                <span class="text-bajada block">Comienza eligiendo una categoría</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="cont-titulo-info-seccion">
-                    <h1>Nuestras categorías</h1>
-                    <p>Seleccione el tipo de proyecto a realizar</p>
+                    <h1 class="text-cotizar">Nuestras categorías</h1>
+                    <p class="text-bajada">Seleccione el tipo de proyecto a realizar</p>
                 </div>
                 <div class="lista-categorias dinone" id="lista-categorias">
                     <div class="card-categoria-lista selected">
-                        <p>TECHO</p>
+                        <p class="text-bajada">TECHO</p>
                         <div class="backImagen"></div>
                     </div>
                     <div class="card-categoria-lista">
-                        <p>PARED</p>
+                        <p class="text-bajada">PARED</p>
                         <div class="backImagen"></div>
                     </div>
                     <div class="card-categoria-lista">
-                        <p>TERMINACION</p>
+                        <p class="text-bajada">TERMINACION</p>
                         <div class="backImagen"></div>
                     </div>
                     <div class="card-categoria-lista">
-                        <p>IMPERMEABILIZAR</p>
+                        <p class="text-bajada">IMPERMEABILIZAR</p>
                         <div class="backImagen"></div>
                     </div>
                 </div>
-                <div class="cont-cards-categorias" id="categorias-cotizar">
+                <div class="cont-cards-categorias cotizar_cards" id="categorias-cotizar">
                     <div class="card-categoria">
                     </div>
                     <div class="card-categoria">
@@ -808,61 +918,81 @@
                     AGREGAR AL CARRITO
                 </button>
             </div>
-            <div data-seccion="informacion" class="seccion">
+            <div data-seccion="informacion" class="seccion informacion_data">
                 <div class="img-info">
-
+                    <img class="info-img" src="./resources/logo/logo_informacion.png">
                 </div>
                 <div>
-                    <div>
-                        <img src="" alt="">
+                    <div class="info-contain">
+                        <img class="info_img" src="./resources/telefono_naranja.svg" alt="">
                         <div class="item-info-per">
-                            <span>Nuestros teléfonos</span>
+                            <span class="info-text">Nuestros teléfonos</span>
                             <div id="nuestros-telefonos">
-                                <p>Cargando...</p>
+                                <p class="info-data">+549 (011) 21849984 | 4899-0110</p>
                             </div>
+                            <div class="linea_info"></div>
                         </div>
                     </div>
-                    <div>
-                        <img src="" alt="">
+                    <div class="info-contain">
+                        <img class="info_img" src="./resources/mail_naranja.svg" alt="">
                         <div class="item-info-per">
-                            <span>Consultas por mail</span>
+                            <span class="info-text">Consultas por mail</span>
                             <div id="consultas-por-mail">
-                                <p>ventas@palermomateriales.com.ar</p>
+                                <p class="info-data">ventas@palermomateriales.com.ar</p>
                             </div>
+                            <div class="linea_info"></div>
                         </div>
                     </div>
-                    <div>
-                        <img src="" alt="">
+                    <div class="info-contain">
+                        <img class="info_img" src="./resources/Horario_naranja.svg" alt="">
                         <div class="item-info-per">
-                            <span>Horarios de atención</span>
+                            <span class="info-text">Horarios de atención</span>
                             <div id="horarios-de-atencion">
-                                <p>Lun. a Vier. de 07.30 a 12.00 hs.</p> <br>
-                                <p>y de 13.00 a 17.00 hs.</p>
+                                <p class="info-data">Lun. a Vier. de 07.30 a 12.00 hs.<br>
+                                y de 13.00 a 17.00 hs.</p>
                             </div>
+                            <div class="linea_info"></div>
                         </div>
                     </div>
-                    <div>
-                        <img src="" alt="">
+                    <div class="info-contain">
+                        <img class="info_img" src="./resources/Ubicacion_naranja.svg" alt="">
                         <div class="item-info-per">
-                            <span>Ubicación</span>
+                            <span class="info-text">Ubicación</span>
                             <div id="ubicaciones">
-                                <p>Av.Juan B.Justo 1700(C1414BHB) CABA, Argentina</p> <br>
-                                <p>Estacionamiento por J.A.Cabrera 5454</p>
+                                <p class="info-data">Av.Juan B.Justo 1700(C1414BHB) CABA, Argentina<br>
+                                Estacionamiento por J.A.Cabrera 5454</p>
                             </div>
+                            <div class="linea_info"></div>
                         </div>
                     </div>
-                    <div>
-                        <img src="" alt="">
+                    <div class="info-contain">
+                        <img class="info_img" src="./resources/SitioWeb_naranja.svg" alt="">
                         <div class="item-info-per">
-                            <span>Sitio web</span>
-                            <p id="sitio-web">www.palermomateriales.com.ar</p>
+                            <span class="info-text">Sitio web</span>
+                            <p class="info-data" id="sitio-web">www.palermomateriales.com.ar</p>
+                            <div class="linea_info"></div>
                         </div>
                     </div>
                 </div>
             </div>
             <div data-seccion="terminos" class="seccion">
-                <h1>terminos</h1>
-                <p id="terminos-condiciones"></p>
+                <div class="img-info">
+                    <img class="info-img" src="./resources/logo/logo_informacion.png">
+                </div>
+                <div>
+                    <div class="terminos-contain">
+                        <div class="item-terminos-per">
+                            <span class="info-text">Términos y Condiciones</span>
+                            <div id="nuestros-telefonos">
+                                <p class="terminos-data">Si tenés o estás desarrollando una aplicación, una plataforma o un E-commerce, es necesario que cumplas con algunas obligaciones como por ejemplo contar con términos y condiciones, políticas de privacidad, registrar tus bases de datos, y otras cosas más. Te ofrecemos packs accesibles para que cumplas con todas tus obligaciones y además puedas proteger tu proyecto. Redactamos términos y condiciones  y políticas de privacidad.  Pagá en cuotas con mercado pago.</p>
+                                <p class="terminos-data">Si tenés o estás desarrollando una aplicación, una plataforma o un E-commerce, es necesario que cumplas con algunas obligaciones como por ejemplo contar con términos y condiciones, políticas de privacidad, registrar tus bases de datos, y otras cosas más. Te ofrecemos packs accesibles para que cumplas con todas tus obligaciones y además puedas proteger tu proyecto. Redactamos términos y condiciones  y políticas de privacidad.  Pagá en cuotas con mercado pago.</p>
+                                <p class="terminos-data">Si tenés o estás desarrollando una aplicación, una plataforma o un E-commerce, es necesario que cumplas con algunas obligaciones como por ejemplo contar con términos y condiciones, políticas de privacidad, registrar tus bases de datos, y otras cosas más. Te ofrecemos packs accesibles para que cumplas con todas tus obligaciones y además puedas proteger tu proyecto. Redactamos términos y condiciones  y políticas de privacidad.  Pagá en cuotas con mercado pago.</p>
+                                <p class="terminos-data">Si tenés o estás desarrollando una aplicación, una plataforma o un E-commerce, es necesario que cumplas con algunas obligaciones como por ejemplo contar con términos y condiciones, políticas de privacidad, registrar tus bases de datos, y otras cosas más. Te ofrecemos packs accesibles para que cumplas con todas tus obligaciones y además puedas proteger tu proyecto. Redactamos términos y condiciones  y políticas de privacidad.  Pagá en cuotas con mercado pago.</p>
+                                <p class="terminos-data">Si tenés o estás desarrollando una aplicación, una plataforma o un E-commerce, es necesario que cumplas con algunas obligaciones como por ejemplo contar con términos y condiciones, políticas de privacidad, registrar tus bases de datos, y otras cosas más. Te ofrecemos packs accesibles para que cumplas con todas tus obligaciones y además puedas proteger tu proyecto. Redactamos términos y condiciones  y políticas de privacidad.  Pagá en cuotas con mercado pago.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div data-seccion="carrito" class="seccion show">
                 <div class="item-paso">
@@ -882,8 +1012,8 @@
                 <div class="cont-table dinone" id="cont-carrito-detalle">
                     <table class="table-thead">
                         <tr class="tr-thead">
-                            <th colspan="2">Productos simples</th>
-                            <th colspan="2">Precio final</th>
+                            <th class="text-bajada" colspan="2">Productos simples</th>
+                            <th class="text-bajada" colspan="2">Precio final</th>
                         </tr>
                     </table>
                     <div id="carrito-detalle">
@@ -916,8 +1046,8 @@
                     </div>
                     <table class="tfoot">
                         <tr>
-                          <td colspan="2">Total</td>
-                          <td colspan="2" id="valor_total_carrito">$6608</td>
+                          <td class="text-bajada" colspan="2">Total</td>
+                          <td class="text-bajada" colspan="2" id="valor_total_carrito">$6608</td>
                         </tr>
                     </table>
                     <table class="btn-add-produc">
@@ -931,15 +1061,19 @@
                 <div id="carrito-pago" class="dinone">
                     <div class="cont-cards-ordenes">
                         <div class="card-solicitud">
-                            <p>Número de orden: #113</p>
-                            <span>|</span>
-                            <p>27/08/1970</p>
-                            <a download href="#" class="button secundary"  id="descargar_orden_compra_actual">Descargar orden</a>
+                            <div>
+                                <p class="text-bajada">Número de orden: #113</p>
+                                <span>|</span>
+                                <p class="text-bajada">27/08/1970</p>
+                            </div>
+                            <a download href="#" class="button secundary"  id="descargar_orden_compra_actual">
+                                <img class="img_descarga" src="./resources/Carrito_DescargaOrden.svg">
+                                Descargar orden</a>
                         </div>
                     </div>
                     <div class="opc-pagos">
-                        <p>Formas de pago</p>
-                        <span>Para coordinar la entraga deberás contactarte a través de WhatsApp (011) 2843-0877 <br> de Lunes a Viernes </span>
+                        <p class="text-cotizar">Formas de pago</p>
+                        <span class="text-bajada">Para coordinar la entraga deberás contactarte a través de WhatsApp (011) 2843-0877 <br> de Lunes a Viernes </span>
                         <label for="mp" class="opcion-pago button secundary"> 
                             <input type="radio" id="mp" name="metodo-pago"> Abonar con Mercado Pago
                         </label>
@@ -953,6 +1087,7 @@
                 </div>
             </div>
         </main>
+        <script defer src="./js/swiper.min.js"></script>
         <script src="js/app.js"></script>
     </body>
 </html>
