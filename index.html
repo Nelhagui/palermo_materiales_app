@@ -30,7 +30,7 @@
         <nav>
             <div class="cont-cont-img-user-per" data-user>
                 <img src="./resources/user-foto.svg" alt="" class="">
-                <span class="text-bajada" data-user-info="nombre-apellido"></span>
+                <span class="text-bajada palermo-user" data-user-info="nombre-apellido"></span>
             </div>
             
             <div class="info-nav" data-visibilidad="login-no-activo">
@@ -593,7 +593,7 @@
                         </div>-->
                         <div class="item">
                             <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
-                            <div class="info-item">
+                            <div class="info-item data-item">
                                 <div class="categoria-item">Techo / Construcción húmeda</div>
                                 <div class="valor-item">$956</div>
                                 <div class="titulo-item">Pintura asfáltica</div>
@@ -606,7 +606,7 @@
                         </div>
                         <div class="item">
                             <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
-                            <div class="info-item">
+                            <div class="info-item data-item">
                                 <div class="categoria-item">Techo / Construcción húmeda</div>
                                 <div class="valor-item">$956</div>
                                 <div class="titulo-item">Pintura asfáltica</div>
@@ -619,7 +619,7 @@
                         </div>
                         <div class="item">
                             <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
-                            <div class="info-item">
+                            <div class="info-item data-item">
                                 <div class="categoria-item">Techo / Construcción húmeda</div>
                                 <div class="valor-item">$956</div>
                                 <div class="titulo-item">Pintura asfáltica</div>
@@ -632,7 +632,7 @@
                         </div>
                         <div class="item">
                             <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
-                            <div class="info-item">
+                            <div class="info-item data-item">
                                 <div class="categoria-item">Techo / Construcción húmeda</div>
                                 <div class="valor-item">$956</div>
                                 <div class="titulo-item">Pintura asfáltica</div>
@@ -645,7 +645,7 @@
                         </div>
                         <div class="item">
                             <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
-                            <div class="info-item">
+                            <div class="info-item data-item">
                                 <div class="categoria-item">Techo / Construcción húmeda</div>
                                 <div class="valor-item">$956</div>
                                 <div class="titulo-item">Pintura asfáltica</div>
@@ -663,10 +663,10 @@
                 <div class="header-perfil">
                     <div class="cont-img-user-per">
                         <img src="./resources/user-foto.svg" alt="" class="">
-                    </div>
-                    <div>
-                        <span data-user-info="nombre-apellido">Martín Rodriguez</span>
-                        <span class="comentario" data-user-info="email">martin.rodriguez@gmail.com.ar</span>
+                        <div class="datos-user">
+                            <span data-user-info="nombre-apellido" class="text-bajada">Martín Rodriguez</span>
+                            <span class="comentario" data-user-info="email">martin.rodriguez@gmail.com.ar</span>
+                        </div>
                     </div>
                     <button class="button secundary comentario" data-accion='edit-perfil'>EDITAR DATOS</button>
                 </div>
@@ -674,28 +674,28 @@
                     <div>
                         <img src="./resources/mi_perfil_naranja.svg" alt="">
                         <div class="item-info-per">
-                            <span>Nombre y apellido</span>
+                            <span class="text-bajada">Nombre y apellido</span>
                             <p class="comentario" data-user-info="nombre-apellido">Martín Rodriguez</p>
                         </div>
                     </div>
                     <div>
                         <img src="./resources/telefono_naranja.svg" alt="">
                         <div class="item-info-per">
-                            <span>Teléfono/Celular</span>
+                            <span class="text-bajada">Teléfono/Celular</span>
                             <p class="comentario" data-user-info="telefono">11-1111-1111</p>
                         </div>
                     </div>
                     <div>
                         <img src="./resources/mail_naranja.svg" alt="">
                         <div class="item-info-per">
-                            <span>Email</span>
+                            <span class="text-bajada">Email</span>
                             <p class="comentario" data-user-info="email">martin.rodriguez@gmail.com</p>
                         </div>
                     </div>
                     <div>
                         <img src="./resources/password_naranja.svg" alt="">
                         <div class="item-info-per">
-                            <span>Contraseña</span>
+                            <span class="text-bajada">Contraseña</span>
                             <p class="comentario">**********</p>
                         </div>
                     </div>
@@ -703,7 +703,7 @@
                 <a class="link-historial-soli" href="#historial-solicitudes" data-link="historial-solicitudes">
                     <div>
                         <img src="./resources/historial.svg" alt="">
-                        <p>Historial de solicitudes</p>
+                        <p class="text-bajada">Historial de solicitudes</p>
                     </div>
                     <span class="icon-fd">
                         <img src="./resources/flecha-derecha.svg" alt="">
@@ -711,23 +711,23 @@
                 </a>
             </div>
             <div data-seccion="historial-solicitudes" class="seccion">
-                <h2 class="titulo-seccion-solicitud">Historial de solicitudes</h2>
+                <h2 class="titulo-seccion-solicitud title-historial">Historial de solicitudes</h2>
                 <div class="cont-cards-solicitudes">
                     <div class="card-solicitud">
-                        <div><p>Número de orden: #113</p></div>
-                        <div><p>27/08/1970</p></div>
+                        <div><p class="text-bajada">Número de orden: #113</p></div>
+                        <div><p class="text-bajada">27/08/1970</p></div>
                         
-                        <div><a href="archivo.jpg" class="button secundary" download>Descargar orden</a></div>
+                        <div><a href="archivo.jpg" class="button secundary btn-download" download>Descargar orden</a></div>
                     </div>
                     <div class="card-solicitud">
-                        <div><p>Número de orden: #213</p></div>
-                        <div><p>27/08/1970</p></div>
-                        <div><button class="button secundary">Descargar orden</button></div>
+                        <div><p class="text-bajada">Número de orden: #213</p></div>
+                        <div><p class="text-bajada">27/08/1970</p></div>
+                        <div><button class="button secundary btn-download">Descargar orden</button></div>
                     </div>
                     <div class="card-solicitud">
-                        <div><p>Número de orden: #213</p></div>
-                        <div><p>27/08/1970</p></div>
-                        <div><button class="button secundary">Descargar orden</button></div>
+                        <div><p class="text-bajada">Número de orden: #213</p></div>
+                        <div><p class="text-bajada">27/08/1970</p></div>
+                        <div><button class="button secundary btn-download">Descargar orden</button></div>
                     </div>
                 </div>
             </div>
@@ -830,7 +830,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="cont-resultados-opciones-sub" class="dinone">
+                    <div id="cont-resultados-opciones-sub" class="dinone cotizar-data">
 
                     </div>    
                     
@@ -1087,7 +1087,7 @@
                 </div>
             </div>
         </main>
-        <script defer src="./js/swiper.min.js"></script>
         <script src="js/app.js"></script>
+        <script async defer src="./js/swiper.min.js"></script>
     </body>
 </html>

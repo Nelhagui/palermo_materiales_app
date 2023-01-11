@@ -64,7 +64,6 @@ validoSesion();
 /*document.querySelector('.hamburger').addEventListener('click', function(){
     this.classList.toggle('is-active'); 
     document.querySelector('nav').classList.toggle('show');
-    document.getElementById("myDIV").style.display = "none";
 });*/
 
 document.querySelector('.hamburger').addEventListener('click', function(){
@@ -74,7 +73,8 @@ document.querySelector('.hamburger').addEventListener('click', function(){
     }
     else
     {
-         document.getElementById("myDIV").style.display = "block";
+        document.querySelector('nav').classList.remove('show');
+        document.getElementById("myDIV").style.display = "block";
     }
 });
 
@@ -937,7 +937,7 @@ document.querySelector('.cont-icon-cart-noti').addEventListener('click', ver_car
 delete ver_carrito;
 
 /*slider banner*/
-var swiper = new Swiper(".mySwiper3", {
+/*var swiper = new Swiper(".mySwiper3", {
         slidesPerView: 1,
         spaceBetween: 30,
         loop: true,
@@ -949,4 +949,5 @@ var swiper = new Swiper(".mySwiper3", {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
         },
-      });
+      });*/
+
