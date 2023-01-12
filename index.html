@@ -30,7 +30,7 @@
         <nav>
             <div class="cont-cont-img-user-per" data-user>
                 <img src="./resources/user-foto.svg" alt="" class="">
-                <span class="text-bajada palermo-user" data-user-info="nombre-apellido"></span>
+                <span class="palermo-user" data-user-info="nombre-apellido"></span>
             </div>
             
             <div class="info-nav" data-visibilidad="login-no-activo">
@@ -196,27 +196,23 @@
                             <p class="comentario">Ingresa los datos a modificar</p>
                         </div>
                         <div class="cont-form">
-                            <label for="">Nombre</label>
+                            <label class="text-bajada" for="">Nombre y Apellido</label>
                             <input type="text" name="nombre" value="" data-user-value>
                         </div>
                         <div class="cont-form">
-                            <label for="">Apellido</label>
-                            <input type="text" name="apellido" value="" data-user-value>
-                        </div>
-                        <div class="cont-form">
-                            <label for="">Telefono/Celular</label>
+                            <label class="text-bajada" for="">Telefono/Celular</label>
                             <input type="number" value="" name="telefono" data-user-value>
                         </div>
                         <div class="cont-form">
-                            <label for="">Email</label>
+                            <label class="text-bajada" for="">Email</label>
                             <input name="email" type="email" value="" data-user-value>
                         </div>
                         <div class="cont-form">
-                            <label for="">Contraseña nueva</label>
+                            <label class="text-bajada" for="">Contraseña nueva</label>
                             <input type="password" name="password" autocomplete="off">
                         </div>
                         <div class="cont-form">
-                            <label for="">Repetir contraseña nueva</label>
+                            <label class="text-bajada" for="">Repetir contraseña nueva</label>
                             <input type="password" name="password_confirmation" autocomplete="off">
                         </div>
                         <button class="button primary">ACEPTAR</button>
@@ -228,8 +224,8 @@
             <div class="elemento-emergente" data-show="add-items-cart">
                 <div class="resp-add-items-cart">
                     <div class="btn-cerrar" data-accion="cerrar">x</div>
-                    <!-- <img src="./resources/icon-animado-check-ok.gif" alt=""> -->
-                    <p class="text-bajada">¡Tu solicitud se ha sumado con éxito al carrito de compras!</p>
+                    <img src="./resources/icon-animado-check-ok.gif" alt="">
+                    <p class="user-title">¡Tu solicitud se ha sumado con éxito al carrito de compras!</p>
                     <br>
                     <a class="button primary" data-link="cotizar" data-accion="cerrar">REALIZAR NUEVA COTIZACION</a>
                     <a class="button secundary" type="button" data-link="carrito" data-accion="cerrar">IR A CARRITO DE COMPRA</a>
@@ -557,7 +553,7 @@
                         <span class="text-filtros">4 Resultados</span>
                         <div class="conte-filtros">
                             <img class="img-filtros" src="./resources/Filtrar.png" alt="">
-                            <p class="text-filtros">Filtrar</p>
+                            <p class="text-bajada">Filtrar</p>
                         </div>
                     </div>
                     <section class="lista-items" id="lista-items">
@@ -664,7 +660,7 @@
                     <div class="cont-img-user-per">
                         <img src="./resources/user-foto.svg" alt="" class="">
                         <div class="datos-user">
-                            <span data-user-info="nombre-apellido" class="text-bajada">Martín Rodriguez</span>
+                            <span data-user-info="nombre-apellido" class="user-title">Martín Rodriguez</span>
                             <span class="comentario" data-user-info="email">martin.rodriguez@gmail.com.ar</span>
                         </div>
                     </div>
@@ -674,36 +670,36 @@
                     <div>
                         <img src="./resources/mi_perfil_naranja.svg" alt="">
                         <div class="item-info-per">
-                            <span class="text-bajada">Nombre y apellido</span>
+                            <span class="user-title">Nombre y apellido</span>
                             <p class="comentario" data-user-info="nombre-apellido">Martín Rodriguez</p>
                         </div>
                     </div>
                     <div>
                         <img src="./resources/telefono_naranja.svg" alt="">
                         <div class="item-info-per">
-                            <span class="text-bajada">Teléfono/Celular</span>
+                            <span class="user-title">Teléfono/Celular</span>
                             <p class="comentario" data-user-info="telefono">11-1111-1111</p>
                         </div>
                     </div>
                     <div>
                         <img src="./resources/mail_naranja.svg" alt="">
                         <div class="item-info-per">
-                            <span class="text-bajada">Email</span>
+                            <span class="user-title">Email</span>
                             <p class="comentario" data-user-info="email">martin.rodriguez@gmail.com</p>
                         </div>
                     </div>
                     <div>
                         <img src="./resources/password_naranja.svg" alt="">
                         <div class="item-info-per">
-                            <span class="text-bajada">Contraseña</span>
+                            <span class="user-title">Contraseña</span>
                             <p class="comentario">**********</p>
                         </div>
                     </div>
                 </div>
                 <a class="link-historial-soli" href="#historial-solicitudes" data-link="historial-solicitudes">
-                    <div>
+                    <div class="historial-contain">
                         <img src="./resources/historial.svg" alt="">
-                        <p class="text-bajada">Historial de solicitudes</p>
+                        <p class="user-title">Historial de solicitudes</p>
                     </div>
                     <span class="icon-fd">
                         <img src="./resources/flecha-derecha.svg" alt="">
@@ -714,20 +710,22 @@
                 <h2 class="titulo-seccion-solicitud title-historial">Historial de solicitudes</h2>
                 <div class="cont-cards-solicitudes">
                     <div class="card-solicitud">
-                        <div><p class="text-bajada">Número de orden: #113</p></div>
-                        <div><p class="text-bajada">27/08/1970</p></div>
-                        
-                        <div><a href="archivo.jpg" class="button secundary btn-download" download>Descargar orden</a></div>
+                        <div><p class="text-bajada">Número de orden: #113</p>
+                            <div class="line-download"></div>
+                        <p class="text-bajada">27/08/1970</p></div>
+                        <div class="download-contain"><a href="archivo.jpg" class="button secundary btn-download" download><img class="img_descarga" src="./resources/Carrito_DescargaOrden.svg">Descargar orden</a></div>
                     </div>
                     <div class="card-solicitud">
-                        <div><p class="text-bajada">Número de orden: #213</p></div>
-                        <div><p class="text-bajada">27/08/1970</p></div>
-                        <div><button class="button secundary btn-download">Descargar orden</button></div>
+                        <div><p class="text-bajada">Número de orden: #213</p>
+                            <div class="line-download"></div>
+                        <p class="text-bajada">27/08/1970</p></div>
+                        <div class="download-contain"><button class="button secundary btn-download"><img class="img_descarga" src="./resources/Carrito_DescargaOrden.svg">Descargar orden</button></div>
                     </div>
                     <div class="card-solicitud">
-                        <div><p class="text-bajada">Número de orden: #213</p></div>
-                        <div><p class="text-bajada">27/08/1970</p></div>
-                        <div><button class="button secundary btn-download">Descargar orden</button></div>
+                        <div><p class="text-bajada">Número de orden: #213</p>
+                            <div class="line-download"></div>
+                        <p class="text-bajada">27/08/1970</p></div>
+                        <div class="download-contain"><button class="button secundary btn-download"><img class="img_descarga" src="./resources/Carrito_DescargaOrden.svg">Descargar orden</button></div>
                     </div>
                 </div>
             </div>
@@ -1053,7 +1051,7 @@
                     <table class="btn-add-produc">
                         <tr>
                             <td>
-                                <a class="button secundary" type="button" data-link="cotizar" >AGREGAR MÁS PRODUCTOS</a>
+                                <a class="button secundary" type="button" data-link="cotizar" ><img class="img_descarga" src="./resources/Carrito_DescargaOrden.svg">AGREGAR MÁS PRODUCTOS</a>
                             </td>
                         </tr>
                     </table>
@@ -1063,7 +1061,7 @@
                         <div class="card-solicitud">
                             <div>
                                 <p class="text-bajada">Número de orden: #113</p>
-                                <span>|</span>
+                                <div class="line-download"></div>
                                 <p class="text-bajada">27/08/1970</p>
                             </div>
                             <a download href="#" class="button secundary"  id="descargar_orden_compra_actual">
