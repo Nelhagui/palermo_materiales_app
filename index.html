@@ -21,7 +21,7 @@
                 <img class="logo_p" src="./resources/logo/logo.png" alt="" class="">
             </div>
             <div>
-                <div class="cont-icon-cart-noti">
+                <div class="cont-icon-cart-noti" onclick="mostrarSeccion('carrito')">
                     <span id="cant-items-cart" class="dinone"></span>
                     <img src="./resources/carrito_blanco.svg" alt="">
                 </div>
@@ -45,7 +45,7 @@
             </div>
             <ul>
                 <li class="item-menu">
-                    <a href="#home" data-link="home">
+                    <a href="#home" onclick="mostrarSeccion('home')">
                         <div class="texto-nav">
                             <img src="./resources/home.svg" alt="">
                             Home
@@ -67,7 +67,7 @@
                     </a>
                 </li>
                 <li class="item-menu">
-                    <a href="#productos" data-link="productos">
+                    <a href="#productos" onclick="mostrarSeccion('productos')">
                         <div class="texto-nav">
                             <img src="./resources/productos.svg" alt="">
                             Productos
@@ -157,10 +157,6 @@
                             <p class="comentario">Registrate para continuar</p>
                         </div>
                         <div class="cont-form">
-                            <label for="">Ingresa tu apellido</label>
-                            <input type="text" name="apellido" value="" required>
-                        </div>
-                        <div class="cont-form">
                             <label for="">Ingresa tu nombre</label>
                             <input type="text" name="nombre" value="" required>
                         </div>
@@ -196,7 +192,7 @@
                             <p class="comentario">Ingresa los datos a modificar</p>
                         </div>
                         <div class="cont-form">
-                            <label class="text-bajada" for="">Nombre y Apellido</label>
+                            <label class="text-bajada" for="">Nombre</label>
                             <input type="text" name="nombre" value="" data-user-value>
                         </div>
                         <div class="cont-form">
@@ -368,7 +364,7 @@
             </div> -->
         </div>
         <main>
-            <div data-seccion="home" class="seccion">
+            <div data-seccion="home" class="seccion show">
                 <div class="banner">
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
@@ -398,122 +394,63 @@
                     <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
                 </div>
                 <div class="op-seccion">
-                    <form action="" method="post" id="form-buscar-prod-inicio">
+                    <div class="cont-buscador">
                         <div class="search">
-                            <input type="text" value="" name="buscar" id="buscar-item" placeholder="buscar producto">
+                            <input type="text" value="" name="buscar" id="buscar_prod_home" placeholder="buscar producto">
                         </div>
-                    </form>
-                    <button class="button primary">COTIZADOR ONLINE</button>
+                    </div>
+                    <button class="button primary" type="button" onclick="buscar_producto('lista_items_home', 'buscar_prod_home' )">BUSCAR</button>
                 </div>
                 <div class="btn-categorias">
                     <p class="comentario">Productos más buscados</p>
-                    <div id="cont-btn-cat-home">
-                        <button class="button seleccion">TECHO</button>
-                        <button class="button">PARED</button>
-                        <button class="button">TERMINACION</button>
-                        <button class="button">IMPERMEABILIDAD</button>
+                    <div id="cont_btn_cat_home">
+                        <button class="button loading"></button>
+                        <button class="button loading"></button>
+                        <button class="button loading"></button>
+                        <button class="button loading"></button>
                     </div>
                 </div>
                 <div>
-                    <!--<section class="lista-items" id="lista-items">
-                        <!--<div class="item">
-                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
-                            <div class="info-item">
-                                <div class="categoria-item "></div>
-                                <div class="valor-item "></div>
-                                <div class="titulo-item "></div>
-                                <div class="descripcion-item "></div>
-                            </div>
-                            <div class="btn-item cotizar"><img src="" alt=""></div>
-                        </div>
+                    <section class="lista-items" id="lista_items_home">
                         <div class="item">
-                            <div class="img-item "><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
-                            <div class="info-item">
-                                <div class="categoria-item "></div>
-                                <div class="valor-item "></div>
-                                <div class="titulo-item "></div>
-                                <div class="descripcion-item "></div>
+                            <div class="img-item loading">
                             </div>
-                            <div class="btn-item "><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
-                        </div>
-                        <div class="item">
-                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
                             <div class="info-item">
-                                <div class="categoria-item"></div>
-                                <div class="valor-item"></div>
-                                <div class="titulo-item"></div>
-                                <div class="descripcion-item"></div>
+                                <div class="categoria-item loading"></div>
+                                <div class="valor-item loading"></div>
+                                <div class="titulo-item loading"></div>
+                                <div class="descripcion-item loading"></div>
                             </div>
-                            <div class="btn-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
-                        </div>-->
-                       <!-- <div class="item">
-                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
-                            <div class="info-item">
-                                <div class="categoria-item">Techo / Construcción húmeda</div>
-                                <div class="valor-item">$956</div>
-                                <div class="titulo-item">Pintura asfáltica</div>
-                                <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
-                            </div>
-                                <div class="btn-item">
-                                    <img class="palermo_img_btn" src="./resources/Agregar_alcarrito.png" alt="">
-                                    <span class="agregar-text">Agregar</span>
+                                <div class="btn-item loading">
                                 </div>    
                         </div>
-                        <div class="item">
-                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
-                            <div class="info-item">
-                                <div class="categoria-item">Techo / Construcción húmeda</div>
-                                <div class="valor-item">$956</div>
-                                <div class="titulo-item">Pintura asfáltica</div>
-                                <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
-                            </div>
-                                <div class="btn-item">
-                                    <img class="palermo_img_btn" src="./resources/Agregar_alcarrito.png" alt="">
-                                    <span class="agregar-text">Agregar</span>
-                                </div>    
-                        </div>
-                        <div class="item">
-                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
-                            <div class="info-item">
-                                <div class="categoria-item">Techo / Construcción húmeda</div>
-                                <div class="valor-item">$956</div>
-                                <div class="titulo-item">Pintura asfáltica</div>
-                                <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
-                            </div>
-                                <div class="btn-item">
-                                    <img class="palermo_img_btn" src="./resources/Agregar_alcarrito.png" alt="">
-                                    <span class="agregar-text">Agregar</span>
-                                </div>    
-                        </div>
-                        <div class="item">
-                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
-                            <div class="info-item">
-                                <div class="categoria-item">Techo / Construcción húmeda</div>
-                                <div class="valor-item">$956</div>
-                                <div class="titulo-item">Pintura asfáltica</div>
-                                <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
-                            </div>
-                                <div class="btn-item">
-                                    <img class="palermo_img_btn" src="./resources/Agregar_alcarrito.png" alt="">
-                                    <span class="agregar-text">Agregar</span>
-                                </div>    
-                        </div>
-                        <div class="item">
-                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
-                            <div class="info-item">
-                                <div class="categoria-item">Techo / Construcción húmeda</div>
-                                <div class="valor-item">$956</div>
-                                <div class="titulo-item">Pintura asfáltica</div>
-                                <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
-                            </div>
-                                <div class="btn-item">
-                                    <img class="palermo_img_btn" src="./resources/Agregar_alcarrito.png" alt="">
-                                    <span class="agregar-text">Agregar</span>
-                                </div>    
-                        </div>
-                    </section>-->
+                    </section>
                 </div> 
             </div>
+            <div data-seccion="cotizar_producto" class="seccion">
+                <div class="card-cotizar">
+                    <div class="cont-img">
+                        <img src="" alt="" id="img_cot_pro">
+                    </div>
+                    <div class="info-card">
+                        <div class="titulo-cod">
+                            <h2 id="titulo_cot_pro"></h2>
+                            <span class="comentario" id="pre_cot_pro"></span>
+                        </div>
+                        <p class="comentario" id="des_cot_pro"></p>
+                    </div>
+                </div>
+                <div class="cont-input-cotizar">
+                    <p class="comentario">Ingrese metro cuadrado</p>
+                    <div class="btn-set-cant" >
+                        <span  data-set-cant="bajar" data-id-input="cant_cot_pro">-</span>
+                        <input type="number" value="1" id="cant_cot_pro" name="cantidad">
+                        <span  data-set-cant="subir" data-id-input="cant_cot_pro">+</span>
+                    </div>
+                    <button class="button primary" type="button" onclick="cotizarProductoSimple('cant_cot_pro', 'btn_add_cot_pro')" id="btn_add_cot_pro">AGREGAR AL CARRITO</button>
+                </div>
+            </div>
+            
             <div data-seccion="productos" class="seccion">
                 <div class="banner">
                     <div class="swiper mySwiper">
@@ -541,120 +478,34 @@
                     </div>
                 </div>
                 <div class="op-seccion">
-                    <form action="" method="post" id="form-buscar-prod">
+                    <div class="cont-buscador">
                         <div class="search">
-                            <input type="text" value="" name="producto" id="buscar-prod" placeholder="buscar producto">
+                            <input type="text" value="" name="producto_buscado" id="producto_buscado" placeholder="buscar producto">
                         </div>
-                    </form>
-                    <button class="button primary">COTIZADOR ONLINE</button>
+                        <button class="button primary" type="button" onclick="buscar_producto('lista_items_productos', 'producto_buscado', 'cant_form_buscar_prod' )">BUSCAR</button>
+                    </div>
                 </div>
                 <div>
                     <div class="opt-filtros">
-                        <span class="text-filtros">4 Resultados</span>
-                        <div class="conte-filtros">
-                            <img class="img-filtros" src="./resources/Filtrar.png" alt="">
-                            <p class="text-bajada">Filtrar</p>
-                        </div>
+                        <span class="text-filtros" id="cant_form_buscar_prod"></span>
                     </div>
-                    <section class="lista-items" id="lista-items">
-                        <!--<div class="item">
-                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
+                    <section class="lista-items" id="lista_items_productos">
+                        <div class="item">
+                            <div class="img-item loading">
+                            </div>
                             <div class="info-item">
-                                <div class="categoria-item "></div>
-                                <div class="valor-item "></div>
-                                <div class="titulo-item "></div>
-                                <div class="descripcion-item "></div>
+                                <div class="categoria-item loading"></div>
+                                <div class="valor-item loading"></div>
+                                <div class="titulo-item loading"></div>
+                                <div class="descripcion-item loading"></div>
                             </div>
-                            <div class="btn-item cotizar"><img src="" alt=""></div>
-                        </div>
-                        <div class="item">
-                            <div class="img-item "><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
-                            <div class="info-item">
-                                <div class="categoria-item "></div>
-                                <div class="valor-item "></div>
-                                <div class="titulo-item "></div>
-                                <div class="descripcion-item "></div>
-                            </div>
-                            <div class="btn-item "><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
-                        </div>
-                        <div class="item">
-                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
-                            <div class="info-item">
-                                <div class="categoria-item"></div>
-                                <div class="valor-item"></div>
-                                <div class="titulo-item"></div>
-                                <div class="descripcion-item"></div>
-                            </div>
-                            <div class="btn-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
-                        </div>-->
-                        <div class="item">
-                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
-                            <div class="info-item data-item">
-                                <div class="categoria-item">Techo / Construcción húmeda</div>
-                                <div class="valor-item">$956</div>
-                                <div class="titulo-item">Pintura asfáltica</div>
-                                <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
-                            </div>
-                                <div class="btn-item">
-                                    <img class="palermo_img_btn" src="./resources/Agregar_alcarrito.png" alt="">
-                                    <span class="agregar-text">Agregar</span>
-                                </div>    
-                        </div>
-                        <div class="item">
-                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
-                            <div class="info-item data-item">
-                                <div class="categoria-item">Techo / Construcción húmeda</div>
-                                <div class="valor-item">$956</div>
-                                <div class="titulo-item">Pintura asfáltica</div>
-                                <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
-                            </div>
-                                <div class="btn-item">
-                                    <img class="palermo_img_btn" src="./resources/Agregar_alcarrito.png" alt="">
-                                    <span class="agregar-text">Agregar</span>
-                                </div>    
-                        </div>
-                        <div class="item">
-                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
-                            <div class="info-item data-item">
-                                <div class="categoria-item">Techo / Construcción húmeda</div>
-                                <div class="valor-item">$956</div>
-                                <div class="titulo-item">Pintura asfáltica</div>
-                                <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
-                            </div>
-                                <div class="btn-item">
-                                    <img class="palermo_img_btn" src="./resources/Agregar_alcarrito.png" alt="">
-                                    <span class="agregar-text">Agregar</span>
-                                </div>    
-                        </div>
-                        <div class="item">
-                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
-                            <div class="info-item data-item">
-                                <div class="categoria-item">Techo / Construcción húmeda</div>
-                                <div class="valor-item">$956</div>
-                                <div class="titulo-item">Pintura asfáltica</div>
-                                <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
-                            </div>
-                                <div class="btn-item">
-                                    <img class="palermo_img_btn" src="./resources/Agregar_alcarrito.png" alt="">
-                                    <span class="agregar-text">Agregar</span>
-                                </div>    
-                        </div>
-                        <div class="item">
-                            <div class="img-item"><img class="palermo_img" src="./resources/img/images.jpg" alt=""></div>
-                            <div class="info-item data-item">
-                                <div class="categoria-item">Techo / Construcción húmeda</div>
-                                <div class="valor-item">$956</div>
-                                <div class="titulo-item">Pintura asfáltica</div>
-                                <div class="descripcion-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, rem explicabo magni praesentium delectus cupiditate vitae</div>
-                            </div>
-                                <div class="btn-item">
-                                    <img class="palermo_img_btn" src="./resources/Agregar_alcarrito.png" alt="">
-                                    <span class="agregar-text">Agregar</span>
+                                <div class="btn-item loading">
                                 </div>    
                         </div>
                     </section>
                 </div>
             </div>
+
             <div data-seccion="perfil" class="seccion" data-user>
                 <div class="header-perfil">
                     <div class="cont-img-user-per">
@@ -670,22 +521,22 @@
                     <div>
                         <img src="./resources/mi_perfil_naranja.svg" alt="">
                         <div class="item-info-per">
-                            <span class="user-title">Nombre y apellido</span>
-                            <p class="comentario" data-user-info="nombre-apellido">Martín Rodriguez</p>
+                            <span class="user-title">Nombre</span>
+                            <p class="comentario" data-user-info="nombre-apellido"></p>
                         </div>
                     </div>
                     <div>
                         <img src="./resources/telefono_naranja.svg" alt="">
                         <div class="item-info-per">
                             <span class="user-title">Teléfono/Celular</span>
-                            <p class="comentario" data-user-info="telefono">11-1111-1111</p>
+                            <p class="comentario" data-user-info="telefono"></p>
                         </div>
                     </div>
                     <div>
                         <img src="./resources/mail_naranja.svg" alt="">
                         <div class="item-info-per">
                             <span class="user-title">Email</span>
-                            <p class="comentario" data-user-info="email">martin.rodriguez@gmail.com</p>
+                            <p class="comentario" data-user-info="email"></p>
                         </div>
                     </div>
                     <div>
@@ -696,7 +547,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="link-historial-soli" href="#historial-solicitudes" data-link="historial-solicitudes">
+                <a class="link-historial-soli" href="#historial-solicitudes" onclick="mostrarSeccion('historial-solicitudes')">
                     <div class="historial-contain">
                         <img src="./resources/historial.svg" alt="">
                         <p class="user-title">Historial de solicitudes</p>
@@ -729,9 +580,7 @@
                     </div>
                 </div>
             </div>
-            <div data-seccion="productos" class="seccion">
-                <h1>productos</h1>
-            </div>
+
             <div data-seccion="cotizar" class="seccion">
                 <div class="banner cotizar">
                     <div class="swiper mySwiper3">
@@ -867,6 +716,7 @@
                     </div>
                 </div>
             </div>
+
             <div data-seccion="cotizar-calculo" class="seccion seccion-cotizar-calculo">
                 <div class="card-cotizar">
                     <div class="cont-img">
@@ -916,6 +766,7 @@
                     AGREGAR AL CARRITO
                 </button>
             </div>
+
             <div data-seccion="informacion" class="seccion informacion_data">
                 <div class="img-info">
                     <img class="info-img" src="./resources/logo/logo_informacion.png">
@@ -973,6 +824,7 @@
                     </div>
                 </div>
             </div>
+
             <div data-seccion="terminos" class="seccion">
                 <div class="img-info">
                     <img class="info-img" src="./resources/logo/logo_informacion.png">
@@ -992,7 +844,8 @@
                     </div>
                 </div>
             </div>
-            <div data-seccion="carrito" class="seccion show">
+
+            <div data-seccion="carrito" class="seccion">
                 <div class="item-paso">
                     <div class="paso-actual" data-paso="detalle">
                         <img src="./resources/detalle.svg" alt="">

@@ -53,7 +53,9 @@ let tiempoEnActualizarInfo = 3;
     }
     let _obd = {"url": url_public+'contenido-app.json', "metodo": 'GET', "datos": 'h=categorias', "recibe": procesa_respuesta_inicial };
     $r.ajax(_obd);  
-    delete procesa_respuesta_inicial;
+    delete procesa_respuesta_inicial, _obd;
+
+    cargaInicialHome();
 }
 
 //fin carga inicial
@@ -61,15 +63,13 @@ let tiempoEnActualizarInfo = 3;
 //valido sesion del usuario
 validoSesion();
 
-/*document.querySelector('.hamburger').addEventListener('click', function(){
-    this.classList.toggle('is-active'); 
-    document.querySelector('nav').classList.toggle('show');
-});*/
 
-document.querySelector('.hamburger').addEventListener('click', function(){
-    if(this.classList.toggle('is-active')){; 
-    document.querySelector('nav').classList.toggle('show');
-    document.getElementById("myDIV").style.display = "none";
+document.querySelector('.hamburger').addEventListener('click', function()
+{
+    if(this.classList.toggle('is-active'))
+    { 
+        document.querySelector('nav').classList.toggle('show');
+        document.getElementById("myDIV").style.display = "none";
     }
     else
     {
@@ -79,8 +79,10 @@ document.querySelector('.hamburger').addEventListener('click', function(){
 });
 
 
-_mostrar_elemento_emergente = function(e) {
-    if(e.target.classList.contains('elemento-emergente')) {
+_mostrar_elemento_emergente = function(e) 
+{
+    if(e.target.classList.contains('elemento-emergente')) 
+    {
         e.target.classList.toggle('show');
         document.querySelector('.cont-elementos-emergentes').classList.toggle('show');
     }
@@ -89,7 +91,8 @@ document.querySelector('.elemento-emergente').addEventListener('click', _mostrar
 delete _mostrar_elemento_emergente;
 
 // apertura de login o registro
-const _login_registro = function(){
+const _login_registro = function()
+{
     document.querySelectorAll('[data-show]').forEach(element => { element.classList.remove('show'); });
     if(this.dataset.accion != "cerrar")
     {
@@ -104,50 +107,39 @@ const _login_registro = function(){
 document.querySelectorAll('[data-accion]').forEach(element => { element.onclick = _login_registro; });
 
 // secciones
-document.querySelectorAll('a[data-link]').forEach(element => {
+document.querySelectorAll('a[data-link]').forEach(element => 
+{
     element.onclick = function()
     {
         document.querySelectorAll('[data-seccion]').forEach(element => { element.classList.remove('show') });
         document.querySelector('[data-seccion="'+this.dataset.link+'"]').classList.add('show');
         switch (this.dataset.link) 
         {
-            case 'home':
-                //valido si ya tiene en local storage las categorás descargadas.
-            break;
-            case 'perfil':
-                console.log('perfil');
-            break;
-            case 'productos':
-                console.log('productos');
-            break;
             case 'cotizar':
-                if(!contenidoActualizado(categorias)) 
-                {
-                    let procesa_respuesta = function(data)
-                    {    console.log('respuesta')
-                        if(!Array.isArray(data))
+                let procesa_respuesta = function(data)
+                {    console.log('respuesta')
+                    if(!Array.isArray(data))
+                    {
+                        alert('No se encontraron categorías, reinicie la app');
+                    }
+                    else
+                    {
+                        if(data.length > 0 )
                         {
-                            alert('No se encontraron categorías, reinicie la app');
+                            categorias = categorias.concat(data);
+                            categorias.tiempo = Number($r.date('YmdHi'));
+                            //MAQUETO LAS CATEGORIAS
+                            maquetoCategorias('categorias-cotizar', categorias);
                         }
                         else
                         {
-                            if(data.length > 0 )
-                            {
-                                categorias = categorias.concat(data);
-                                categorias.tiempo = Number($r.date('YmdHi'));
-                                //MAQUETO LAS CATEGORIAS
-                                maquetoCategorias('categorias-cotizar', categorias);
-                            }
-                            else
-                            {
-                                alert('No se encontraron categorías, reinicie la app por favor');
-                            }
-                        }          
-                    }   
-                    var _obd = {"url": url_ajax+'categoria', "metodo": 'GET', "datos": 'h=categorias', "recibe": procesa_respuesta };
-                    $r.ajax(_obd);  
-                    delete procesa_respuesta;
-                }
+                            alert('No se encontraron categorías, reinicie la app por favor');
+                        }
+                    }          
+                }   
+                var _obd = {"url": url_ajax+'/categoria', "metodo": 'GET', "datos": 'h=categorias', "recibe": procesa_respuesta };
+                $r.ajax(_obd);  
+                delete procesa_respuesta;
                 
                 document.getElementById('cont-resultados-opciones-sub').classList.add('dinone');
                 document.getElementById('lista-categorias').classList.add('dinone');
@@ -159,22 +151,9 @@ document.querySelectorAll('a[data-link]').forEach(element => {
                 
                 borrarHistorialFiltros()
 
-                // si no hay categorías descargadas pre
-
             break;
             case 'informacion':
                 
-            break;
-            case 'carrito':
-                {
-                    let carrito = $r.gls('carrito');
-                    if(carrito.length > 0)
-                    {
-                        mostrarItemsCarrito(carrito);
-                    }
-                    else
-                        alert('no hay elementos en el carrito de compras');
-                }
             break;
             case 'terminos':
                 console.log('terminos');
@@ -317,8 +296,7 @@ function maquetoCategorias(idElemento, array)
                             traerSubcategorias('cont-resultados-opciones-sub', 'cotizable', categoria.id)
                         }
                     document.getElementById('lista-categorias').appendChild(cardCate2);
-                });
-                
+                });  
             }
         break;
 
@@ -407,7 +385,7 @@ function traerSubcategorias(idElemento, tipo, idCategoria)
             }
         }          
     }   
-    var _obd = {"url": url_ajax+'categoria/'+tipo+'/'+idCategoria, "metodo": 'GET', "datos": 'h=categorias', "recibe": procesa_respuesta };
+    var _obd = {"url": url_ajax+'/categoria/'+tipo+'/'+idCategoria, "metodo": 'GET', "datos": 'h=categorias', "recibe": procesa_respuesta };
     $r.ajax(_obd);  
     delete procesa_respuesta;
 
@@ -555,7 +533,7 @@ _envio_login = function(event)
 
             }
         }
-        var _obd = {"url": url_ajax+'auth/login', "metodo": 'POST', "datos": 'h=login&'+$r.serialize(document.getElementById('form-login')), "recibe": procesa_respuesta_login };
+        var _obd = {"url": url_ajax+'/auth/login', "metodo": 'POST', "datos": 'h=login&'+$r.serialize(document.getElementById('form-login')), "recibe": procesa_respuesta_login };
         $r.ajax(_obd);  
         delete procesa_respuesta_login;
     } else {
@@ -600,7 +578,7 @@ _envia_registro = function(event){
             alert(data.errors[0])
         }
     }
-    var _obd = {"url": url_ajax+'user/crear', "metodo": 'POST', "datos": 'h=registro&'+$r.serialize(document.getElementById('form-registro')), "recibe": procesa_respuesta_registro };
+    var _obd = {"url": url_ajax+'/user/crear', "metodo": 'POST', "datos": 'h=registro&'+$r.serialize(document.getElementById('form-registro')), "recibe": procesa_respuesta_registro };
     $r.ajax(_obd);  
     delete procesa_respuesta_registro;
 }
@@ -630,7 +608,8 @@ function ocultarElementoEmergente(dataShow){
     });
     document.querySelector('.cont-elementos-emergentes').classList.remove('show');
 }
-function mostrarDatosUsuario(){
+function mostrarDatosUsuario()
+{
     //recorro los data donde se insertan los datos del usuario:
     document.querySelectorAll('[data-user]').forEach(dataUser => {
         //ahora busco los inputs para insertar values
@@ -751,7 +730,7 @@ _envio_coti_combi = function(event)
             alert(data.errors[0])
         }
     }
-    var _obd = {"url": url_ajax+'cotizador/cotizar', "metodo": 'POST', "datos": $r.serialize(document.getElementById('form-envio-coti-combinado')), "recibe": procesa_respuesta_cotizacion };
+    var _obd = {"url": url_ajax+'/cotizador/cotizar', "metodo": 'POST', "datos": $r.serialize(document.getElementById('form-envio-coti-combinado')), "recibe": procesa_respuesta_cotizacion };
     $r.ajax(_obd);  
     delete procesa_respuesta_cotizacion;
 }
@@ -887,7 +866,7 @@ _siguienteCarrito = function()
                 document.querySelector('[data-paso="pago"]').classList.add('paso-actual')
 
             }
-            var _obd = {"url": url_ajax+'orden', "metodo": 'POST', "datos": "h=_crea_orden&cotizaciones="+arrayCotizacion, "recibe": _enviar_cotizacion };
+            var _obd = {"url": url_ajax+'/orden', "metodo": 'POST', "datos": "h=_crea_orden&cotizaciones="+arrayCotizacion, "recibe": _enviar_cotizacion };
             $r.ajax(_obd);  
             delete _enviar_cotizacion;
         }
@@ -904,50 +883,268 @@ _siguienteCarrito = function()
 document.getElementById('btn-continuar-pasos-carrito').addEventListener('click', _siguienteCarrito, false);
 delete _siguienteCarrito;
 
-ver_carrito = function()
+
+function mostrarSeccion(seccion)
 {
-    if(document.querySelector('[data-seccion="carrito"').classList.contains('show') == false)
+    let mostrar = true;
+    switch (seccion) 
     {
-        console.log('muestro');
-        let carrito = $r.gls('carrito');
-        if(carrito.length > 0)
-        {
-            mostrarItemsCarrito(carrito);
-            document.querySelectorAll('[data-seccion]').forEach(seccion => 
+        case 'home':
             {
-                if(seccion.getAttribute('data-seccion') == 'carrito')
-                {
-                    seccion.classList.add('show');
+                document.getElementById('lista_items_home').innerHTML = '';
+                let div1 = document.createElement('div')
+                    div1.classList.add('item');
+                    div1.innerHTML = '<div class="img-item loading">\
+                                        </div>\
+                                        <div class="info-item">\
+                                            <div class="categoria-item loading"></div>\
+                                            <div class="valor-item loading"></div>\
+                                            <div class="titulo-item loading"></div>\
+                                            <div class="descripcion-item loading"></div>\
+                                        </div>\
+                                            <div class="btn-item loading">\
+                                            </div>';
+                document.getElementById('lista_items_home').appendChild(div1);
+                cargaInicialHome();
+            }
+        break;
+
+        case 'perfil':
+            console.log('en perfil');
+        break;
+
+        case 'historial-solicitudes':
+            console.log('jsolidifajfkl;s')
+        break;
+
+        case 'productos':
+            document.getElementById('cant_form_buscar_prod').innerHTML = "";
+            document.getElementById('producto_buscado').value = "";
+            document.getElementById('lista_items_productos').innerHTML = '';
+            let div1 = document.createElement('div')
+                div1.classList.add('item');
+                div1.innerHTML = '<div class="img-item loading">\
+                                    </div>\
+                                    <div class="info-item">\
+                                        <div class="categoria-item loading"></div>\
+                                        <div class="valor-item loading"></div>\
+                                        <div class="titulo-item loading"></div>\
+                                        <div class="descripcion-item loading"></div>\
+                                    </div>\
+                                        <div class="btn-item loading">\
+                                        </div>';
+            document.getElementById('lista_items_productos').appendChild(div1);
+            cargaInicialProducto();
+        break;
+
+        case 'cotizar_producto':
+            console.log('en cotizar productos');
+            let producto = JSON.parse(localStorage.getItem('cotizar_producto'))
+            console.log(producto)
+            document.getElementById('img_cot_pro').src = producto.productos_simples[0]['foto'];
+            document.getElementById('titulo_cot_pro').innerHTML = producto.productos_simples[0]['titulo'];
+            document.getElementById('pre_cot_pro').innerHTML = "$"+producto.productos_simples[0]['precio_x_unidad'];
+            document.getElementById('des_cot_pro').innerHTML = producto.productos_simples[0]['descripcion_corta'];
+        break;
+
+        case 'cotizar':
+            console.log('en cotizar')
+        break;
+
+        case 'carrito':
+            if(document.querySelector('[data-seccion="carrito"').classList.contains('show') == false)
+            {
+                let carrito = $r.gls('carrito');
+                if(carrito.length > 0) {
+                    mostrarItemsCarrito(carrito);
                 }
-                else
-                {
-                    seccion.classList.remove('show');
+                else {
+                    mostrar = false;
+                    alert('No hay productos en el carrito');
                 }
-            });
-        }
-        else 
+            }
+        break;
+
+        case 'informacion':    
+            console.log('en informacion')
+        break;
+
+
+        case 'terminos':
+            console.log('terminos');
+        break;
+    
+        default:
+        break;
+    }
+
+    if(mostrar === true){
+        document.querySelectorAll('[data-seccion]').forEach(element => { element.classList.remove('show') });
+        document.querySelector('[data-seccion="'+seccion+'"]').classList.add('show');
+    }
+    document.querySelector('.hamburger').classList.remove('is-active'); document.querySelector('nav').classList.remove('show')
+
+}
+
+
+function cotizarProductoSimple(id_cantidad, boton_id)
+{
+    document.getElementById(boton_id).disabled = true;
+    let producto = JSON.parse(localStorage.getItem('cotizar_producto'))
+    let cantidad = document.getElementById(id_cantidad).value;
+    var requestOptions = {
+        method: 'POST',
+        redirect: 'follow'
+    };
+    fetch(url_ajax+"/cotizador/cotizar?cantidad="+cantidad+"&producto_combinado_id="+producto.id+"", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+        addCart(result)
+        document.getElementById(boton_id).disabled = false;
+    })
+    .catch(error => {
+        console.log('error', error)
+        document.getElementById(boton_id).disabled = false;
+    });
+   
+}
+
+// HOME
+function cargaInicialHome() 
+{    
+    procesa_datos_home = function(data)
+    {
+        document.getElementById('cont_btn_cat_home').innerHTML = '';
+        data.forEach( categoria => {
+            let boton = document.createElement('button');
+                boton.classList.add('button');
+                boton.innerHTML = categoria.titulo.toUpperCase();
+                boton.onclick = function(){seleccionarCategoriaHome(categoria.id)}
+            document.getElementById('cont_btn_cat_home').appendChild(boton);
+        });
+        seleccionarCategoriaHome(data[0].id);
+    }
+    let _obd_home = {"url": url_ajax+'/categoria', "metodo": 'GET', "datos": 'h=categorias', "recibe": procesa_datos_home };
+    $r.ajax(_obd_home);  
+    delete procesa_datos_home, _obd_home;
+}
+function seleccionarCategoriaHome(categoria_id)
+{
+    document.getElementById('lista_items_home').innerHTML = '';
+    let div1 = document.createElement('div')
+        div1.classList.add('item');
+        div1.innerHTML = '<div class="img-item loading">\
+                            </div>\
+                            <div class="info-item">\
+                                <div class="categoria-item loading"></div>\
+                                <div class="valor-item loading"></div>\
+                                <div class="titulo-item loading"></div>\
+                                <div class="descripcion-item loading"></div>\
+                            </div>\
+                                <div class="btn-item loading">\
+                                </div>';
+    document.getElementById('lista_items_home').appendChild(div1);
+    console.log(categoria_id);
+    procesa_cat_home = function(data)
+    {
+        maquetarProductoSimple(data, 'lista_items_home')
+    }
+    let _obd_home = {"url": url_ajax+'/categoria/'+categoria_id+'/mas-vendidos', "metodo": 'GET', "datos": 'h=categorias', "recibe": procesa_cat_home };
+    $r.ajax(_obd_home);  
+    delete procesa_cat_home, _obd_home;
+}
+
+// PRODUCTO
+function cargaInicialProducto() {
+    procesa_datos_producto = function(data)
+    {
+        procesa_cat_prod = function(data)
         {
-            alert('No hay productos en el carrito');
+            maquetarProductoSimple(data, 'lista_items_productos')
         }
-    } else {
-        console.log('no muestro');
+        let _obd_cat_prod = {"url": url_ajax+'/categoria/'+data[0].id+'/mas-vendidos', "metodo": 'GET', "datos": 'h=categorias', "recibe": procesa_cat_prod };
+        $r.ajax(_obd_cat_prod);  
+        delete procesa_cat_prod, _obd_cat_prod;
+    }
+    let _obd_prod = {"url": url_ajax+'/categoria', "metodo": 'GET', "datos": 'h=categorias', "recibe": procesa_datos_producto };
+    $r.ajax(_obd_prod);  
+    delete procesa_datos_producto, _obd_prod;
+}
+function buscar_producto(id_lista, id_busqueda, id_cantidad_resultado = false)
+{
+    if(id_cantidad_resultado !== false)
+        document.getElementById(id_cantidad_resultado).innerHTML = "";
+    let q = document.getElementById(id_busqueda).value;
+    if(q.length > 1)
+    {
+        document.getElementById(id_lista).innerHTML = '';
+                let div1 = document.createElement('div')
+                    div1.classList.add('item');
+                    div1.innerHTML = '<div class="img-item loading">\
+                                        </div>\
+                                        <div class="info-item">\
+                                            <div class="categoria-item loading"></div>\
+                                            <div class="valor-item loading"></div>\
+                                            <div class="titulo-item loading"></div>\
+                                            <div class="descripcion-item loading"></div>\
+                                        </div>\
+                                            <div class="btn-item loading">\
+                                            </div>';
+        document.getElementById(id_lista).appendChild(div1);
+
+        var requestOptions = { method: 'GET', redirect: 'follow' };
+          
+        fetch(url_ajax+"/productocombinado/simple/categorias/buscar?q="+q, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            if(id_cantidad_resultado !== false) {
+                let tex_cantidad = 'resultado';
+                if(result.length > 1)
+                    tex_cantidad = 'resultados';
+                document.getElementById(id_cantidad_resultado).innerHTML = result.length+" "+tex_cantidad;
+            }
+            maquetarProductoSimple(result, id_lista)
+        })
+        .catch(error => console.log('error', error));
+    }
+    else {
+        alert('Ingreses al menos 2 caracteres');
     }
 }
-document.querySelector('.cont-icon-cart-noti').addEventListener('click', ver_carrito, false);
-delete ver_carrito;
 
-/*slider banner*/
-/*var swiper = new Swiper(".mySwiper3", {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        loop: true,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-      });*/
 
+
+// PRODUCTOS SIMPLES
+function maquetarProductoSimple(data, id_lista)
+{
+    document.getElementById(id_lista).innerHTML = '';
+    data.forEach( categoria => {
+        let producto = document.createElement('div');
+            producto.classList.add('item');
+                let div1Img = document.createElement('div');
+                    div1Img.classList.add('img-item');
+                    div1Img.innerHTML = '<img class="palermo_img" src="'+categoria.productos_simples[0]['foto']+'" alt="">';
+
+                let div2Info = document.createElement('div');
+                    div2Info.classList.add('info-item');
+                    div2Info.innerHTML =    '<div class="valor-item">'+categoria.productos_simples[0]['titulo']+'</div>\
+                                            <div class="titulo-item">$'+categoria.productos_simples[0]['precio_x_unidad']+'</div>\
+                                            <div class="descripcion-item">'+categoria.productos_simples[0]['descripcion_corta']+'</div>';
+                let div3AddConte = document.createElement('div');
+                    div3AddConte.classList.add('btn-item');
+                        let div3Img = document.createElement('img');
+                            div3Img.classList.add('palermo_img_btn')
+                            div3Img.setAttribute('src', './resources/Agregar_alcarrito.png');
+                        let div3AddBtn = document.createElement('span');
+                            div3AddBtn.classList.add('agregar-text');
+                            div3AddBtn.onclick = function(){mostrarSeccion('cotizar_producto'); localStorage.setItem('cotizar_producto', JSON.stringify(categoria))};
+                            div3AddBtn.innerHTML = 'Agregar';
+                    div3AddConte.appendChild(div3Img);
+                    div3AddConte.appendChild(div3AddBtn);
+
+            producto.appendChild(div1Img)
+            producto.appendChild(div2Info)
+            producto.appendChild(div3AddConte)
+        document.getElementById(id_lista).appendChild(producto);
+    });
+}

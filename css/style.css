@@ -330,9 +330,7 @@ button.btn-download:hover
     padding: 12px var(--padding-lr) 40px var(--padding-lr);
     box-sizing: border-box;
 }
-.op-seccion form {
-    width: 67.9%;
-}
+
 .op-seccion .button.primary {
     width: 31.9%;
     height: 65px;
@@ -340,6 +338,11 @@ button.btn-download:hover
 }
 .op-seccion .search {
     margin-right: 8px;
+}
+.cont-buscador {
+    display: flex;
+    width: 100% !important;
+    justify-content: space-evenly;
 }
 
 .search input { width: calc(100% - 47px); border: none;}
@@ -1446,6 +1449,14 @@ div.item-info-per .info-text
 .swiper-button-prev:after
 {
     font-size: 1rem !important;
+}
+
+.img-item.loading {
+    height: 150px;
+}
+
+.btn-item.loading {
+    border: none !important;
 }
 
 /*media*/
