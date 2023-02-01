@@ -926,25 +926,29 @@ function mostrarSeccion(seccion)
             document.getElementById('lista_ordenes_cliente').appendChild(precarga);
             procesa_datos_ordenes = function(data)
             {
-                console.log(data);
-                
-                
-                document.getElementById('cont_btn_cat_home').innerHTML = '';
-                data.forEach( orden => {
-                    let ordenDiv = document.createElement('div');
-                        ordenDiv.classList.add('card-solicitud');
-                        ordenDiv.innerHTML = '<div>\
-                                                <p class="text-bajada">Número de orden: #113</p>\
-                                                <div class="line-download"></div>\
-                                                <p class="text-bajada">27/08/1970</p>\
-                                            </div>\
-                                            <div class="download-contain">\
-                                                <a href="archivo.jpg" class="button secundary btn-download" download="">\
-                                                    <img class="img_descarga" src="./resources/Carrito_DescargaOrden.svg">Descargar orden\
-                                                </a>\
-                                            </div>';
-                    document.getElementById('lista_ordenes_cliente').appendChild(ordenDiv);
-                });
+                if(data.length > 0)
+                {
+                    document.getElementById('lista_ordenes_cliente').innerHTML = '';
+                    data.forEach( orden => {
+                        let fecha = orden.created_at.split(' ')[0].split('-')[2]+'/'+orden.created_at.split(' ')[0].split('-')[1]+'/'+orden.created_at.split(' ')[0].split('-')[0];
+                        let ordenDiv = document.createElement('div');
+                            ordenDiv.classList.add('card-solicitud');
+                            ordenDiv.innerHTML = '<div>\
+                                                    <p class="text-bajada">Número de orden: #'+orden.id+'</p>\
+                                                    <div class="line-download"></div>\
+                                                    <p class="text-bajada">'+fecha+'</p>\
+                                                </div>\
+                                                <div class="download-contain">\
+                                                    <a href="'+url_public+'/uploads/'+orden.pdf+'" class="button secundary btn-download" download="">\
+                                                        <img class="img_descarga" src="./resources/Carrito_DescargaOrden.svg">Descargar orden\
+                                                    </a>\
+                                                </div>';
+                        document.getElementById('lista_ordenes_cliente').appendChild(ordenDiv);
+                    });
+                } else {
+                    
+                    document.getElementById('lista_ordenes_cliente').innerHTML = 'Sin ordenes';
+                }
             }
             let _obd_ordenes = {"url": url_ajax+'/orden', "metodo": 'GET', "datos": 'h=ordenes', "recibe": procesa_datos_ordenes };
             $r.ajax(_obd_ordenes);  
