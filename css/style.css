@@ -14,7 +14,7 @@
     src: url("../css/fonts/GOTHAM-BOLD.OTF");
   }
 /* header */
-header { top: 0;position: fixed; height: 80px; background: #e9a107; display: flex; align-items: center; width: 100vw; justify-content: space-between; z-index: 4;}
+header { top: 0;position: fixed; height: 60px; background: #e9a107; display: flex; align-items: center; width: 100vw; justify-content: space-between; z-index: 4;}
 main {padding-top: var(--height-header);}
 .hamburger {padding-left: 15px; cursor: pointer;}
 .hamburger .line{width: 25px;height: 3px; border-radius: 10px;background-color: #ecf0f1;display: block;margin: 4px auto;-webkit-transition: all 0.3s ease-in-out;-o-transition: all 0.3s ease-in-out;transition: all 0.3s ease-in-out;}
@@ -125,6 +125,11 @@ nav {
     margin-top: 25px;
 } 
 nav.show {left: 0%; transition-duration: .3s; margin-top: 25px; height: 100vh;}
+nav ul
+{
+    overflow: auto;
+    height: 50%;
+}
 .btn-nav-user-accion {
     margin-top: 23px;
 }
@@ -300,7 +305,7 @@ button.btn-download:hover
 }
 .btn-categorias {
     /*height: var(--height-btn-cat);*/
-    height: 200px;
+    height: 150px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -333,7 +338,7 @@ button.btn-download:hover
 
 .op-seccion .button.primary {
     width: 31.9%;
-    height: 65px;
+    height: 45px;
     font-size: .8rem;
 }
 .op-seccion .search {
@@ -350,17 +355,27 @@ button.btn-download:hover
 /* card prod-cat */
 .img-item > img, .cont-img > img  {
     object-fit: cover;
-    width: 100%;
+    width: auto;
     height: 100%;
+    max-height: 240px;
+    max-width: unset;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    min-height: 140px;
 }
 .item {
     display: flex;
     justify-content: space-between;
-    height: 220px; /* TEMPORAL */
+    height: 220px;
     margin-bottom: 8px;
     background-color: white;
     box-shadow: 0px 0px 2px rgb(0 0 0 / 25%);
     border-radius: 3px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: stretch;
 }
 .img-item {
     width: 30%;
@@ -369,12 +384,12 @@ button.btn-download:hover
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+    background-color: #eeeeee;
 }
 .btn-item {
     width: 20%;
-    min-width: 20%;
     border-left: 0.5px solid #b5b4b48a;
-    margin: 21px 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -395,7 +410,16 @@ button.btn-download:hover
 }
 .valor-item{
     font-family: 'gotham-b';
-    font-size: 1.5rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
 }
 .descripcion-item {
     overflow: hidden;
@@ -407,22 +431,28 @@ button.btn-download:hover
     font-size: 1rem;
     font-family: 'gotham-l';
     font-weight: 700;
+    margin: 0.5rem 0;
 }
 .palermo_img_btn{
-    width: 50px;
+    width: 30px;
+    opacity: 0.7;
 }
 .agregar-text{
     font-family: 'gotham-l';
-    color: #cfcfcf;
+    color: #000000;
     margin-top: 0.5rem;
+    font-size: 0.6rem;
 }
 .info-item {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     flex-direction: column;
     padding: 14px 13px 13px 13px;
-    max-width: 40%;
-    width: 40%;
+    width: calc(100% - 131px);
+    min-width: 190px;
+    flex-wrap: wrap;
+    align-content: space-between;
+    align-items: flex-start;
 }
 .btn-item{
     display: flex;
@@ -430,6 +460,11 @@ button.btn-download:hover
     flex-direction: column;
 }
 /* botones */
+.btselected
+{
+    background-color:var(--color-one) !important;
+    color:#ffffff;
+}
 .button:active, .link:active, .card-categoria:active, .card-categoria-lista:active  {
     transform: scale(0.98);
 }
@@ -446,7 +481,7 @@ button, .button {
     background-color: white;
     border-radius: 3px;
     /*height: var(--height-btn-ps);*/
-    height: 65px;
+    height: 45px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -454,13 +489,13 @@ button, .button {
     cursor: pointer;
 }
 .button.primary, .button.seleccion {
-    height: 65px;
+    height: 45px;
     background-color: var(--color-one);
     color: white;
     font-family: 'gotham-b';
 }
 .button.secundary {
-    height: 65px;
+    height: 45px;
     color: var(--color-one);
     border: 1px solid var(--color-one);
     min-height: var(--height-btn-ps);
@@ -477,16 +512,16 @@ button, .button {
 }
 .cont-form input, .cont-form select {
     margin-bottom: 15px;
-    height: 65px;
+    height: 45px;
     padding-left: 0.5rem;
 }
 .search input[type=text] {
     background-image: url(../resources/icon-search.svg);
-    background-position: 94% 25px;
+    background-position: 94% center;
     background-repeat: no-repeat;
     padding-right: 30px;
     padding-left: 17px;
-    height: 65px;
+    height: 45px;
     /*height: var(--height-btn-ps);*/
     border-radius: 45px;
 }
@@ -1467,7 +1502,6 @@ div.item-info-per .info-text
     }
     .banner
     {
-        margin-top: 25px;
         margin-bottom: initial;
     }
     .frente_transp
@@ -1526,7 +1560,6 @@ div.item-info-per .info-text
     section.lista-items .item,
     div.cotizar-data .item
     {
-        flex-direction: column;
         height: initial;
     }
     div.item .img-item
@@ -1541,14 +1574,22 @@ div.item-info-per .info-text
     }
     div.item .btn-item
     {
-        width: 20%;
-        margin-left: auto;
-        margin-right: 1rem;
-        border-left: none;
-        border: 1px solid #b5b4b48a;
-        border-radius: 5px;
-        padding: 1rem;
+        width: 60px;
+        border: none;
+        padding: 0 1rem;
         cursor: pointer;
+        position: relative;
+    }
+    div.item .btn-item::before
+    {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 1px;
+        height: 50%;
+        background-color: #cdcdcd;
+        transform: translateY(-50%);
     }
     div.item .btn-item:hover
     {

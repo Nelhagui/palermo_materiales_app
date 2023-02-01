@@ -5,6 +5,7 @@ let productoSeleccionado = {};
 let historialFiltros = [];
 $r.cls('carrito', JSON.stringify([]));
 let tiempoEnActualizarInfo = 3;
+var _variableGlobal = {vuelta:0};
 
 //carga iniciar
 {
@@ -52,7 +53,7 @@ let tiempoEnActualizarInfo = 3;
 
     }
     let _obd = {"url": url_public+'contenido-app.json', "metodo": 'GET', "datos": 'h=categorias', "recibe": procesa_respuesta_inicial };
-    $r.ajax(_obd);  
+    $r.ajax(_obd);
     delete procesa_respuesta_inicial, _obd;
 
     cargaInicialHome();
@@ -1009,7 +1010,6 @@ function cotizarProductoSimple(id_cantidad, boton_id)
    
 }
 
-// HOME
 function cargaInicialHome() 
 {    
     procesa_datos_home = function(data)
@@ -1017,9 +1017,20 @@ function cargaInicialHome()
         document.getElementById('cont_btn_cat_home').innerHTML = '';
         data.forEach( categoria => {
             let boton = document.createElement('button');
+            console.log(_variableGlobal)
+            if(_variableGlobal.vuelta == 0)
+            {
+                boton.classList.add('btselected');
+                _variableGlobal.ultimoSeleccionado = categoria.id;
+                _variableGlobal.vuelta++;
+            }
                 boton.classList.add('button');
+                boton._datosBtn = categoria.id;
                 boton.innerHTML = categoria.titulo.toUpperCase();
-                boton.onclick = function(){seleccionarCategoriaHome(categoria.id)}
+                boton.onclick = function(){
+                    _variableGlobal.ultimoSeleccionado = this._datosBtn;
+                    seleccionarCategoriaHome(this._datosBtn);
+                }
             document.getElementById('cont_btn_cat_home').appendChild(boton);
         });
         seleccionarCategoriaHome(data[0].id);
@@ -1030,6 +1041,15 @@ function cargaInicialHome()
 }
 function seleccionarCategoriaHome(categoria_id)
 {
+    let todosBotones = document.querySelectorAll("#cont_btn_cat_home button");
+    for (let uu = 0; uu < todosBotones.length; uu++) 
+    {
+        todosBotones[uu].classList.remove("btselected");
+        if(typeof _variableGlobal.ultimoSeleccionado != "undefined")
+            if(_variableGlobal.ultimoSeleccionado == todosBotones[uu]._datosBtn)
+                todosBotones[uu].classList.add('btselected');
+    }
+            
     document.getElementById('lista_items_home').innerHTML = '';
     let div1 = document.createElement('div')
         div1.classList.add('item');
@@ -1127,14 +1147,14 @@ function maquetarProductoSimple(data, id_lista)
 
                 let div2Info = document.createElement('div');
                     div2Info.classList.add('info-item');
-                    div2Info.innerHTML =    '<div class="valor-item">'+categoria.productos_simples[0]['titulo']+'</div>\
-                                            <div class="titulo-item">$'+categoria.productos_simples[0]['precio_x_unidad']+'</div>\
-                                            <div class="descripcion-item">'+categoria.productos_simples[0]['descripcion_corta']+'</div>';
+                    div2Info.innerHTML =   '<div class="titulo-item">$'+categoria.productos_simples[0]['precio_x_unidad']+'</div>\
+                                            <div class="valor-item">'+categoria.productos_simples[0]['titulo']+'</div>';
+                                            //<div class="descripcion-item">'+categoria.productos_simples[0]['descripcion_corta']+'</div>
                 let div3AddConte = document.createElement('div');
                     div3AddConte.classList.add('btn-item');
                         let div3Img = document.createElement('img');
                             div3Img.classList.add('palermo_img_btn')
-                            div3Img.setAttribute('src', './resources/Agregar_alcarrito.png');
+                            div3Img.setAttribute('src', './resources/Agregar_alcarrito.svg');
                         let div3AddBtn = document.createElement('span');
                             div3AddBtn.classList.add('agregar-text');
                             div3AddBtn.onclick = function(){mostrarSeccion('cotizar_producto'); localStorage.setItem('cotizar_producto', JSON.stringify(categoria))};

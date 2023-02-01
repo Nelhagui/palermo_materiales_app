@@ -2,11 +2,21 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta http-equiv=Content-Security-Policy content="
+                default-src 'self'; 
+                script-src * https://www.googletagmanager.com/ https://*.palermomateriales.com.ar/ https://api.palermomateriales.com.ar/contenido-app.json 'unsafe-eval' 'unsafe-inline' ; 
+                connect-src *  blob: data:; 
+                style-src 'self' data: chrome-extension-resource: 'unsafe-inline'; 
+                img-src 'self' https://*.palermomateriales.com.ar/ blob: data: chrome-extension-resource:; 
+                frame-src 'self' https://www.google.com/ data: chrome-extension-resource:; 
+                font-src 'self' data: chrome-extension-resource:; 
+                media-src *;">
+
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Palermo Materiales</title>
-        <link rel="stylesheet" href="css/root.css">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" async href="css/root.css">
+        <link rel="stylesheet" async href="css/style.css">
         <link rel="stylesheet" async type="text/css" href="./css/swiper-bundle.min.css">
         <script src="r/r.js"></script>
     </head>
