@@ -1458,6 +1458,15 @@ div.item-info-per .info-text
 .btn-item.loading {
     border: none !important;
 }
+.card-solicitud .loading {
+    height: 50px;
+    width: 50%;
+}
+
+.text-bajada.loading {
+    height: 23px;
+    width: 100px;
+}
 
 /*media*/
 @media (max-width: 640px){

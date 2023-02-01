@@ -914,7 +914,40 @@ function mostrarSeccion(seccion)
         break;
 
         case 'historial-solicitudes':
-            console.log('jsolidifajfkl;s')
+            document.getElementById('lista_ordenes_cliente').innerHTML = '';
+                let precarga = document.createElement('div');
+                    precarga.classList.add('cont-cards-solicitudes');
+                    precarga.innerHTML = '<div class="card-solicitud ">\
+                                                <div class="loading">\
+                                                </div>\
+                                                <p class="text-bajada loading"></p>\
+                                            </div>';
+            document.getElementById('lista_ordenes_cliente').appendChild(precarga);
+            procesa_datos_ordenes = function(data)
+            {
+                console.log(data);
+                
+                
+                document.getElementById('cont_btn_cat_home').innerHTML = '';
+                data.forEach( orden => {
+                    let ordenDiv = document.createElement('div');
+                        ordenDiv.classList.add('card-solicitud');
+                        ordenDiv.innerHTML = '<div>\
+                                                <p class="text-bajada">Número de orden: #113</p>\
+                                                <div class="line-download"></div>\
+                                                <p class="text-bajada">27/08/1970</p>\
+                                            </div>\
+                                            <div class="download-contain">\
+                                                <a href="archivo.jpg" class="button secundary btn-download" download="">\
+                                                    <img class="img_descarga" src="./resources/Carrito_DescargaOrden.svg">Descargar orden\
+                                                </a>\
+                                            </div>';
+                    document.getElementById('lista_ordenes_cliente').appendChild(ordenDiv);
+                });
+            }
+            let _obd_ordenes = {"url": url_ajax+'/orden', "metodo": 'GET', "datos": 'h=ordenes', "recibe": procesa_datos_ordenes };
+            $r.ajax(_obd_ordenes);  
+            delete procesa_datos_ordenes, _obd_ordenes;
         break;
 
         case 'productos':
