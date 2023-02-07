@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        
         <meta charset="UTF-8">
-        <meta http-equiv=Content-Security-Policy content="
+        <!-- <meta http-equiv=Content-Security-Policy content="
                 default-src 'self'; 
-                script-src * https://www.googletagmanager.com/ https://*.palermomateriales.com.ar/ https://api.palermomateriales.com.ar/contenido-app.json 'unsafe-eval' 'unsafe-inline' ; 
+                script-src * https://www.googletagmanager.com/ https://*.palermomateriales.com.ar/ https://sdk.mercadopago.com/js/v2 https://api.palermomateriales.com.ar/contenido-app.json 'unsafe-eval' 'unsafe-inline' ; 
                 connect-src *  blob: data:; 
                 style-src 'self' data: chrome-extension-resource: 'unsafe-inline'; 
-                img-src 'self' https://*.palermomateriales.com.ar/ blob: data: chrome-extension-resource:; 
-                frame-src 'self' https://www.google.com/ data: chrome-extension-resource:; 
+                img-src 'self' https://*.palermomateriales.com.ar/ https://sdk.mercadopago.com/js/v2 https://www.mercadolibre.com/* blob: data: chrome-extension-resource:; 
+                frame-src 'self' https://www.google.com/ https://sdk.mercadopago.com/js/v2 data: chrome-extension-resource:; 
                 font-src 'self' data: chrome-extension-resource:; 
-                media-src *;">
-
+                media-src *;"> -->
+        <script src="https://sdk.mercadopago.com/js/v2"></script>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Palermo Materiales</title>
@@ -88,7 +89,7 @@
                     </a>
                 </li>
                 <li class="item-menu">
-                    <a href="#cotizar" data-link="cotizar">
+                    <a href="#cotizar" onclick="mostrarSeccion('cotizar')">
                         <div class="texto-nav">
                             <img src="./resources/cotizar.svg" alt="">
                             Cotizar
@@ -203,24 +204,24 @@
                         </div>
                         <div class="cont-form">
                             <label class="text-bajada" for="">Nombre</label>
-                            <input type="text" name="nombre" value="" data-user-value>
+                            <input type="text" id="nombre_perfil" name="nombre" value="" data-user-value>
                         </div>
                         <div class="cont-form">
                             <label class="text-bajada" for="">Telefono/Celular</label>
-                            <input type="number" value="" name="telefono" data-user-value>
+                            <input type="number" value="" id="telefono_perfil" name="telefono" data-user-value>
                         </div>
                         <div class="cont-form">
                             <label class="text-bajada" for="">Email</label>
-                            <input name="email" type="email" value="" data-user-value>
+                            <input id="email_perfil" name="email" type="email" value="" data-user-value>
                         </div>
                         <div class="cont-form">
-                            <label class="text-bajada" for="">Contraseña nueva</label>
-                            <input type="password" name="password" autocomplete="off">
+                            <label class="text-bajada" for="">Contraseña</label>
+                            <input type="password" id="password_perfil" name="password" autocomplete="off">
                         </div>
-                        <div class="cont-form">
+                        <!-- <div class="cont-form">
                             <label class="text-bajada" for="">Repetir contraseña nueva</label>
-                            <input type="password" name="password_confirmation" autocomplete="off">
-                        </div>
+                            <input type="password" id="password_confirmation_perfil" name="password_confirmation" autocomplete="off">
+                        </div> -->
                         <button class="button primary">ACEPTAR</button>
                         <br>
                         <button class="button secundary">CANCELAR</button>
@@ -230,11 +231,13 @@
             <div class="elemento-emergente" data-show="add-items-cart">
                 <div class="resp-add-items-cart">
                     <div class="btn-cerrar" data-accion="cerrar">x</div>
-                    <img src="./resources/icon-animado-check-ok.gif" alt="">
+                    <div class="icon-animado">
+                        <img src="./resources/icon-animado-check-ok.gif" alt="">
+                    </div>
                     <p class="user-title">¡Tu solicitud se ha sumado con éxito al carrito de compras!</p>
                     <br>
-                    <a class="button primary" data-link="cotizar" data-accion="cerrar">REALIZAR NUEVA COTIZACION</a>
-                    <a class="button secundary" type="button" data-link="carrito" data-accion="cerrar">IR A CARRITO DE COMPRA</a>
+                    <a class="button primary" data-accion="cerrar">REALIZAR NUEVA COTIZACION</a>
+                    <a class="button secundary" type="button" onclick="mostrarSeccion('carrito')">IR AL CARRITO DE COMPRA</a>
                     
                 </div>
             </div>
@@ -246,132 +249,34 @@
                         <span>Complete el formulario con los datos solicitados</span>
                     </div>
                     <hr>
-                    <form action="" id="form-mp">
-                        <div class="cont-form">
-                            <label for="">Número de tarjeta</label>
-                            <input type="number">
+                        <div id="cardPaymentBrick_container"></div>
+                        <div class="cont-msj-error-mp">
+                            <span id="msj_error_mp"></span>
                         </div>
-                        <div class="colspan-2">
-                            <div class="cont-form">
-                                <label for="">CVV</label>
-                                <input type="number">
-                            </div>
-                            <div class="cont-form">
-                                <label for="">Vencimiento</label>
-                                <input type="date">
-                            </div>
-                        </div>
-                        <div class="cont-form">
-                            <label for="">Medio de pago</label>
-                            <input type="text">
-                        </div>
-                        <div class="cont-form">
-                            <label for="">Nombre del titular</label>
-                            <input type="text">
-                        </div>
-                        <div class="colspan-2">
-                            <div class="cont-form">
-                                <label for="">Tipo de documento</label>
-                                <select name="tipo_documento" id="tipo_documento">
-                                    <option value="">DNI</option>
-                                    <option value="">Cedula</option>
-                                </select>
-                            </div>
-                            <div class="cont-form">
-                                <label for="">Nro. de documento</label>
-                                <input type="number">
-                            </div>
-                        </div>
-                        <div class="cont-form">
-                            <label for="">Ingresa email</label>
-                            <input type="email">
-                        </div>
-                        <button class="button primary">INGRESAR</button>
-                        <button class="button secundary">REGRESAR</button>
-                        
-                    </form>
-                    
+                        <button type="button" class="button primary approved" onclick="createPayment();" id="btn_pay_mp">PAGAR</button>
                 </div>
             </div>
             <div class="elemento-emergente" data-show="coordinar-mail">
                 <div class="coordi-mail">
                     <div class="btn-cerrar" data-accion="cerrar">x</div>
                     <div>
-                        <h1>Abonar con Mercado Pago</h1>
+                        <div class="icon-animado">
+                            <img src="./resources/icon_animado_email.gif" alt="">
+                        </div>
+                        <h1>Coordinar pago por email</h1>
+                        <br>
+                        <br>
                         <p>Escribimos a pedidos@palermomateriales.com.ar, haciendo referencia a tu número de orden con 72hs. de anticipación para poder coordinar la forma de pago y la entrega.</p>
+                        <br>
                         <p>También podés hacerlo a través de nuestro WhatsApp (011) 8986-767756 de Lunes a viernes.</p>
+                        <br>
                     </div>
                     <div>
-                        <button class="button primary">REALIZAR UNA NUEVA COMPRA</button>
+                        <button class="button primary" onclick="mostrarSeccion('productos')">REALIZAR UNA NUEVA COMPRA</button>
                     </div>
                     
                 </div>
             </div>
-            <!-- <div class="elemento-emergente filtros" data-show="filtros">
-                <div class="filtros">
-                    <div class="btn-cerrar" data-accion="cerrar">x</div>
-                    <div>
-                        <img src="" alt="">
-                        <p>Filtrar</p>
-                    </div>
-                    <div class="cont-filtros-pro">
-                        <div class="item-filtro-pro">
-                            <div class="accordion productos">
-                                <div>
-                                    <p>Ordenar por</p>
-                                </div>
-                                <div>
-                                    >
-                                </div>
-                            </div>
-                            <div class="contenido-accordion">
-                                <label class="item-grupo-pro">
-                                    <div>Placa Durlock STD 9.5 1200X3.200</div>
-                                    <input type="checkbox">
-                                </label>
-                                <label class="item-grupo-pro">
-                                    <div>Placa Doble X3.200</div>
-                                    <input type="checkbox">
-                                </label>
-                            </div>
-                        </div>
-                        <div class="item-filtro-pro">
-                            <div class="accordion productos">
-                                <div>
-                                    <p>Categorías</p>
-                                </div>
-                                <div>
-                                    >
-                                </div>
-                            </div>
-                            <div class="contenido-accordion">
-                                <div class="accordion productos">
-                                    <div>
-                                        <p>TECHOS</p>
-                                    </div>
-                                    <div>
-                                        >
-                                    </div>
-                                </div>
-                                <div class="contenido-accordion">
-                                    <label class="item-grupo-pro">
-                                        <div>Techos</div>
-                                        <input type="checkbox">
-                                    </label>
-                                    <label class="item-grupo-pro">
-                                        <div>Placa Doble X3.200</div>
-                                        <input type="checkbox">
-                                    </label>
-                                </div>
-                                <label class="item-grupo-pro">
-                                    <div>Placa Doble X3.200</div>
-                                    <input type="checkbox">
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </div>
         <main>
             <div data-seccion="home" class="seccion show">
@@ -438,16 +343,15 @@
                 </div> 
             </div>
             <div data-seccion="cotizar_producto" class="seccion">
-                <div class="card-cotizar">
-                    <div class="cont-img">
-                        <img src="" alt="" id="img_cot_pro">
+                <div class="card-cotizar" id="card_cotizar_producto">
+                    <div class="cont-img loading">
                     </div>
                     <div class="info-card">
                         <div class="titulo-cod">
-                            <h2 id="titulo_cot_pro"></h2>
-                            <span class="comentario" id="pre_cot_pro"></span>
+                            <h2 class="titulo-prod-coti-loading"></h2>
+                            <span class="comentario loading" ></span>
                         </div>
-                        <p class="comentario" id="des_cot_pro"></p>
+                        <p class="comentario2 loading" ></p>
                     </div>
                 </div>
                 <div class="cont-input-cotizar">
@@ -845,7 +749,7 @@
             </div>
 
             <div data-seccion="carrito" class="seccion">
-                <div class="item-paso">
+                <div class="item-paso" id="items-pasos">
                     <div class="paso-actual" data-paso="detalle">
                         <img src="./resources/detalle.svg" alt="">
                         <p>Detalle</p>
@@ -912,23 +816,23 @@
                     <div class="cont-cards-ordenes">
                         <div class="card-solicitud">
                             <div>
-                                <p class="text-bajada">Número de orden: #113</p>
+                                <p class="text-bajada">Número de orden: <span id="numero_de_orden"></span></p>
                                 <div class="line-download"></div>
-                                <p class="text-bajada">27/08/1970</p>
+                                <p class="text-bajada" id="fecha_orden">27/08/1970</p>
                             </div>
                             <a download href="#" class="button secundary"  id="descargar_orden_compra_actual">
                                 <img class="img_descarga" src="./resources/Carrito_DescargaOrden.svg">
                                 Descargar orden</a>
                         </div>
                     </div>
-                    <div class="opc-pagos">
+                    <div class="opc-pagos" id="opc_pagos">
                         <p class="text-cotizar">Formas de pago</p>
                         <span class="text-bajada">Para coordinar la entraga deberás contactarte a través de WhatsApp (011) 2843-0877 <br> de Lunes a Viernes </span>
-                        <label for="mp" class="opcion-pago button secundary"> 
-                            <input type="radio" id="mp" name="metodo-pago"> Abonar con Mercado Pago
+                        <label for="mp_radio" class="opcion-pago button secundary"> 
+                            <input type="radio" class="metodo_pago_radio" id="mp_radio" value="mp" name="metodo-pago"> Abonar con Mercado Pago
                         </label>
-                        <label for="mail" class="opcion-pago button secundary"> 
-                            <input type="radio" name="metodo-pago" id="mail"> Coordinar por mail
+                        <label for="mail_radio" class="opcion-pago button secundary"> 
+                            <input type="radio" class="metodo_pago_radio" name="metodo-pago" value="mail" id="mail_radio"> Coordinar por mail
                         </label>
                     </div>
                 </div>
@@ -939,5 +843,107 @@
         </main>
         <script src="js/app.js"></script>
         <script async defer src="./js/swiper.min.js"></script>
+        <script>
+            function createPayment() {
+                window.cardPaymentBrickController.getFormData()
+                    .then((cardFormData) => {
+
+                        document.getElementById('msj_error_mp').innerHTML = "";
+                        document.getElementById('btn_pay_mp').disabled = true;
+                        document.getElementById('btn_pay_mp').classList.add('loading');
+                        document.getElementById('btn_pay_mp').innerHTML = "Procesando pago...";
+
+                        console.log('cardFormData received, creating payment...');
+                        fetch("https://test.api.palermomateriales.com.ar/api/orden/process_payment", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(cardFormData),
+                        })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            console.log(data)
+                            if(data.status === "approved") {
+    
+                                document.getElementById('btn_pay_mp').innerHTML = "¡PAGADO!";
+                                document.getElementById('btn_pay_mp').classList.remove('loading');
+                                document.getElementById('btn_pay_mp').classList.add('approved');
+                                document.getElementById('mp_radio').disabled = true;
+                                document.getElementById('mp_radio').checked = false;
+                                
+                            }
+                            else if(data.status === "rejected") {
+                                document.getElementById('msj_error_mp').innerHTML = ProcessResponseMP(data.status_detail)
+                                document.getElementById('btn_pay_mp').innerHTML = "PAGAR";
+                                document.getElementById('btn_pay_mp').classList.remove('loading');
+                                document.getElementById('btn_pay_mp').disabled = false;
+                            }
+                        })
+                    })
+                    .catch((error) => {
+                        // tratamiento de error al intentar llamar getFormData()
+                    });
+            };
+            function upMpPayment()
+            {
+                const mp = new MercadoPago('TEST-1228f104-bb7c-4706-a8c0-35997f1c4135', {
+                  locale: 'es-AR',
+                });
+                
+                    const bricksBuilder = mp.bricks();
+                    const renderCardPaymentBrick = async (bricksBuilder) => {
+                      const settings = {
+                        initialization: {
+                          amount: Number(localStorage.getItem('stc')), // monto a ser pago
+                          payer: {
+                            email: "",
+                          },
+                        },
+                        customization: {
+                          visual: {
+                            hidePaymentButton: true,
+                            hideFormTitle: true,
+                            style: {
+                              theme: 'bootstrap', // | 'dark' | 'bootstrap' | 'flat'
+                            }
+                          },
+                        },
+                        callbacks: {
+                          onReady: () => {
+                            // callback llamado cuando Brick esté listo
+                          },
+                          onSubmit: (cardFormData) => {
+                            //  callback llamado cuando el usuario haga clic en el botón enviar los datos
+                            //  ejemplo de envío de los datos recolectados por el Brick a su servidor
+                            return new Promise((resolve, reject) => {
+                              fetch('https://test.api.palermomateriales.com.ar/api/orden/process_payment', {
+                                method: "POST",
+                                headers: {
+                                  "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify(cardFormData)
+                              })
+                                .then((response) => {
+                                  // recibir el resultado del pago
+                                  resolve();
+                                })
+                                .catch((error) => {
+                                  // tratar respuesta de error al intentar crear el pago
+                                  reject();
+                                })
+                            });
+                          },
+                          onError: (error) => {
+                            // callback llamado para todos los casos de error de Brick
+                          },
+                        },
+                      };
+                      window.cardPaymentBrickController = await bricksBuilder.create('cardPayment', 'cardPaymentBrick_container', settings);
+                    };
+                    renderCardPaymentBrick(bricksBuilder);
+            }
+            
+          </script>
     </body>
 </html>

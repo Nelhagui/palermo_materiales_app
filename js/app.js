@@ -6,6 +6,58 @@ let historialFiltros = [];
 $r.cls('carrito', JSON.stringify([]));
 let tiempoEnActualizarInfo = 3;
 var _variableGlobal = {vuelta:0};
+const ProcessResponseMP = (status_detail) => {
+    let msj = '';
+    switch (status_detail) 
+    {
+        case 'Accredited':
+             msj = "Pago acreditado";
+        break;
+        case 'pending_contingency':
+             msj = "El pago está siendo procesado";
+        break;
+        case 'pending_review_manual':
+             msj = "El pago se encuentra en revisión para determinar su aprobación o rechazo";
+        break;
+        case 'cc_rejected_bad_filled_date':
+             msj = "Fecha de caducidad incorrecta";
+        break;
+        case 'cc_rejected_bad_filled_other':
+             msj = "Datos de tarjeta incorrectos";
+        break;
+        case 'cc_rejected_bad_filled_security_code':
+             msj = "CVV incorrecto";
+        break;
+        case 'cc_rejected_blacklist':
+             msj = "La tarjeta está en una lista negra por robo/denuncia/fraude";
+        break;
+        case 'cc_rejected_call_for_authorize':
+             msj = "El medio de pago requiere autorización previa del monto de la operación";
+        break;
+        case 'cc_rejected_card_disabled':
+             msj = "La tarjeta está inactiva";
+        break;
+        case 'cc_rejected_duplicated_payment':
+             msj = "Transaccion duplicada.";
+        break;
+        case 'cc_rejected_high_risk':
+             msj = "Rechazo por Prevención de Fraude.";
+        break;
+        case 'cc_rejected_insufficient_amount':
+             msj = "Saldo insuficiente.";
+        break;
+        case 'cc_rejected_invalid_installments':
+             msj = "Número de cuotas no válido";
+        break;
+        case 'cc_rejected_max_attempts':
+             msj = "Se ha superado el número máximo de intentos";
+        break;
+        case 'cc_rejected_other_reason':
+             msj = "Vuelva a intentarlo por favor";
+        break;
+    }
+    return msj;
+}
 
 //carga iniciar
 {
@@ -114,55 +166,7 @@ document.querySelectorAll('a[data-link]').forEach(element =>
     {
         document.querySelectorAll('[data-seccion]').forEach(element => { element.classList.remove('show') });
         document.querySelector('[data-seccion="'+this.dataset.link+'"]').classList.add('show');
-        switch (this.dataset.link) 
-        {
-            case 'cotizar':
-                let procesa_respuesta = function(data)
-                {    console.log('respuesta')
-                    if(!Array.isArray(data))
-                    {
-                        alert('No se encontraron categorías, reinicie la app');
-                    }
-                    else
-                    {
-                        if(data.length > 0 )
-                        {
-                            categorias = categorias.concat(data);
-                            categorias.tiempo = Number($r.date('YmdHi'));
-                            //MAQUETO LAS CATEGORIAS
-                            maquetoCategorias('categorias-cotizar', categorias);
-                        }
-                        else
-                        {
-                            alert('No se encontraron categorías, reinicie la app por favor');
-                        }
-                    }          
-                }   
-                var _obd = {"url": url_ajax+'/categoria', "metodo": 'GET', "datos": 'h=categorias', "recibe": procesa_respuesta };
-                $r.ajax(_obd);  
-                delete procesa_respuesta;
-                
-                document.getElementById('cont-resultados-opciones-sub').classList.add('dinone');
-                document.getElementById('lista-categorias').classList.add('dinone');
-                document.getElementById('categorias-cotizar').classList.remove('dinone');
-                document.querySelector('.cont-resul-calc-conti').classList.add('dinone');
-                document.getElementById('btn-add-cart-resul-coti').classList.add('dinone');
-                document.getElementById('mt-cuadrados-cot').value = 1;
-                document.getElementById('lista-categorias').querySelectorAll('.card-categoria-lista').forEach(item => {item.classList.remove('selected');})
-                
-                borrarHistorialFiltros()
-
-            break;
-            case 'informacion':
-                
-            break;
-            case 'terminos':
-                console.log('terminos');
-            break;
         
-            default:
-            break;
-        }
         // oculto nav
         document.querySelector('.hamburger').classList.remove('is-active'); document.querySelector('nav').classList.remove('show')
 
@@ -221,14 +225,17 @@ function contenidoActualizado(array)
 // MAQUETADOS
 function maquetoCategorias(idElemento, array)
 {
-    console.log('maquetando');
-    document.getElementById(idElemento).innerHTML = "";
-    switch (idElemento) {
+    
+    switch (idElemento) 
+    {
         case 'categorias-cotizar':
             {
                 document.getElementById('lista-categorias').innerHTML = "";
+                document.getElementById('categorias-cotizar').innerHTML = '';
+                console.log('aqui')
                 array.forEach( categoria => 
                 {
+                    console.log('cuanto')
                     // cards 1
                     let cardCate = document.createElement('div');
                         cardCate.classList.add('card-categoria');
@@ -263,7 +270,7 @@ function maquetoCategorias(idElemento, array)
                                 //armar funcion para traida de subcategorias
 
                         }
-                    document.getElementById(idElemento).appendChild(cardCate);
+                    document.getElementById('categorias-cotizar').appendChild(cardCate);
 
                     //cards 2
                     let cardCate2 = document.createElement('div');
@@ -603,10 +610,16 @@ function cambiarVisibilidad(elements){
     }
 }
 
-function ocultarElementoEmergente(dataShow){
-    document.querySelectorAll('[data-show="'+dataShow+'"]').forEach(element => {
-        element.classList.remove('show');
-    });
+function ocultarElementoEmergente(dataShow = false){
+    if(dataShow !== false){
+        document.querySelectorAll('[data-show="'+dataShow+'"]').forEach(element => {
+            element.classList.remove('show');
+        });
+    } else {
+        document.querySelectorAll('[data-show]').forEach(element => {
+            element.classList.remove('show');
+        });
+    }
     document.querySelector('.cont-elementos-emergentes').classList.remove('show');
 }
 function mostrarDatosUsuario()
@@ -840,6 +853,7 @@ function mostrarItemsCarrito(productos)
         
     });
     document.getElementById('valor_total_carrito').innerHTML = '$'+total.toFixed(2);
+    localStorage.setItem('stc', total.toFixed(2))
     document.getElementById('cont-carrito-detalle').classList.remove('dinone');
 }
 
@@ -848,37 +862,84 @@ function mostrarItemsCarrito(productos)
 //pasos carrito
 _siguienteCarrito = function()
 {
-    let carrito = $r.gls('carrito');
-    if(carrito.length > 0)
-    {
-        if($r.vls('user'))
-        {
-            // tengo que enviar la cotización para generar la orden
-            // https://test.api.palermomateriales.com.ar/api/orden?cotizaciones=[{{array_de_id_de_cotizaciones}}]
-            let arrayCotizacion = carrito.map(item => item.id);
-            
-            _enviar_cotizacion = function(data)
-            {
-                console.log(data);
-                document.getElementById('descargar_orden_compra_actual').setAttribute('href', url_public+"uploads/"+data.pdf);
-                document.getElementById('cont-carrito-detalle').classList.add('dinone');
-                document.getElementById('carrito-pago').classList.remove('dinone');
-                document.querySelector('[data-paso="detalle"]').classList.remove('paso-actual')
-                document.querySelector('[data-paso="pago"]').classList.add('paso-actual')
+    let paso_actual = document.getElementById('items-pasos').querySelector('.paso-actual').getAttribute('data-paso');
 
-            }
-            var _obd = {"url": url_ajax+'/orden', "metodo": 'POST', "datos": "h=_crea_orden&cotizaciones="+arrayCotizacion, "recibe": _enviar_cotizacion };
-            $r.ajax(_obd);  
-            delete _enviar_cotizacion;
-        }
-        else
+    if(paso_actual == 'detalle')
+    {
+        let carrito = $r.gls('carrito');
+        if(carrito.length > 0)
         {
-            document.querySelector('[data-show="iniciar"]').classList.add('show');
-            document.querySelector('.cont-elementos-emergentes').classList.add('show');
+            document.getElementById('mp_radio').disabled = false;
+            if($r.vls('user'))
+            {
+                // document.getElementById('cardPaymentBrick_container').innerHTML = '';
+                
+                document.getElementById('btn-continuar-pasos-carrito').innerHTML = 'Procesando...';
+                document.getElementById('btn-continuar-pasos-carrito').classList.add('loading');
+                document.getElementById('btn-continuar-pasos-carrito').disabled = true;
+
+                
+                let arrayCotizacion = carrito.map(item => item.id);
+                
+                _enviar_cotizacion = function(data)
+                {
+                    let fecha = (data.created_at).split(' ')[0];
+                    $r.cls('carrito', JSON.stringify([]));
+                    document.getElementById('cant-items-cart').innerHTML = '';
+                    document.getElementById('cant-items-cart').classList.add('dinone');
+
+                    document.getElementById('btn-continuar-pasos-carrito').innerHTML = 'CONTINUAR';
+                    document.getElementById('btn-continuar-pasos-carrito').classList.remove('loading');
+                    document.getElementById('btn-continuar-pasos-carrito').disabled = false;
+
+                    document.getElementById('numero_de_orden').innerHTML = "#"+data.id
+                    document.getElementById('fecha_orden').innerHTML = fecha.split('-')[2]+'/'+fecha.split('-')[1]+'/'+fecha.split('-')[0];
+                    document.getElementById('descargar_orden_compra_actual').setAttribute('href', url_public+"uploads/"+data.pdf);
+
+                    document.getElementById('cont-carrito-detalle').classList.add('dinone');
+                    document.getElementById('carrito-pago').classList.remove('dinone');
+
+                    document.querySelector('[data-paso="detalle"]').classList.remove('paso-actual')
+                    document.querySelector('[data-paso="pago"]').classList.add('paso-actual')
+                    upMpPayment();
+
+                }
+                var _obd = {"url": url_ajax+'/orden', "metodo": 'POST', "datos": "h=_crea_orden&cotizaciones="+arrayCotizacion, "recibe": _enviar_cotizacion };
+                $r.ajax(_obd);  
+                delete _enviar_cotizacion;
+            }
+            else
+            {
+                document.querySelector('[data-show="iniciar"]').classList.add('show');
+                document.querySelector('.cont-elementos-emergentes').classList.add('show');
+            }
+        }
+        else {
+            alert('no hay productos en el carrito');
         }
     }
-    else {
-        alert('no hay productos en el carrito');
+    if(paso_actual == 'pago')
+    {
+        if(document.getElementById('mp_radio').checked)
+        {
+            document.getElementById('msj_error_mp').innerHTML = '';
+            document.getElementById('btn_pay_mp').innerHTML = "PAGAR";
+            document.getElementById('btn_pay_mp').classList.remove('loading');
+            document.getElementById('btn_pay_mp').classList.remove('approved');
+            document.getElementById('btn_pay_mp').disabled = false;
+
+            document.querySelector('[data-show="abonar-mp"]').classList.add('show');
+            document.querySelector('.cont-elementos-emergentes').classList.add('show');
+        } 
+        else if(document.getElementById('mail_radio').checked)
+        {
+            document.querySelector('[data-show="coordinar-mail"]').classList.add('show');
+            document.querySelector('.cont-elementos-emergentes').classList.add('show');
+        } 
+        else 
+        {
+            alert('Seleccione una forma de pago');
+        }
     }
 }
 document.getElementById('btn-continuar-pasos-carrito').addEventListener('click', _siguienteCarrito, false);
@@ -887,6 +948,13 @@ delete _siguienteCarrito;
 
 function mostrarSeccion(seccion)
 {
+    ocultarElementoEmergente()
+
+    if(seccion !== 'carrito') {
+        document.getElementById('carrito-pago').classList.add('dinone')
+        document.getElementById('cont-carrito-detalle').classList.add('dinone')
+    }
+
     let mostrar = true;
     switch (seccion) 
     {
@@ -976,30 +1044,89 @@ function mostrarSeccion(seccion)
         break;
 
         case 'cotizar_producto':
-            console.log('en cotizar productos');
-            let producto = JSON.parse(localStorage.getItem('cotizar_producto'))
-            console.log(producto)
-            document.getElementById('img_cot_pro').src = producto.productos_simples[0]['foto'];
-            document.getElementById('titulo_cot_pro').innerHTML = producto.productos_simples[0]['titulo'];
-            document.getElementById('pre_cot_pro').innerHTML = "$"+producto.productos_simples[0]['precio_x_unidad'];
-            document.getElementById('des_cot_pro').innerHTML = producto.productos_simples[0]['descripcion_corta'];
+            if(location.hash.indexOf('producto?id=') !== -1 && location.hash.split('=').length == 2)
+            {
+                let producto = JSON.parse(localStorage.getItem('cotizar_producto'))
+                document.getElementById('card_cotizar_producto').innerHTML = '<div class="cont-img loading">\
+                                                                                </div>\
+                                                                                <div class="info-card">\
+                                                                                    <div class="titulo-cod">\
+                                                                                        <h2 class="titulo-prod-coti-loading"></h2>\
+                                                                                        <span class="comentario loading" ></span>\
+                                                                                    </div>\
+                                                                                    <p class="comentario2 loading" ></p>\
+                                                                                </div>';
+
+                document.getElementById('card_cotizar_producto').innerHTML =    '<div class="cont-img">\
+                                                                                        <img src="'+producto.productos_simples[0]['foto']+'" alt="">\
+                                                                                    </div>\
+                                                                                    <div class="info-card">\
+                                                                                        <div class="titulo-cod">\
+                                                                                            <h2>'+producto.productos_simples[0]['titulo']+'</h2>\
+                                                                                            <span class="comentario" id="pre_cot_pro"> $'+producto.productos_simples[0]['precio_x_unidad']+'</span>\
+                                                                                        </div>\
+                                                                                        <p class="comentario">'+producto.productos_simples[0]['descripcion_corta']+'</p>\
+                                                                                </div>';
+            }
         break;
 
         case 'cotizar':
-            console.log('en cotizar')
+            let procesa_respuesta = function(data)
+                {    
+                    if(!Array.isArray(data))
+                    {
+                        alert('No se encontraron categorías, reinicie la app');
+                    }
+                    else
+                    {
+                        if(data.length > 0 )
+                        {
+                            maquetoCategorias('categorias-cotizar', data);
+                        }
+                        else
+                        {
+                            alert('No se encontraron categorías, reinicie la app por favor');
+                        }
+                    }          
+                }   
+                var _obd = {"url": url_ajax+'/categoria', "metodo": 'GET', "datos": 'h=categorias', "recibe": procesa_respuesta };
+                $r.ajax(_obd);  
+                delete procesa_respuesta;
+                
+                document.getElementById('cont-resultados-opciones-sub').classList.add('dinone');
+                document.getElementById('lista-categorias').classList.add('dinone');
+                document.getElementById('categorias-cotizar').classList.remove('dinone');
+                document.querySelector('.cont-resul-calc-conti').classList.add('dinone');
+                document.getElementById('btn-add-cart-resul-coti').classList.add('dinone');
+                document.getElementById('mt-cuadrados-cot').value = 1;
+                document.getElementById('lista-categorias').querySelectorAll('.card-categoria-lista').forEach(item => {item.classList.remove('selected');})
+                
+                borrarHistorialFiltros()
         break;
 
         case 'carrito':
             if(document.querySelector('[data-seccion="carrito"').classList.contains('show') == false)
             {
+                ocultarElementoEmergente();
+
+                document.querySelector('[data-paso="detalle"]').classList.add('paso-actual')
+                document.querySelector('[data-paso="pago"]').classList.remove('paso-actual')
+
+                document.querySelector('[data-seccion="carrito"').classList.add('show');
+
                 let carrito = $r.gls('carrito');
-                if(carrito.length > 0) {
+                if(carrito.length > 0) 
+                {
                     mostrarItemsCarrito(carrito);
+                    console.log('voy 3')
                 }
                 else {
                     mostrar = false;
                     alert('No hay productos en el carrito');
                 }
+            } else {
+                mostrar = false;
+                console.log('es false')
             }
         break;
 
@@ -1013,6 +1140,7 @@ function mostrarSeccion(seccion)
         break;
     
         default:
+            console.log('estoy en default')
         break;
     }
 
@@ -1024,10 +1152,18 @@ function mostrarSeccion(seccion)
 
 }
 
+function toggleEmergente(data_elemento)
+{
+    document.querySelector('[data-show="'+data_elemento+'"]').classList.toggle('show');
+    document.querySelector('.cont-elementos-emergentes').classList.toggle('show');
+}
+
 
 function cotizarProductoSimple(id_cantidad, boton_id)
 {
     document.getElementById(boton_id).disabled = true;
+    document.getElementById(boton_id).innerHTML = "Procesando...";
+    document.getElementById(boton_id).classList.add('loading');
     let producto = JSON.parse(localStorage.getItem('cotizar_producto'))
     let cantidad = document.getElementById(id_cantidad).value;
     var requestOptions = {
@@ -1039,10 +1175,15 @@ function cotizarProductoSimple(id_cantidad, boton_id)
     .then(result => {
         addCart(result)
         document.getElementById(boton_id).disabled = false;
+        document.getElementById(boton_id).innerHTML = "AGREGAR AL CARRITO";
+        document.getElementById(boton_id).classList.remove('loading');
+        toggleEmergente('add-items-cart');
     })
     .catch(error => {
         console.log('error', error)
         document.getElementById(boton_id).disabled = false;
+        document.getElementById(boton_id).innerHTML = "AGREGAR AL CARRITO";
+        document.getElementById(boton_id).classList.remove('loading');
     });
    
 }
@@ -1175,33 +1316,69 @@ function buscar_producto(id_lista, id_busqueda, id_cantidad_resultado = false)
 function maquetarProductoSimple(data, id_lista)
 {
     document.getElementById(id_lista).innerHTML = '';
-    data.forEach( categoria => {
-        let producto = document.createElement('div');
-            producto.classList.add('item');
+    data.forEach( producto => {
+        let item = document.createElement('div');
+            item.classList.add('item');
                 let div1Img = document.createElement('div');
                     div1Img.classList.add('img-item');
-                    div1Img.innerHTML = '<img class="palermo_img" src="'+categoria.productos_simples[0]['foto']+'" alt="">';
+                    div1Img.innerHTML = '<img class="palermo_img" src="'+producto.productos_simples[0]['foto']+'" alt="">';
 
                 let div2Info = document.createElement('div');
                     div2Info.classList.add('info-item');
-                    div2Info.innerHTML =   '<div class="titulo-item">$'+categoria.productos_simples[0]['precio_x_unidad']+'</div>\
-                                            <div class="valor-item">'+categoria.productos_simples[0]['titulo']+'</div>';
+                    div2Info.innerHTML =   '<div class="titulo-item">$'+producto.productos_simples[0]['precio_x_unidad']+'</div>\
+                                            <div class="valor-item">'+producto.productos_simples[0]['titulo']+'</div>';
                                             //<div class="descripcion-item">'+categoria.productos_simples[0]['descripcion_corta']+'</div>
                 let div3AddConte = document.createElement('div');
                     div3AddConte.classList.add('btn-item');
+                    div3AddConte.onclick = function(){
+                        window.location.hash = "producto?id="+producto.id;
+                        localStorage.setItem('cotizar_producto', JSON.stringify(producto))
+                        mostrarSeccion('cotizar_producto'); 
+                    };
                         let div3Img = document.createElement('img');
                             div3Img.classList.add('palermo_img_btn')
                             div3Img.setAttribute('src', './resources/Agregar_alcarrito.svg');
                         let div3AddBtn = document.createElement('span');
                             div3AddBtn.classList.add('agregar-text');
-                            div3AddBtn.onclick = function(){mostrarSeccion('cotizar_producto'); localStorage.setItem('cotizar_producto', JSON.stringify(categoria))};
                             div3AddBtn.innerHTML = 'Agregar';
                     div3AddConte.appendChild(div3Img);
                     div3AddConte.appendChild(div3AddBtn);
 
-            producto.appendChild(div1Img)
-            producto.appendChild(div2Info)
-            producto.appendChild(div3AddConte)
-        document.getElementById(id_lista).appendChild(producto);
+            item.appendChild(div1Img)
+            item.appendChild(div2Info)
+            item.appendChild(div3AddConte)
+        document.getElementById(id_lista).appendChild(item);
     });
 }
+
+
+// editar perfil
+_edit_perfil = function(event)
+{
+    event.preventDefault();
+    console.log('enviando edición');
+    var requestOptions = { method: 'PUT', redirect: 'follow' };
+    let nombre = document.getElementById('nombre_perfil').value;
+    let telefono = document.getElementById('telefono_perfil').value;
+    let password = document.getElementById('password_perfil').value;
+    // let password_confirmation = document.getElementById('password_confirmation_perfil').value;
+    let email = document.getElementById('email_perfil').value;
+    if(password !== '')
+    {
+        $user = JSON.parse(localStorage.getItem('user'))
+        fetch(`${url_ajax}/user/${$user.id}/update?nombre=${nombre}&telefono=${telefono}&password=${password}&email=${email}`, requestOptions)
+          .then(response => response.json())
+          .then(result => 
+                {
+                    alert('Cambios guardados correctamente');
+                    $r.cls('user', JSON.stringify(result));
+                    mostrarDatosUsuario();
+                }
+            )
+          .catch(error => console.log('error', error));
+    } else {
+        alert('Ingrese la contraseña');
+    }
+      
+}
+document.getElementById('form-edit-perfil').addEventListener('submit', _edit_perfil, false);
