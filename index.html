@@ -3,7 +3,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <!-- <meta http-equiv=Content-Security-Policy content="
+        <meta http-equiv=Content-Security-Policy content="
                 default-src 'self'; 
                 script-src * https://www.googletagmanager.com/ https://*.palermomateriales.com.ar/ https://sdk.mercadopago.com/js/v2 https://api.palermomateriales.com.ar/contenido-app.json 'unsafe-eval' 'unsafe-inline' ; 
                 connect-src *  blob: data:; 
@@ -11,7 +11,7 @@
                 img-src 'self' https://*.palermomateriales.com.ar/ https://sdk.mercadopago.com/js/v2 https://www.mercadolibre.com/* blob: data: chrome-extension-resource:; 
                 frame-src 'self' https://www.google.com/ https://sdk.mercadopago.com/js/v2 data: chrome-extension-resource:; 
                 font-src 'self' data: chrome-extension-resource:; 
-                media-src *;"> -->
+                media-src *;">
         <script src="https://sdk.mercadopago.com/js/v2"></script>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -853,8 +853,7 @@
                         document.getElementById('btn_pay_mp').classList.add('loading');
                         document.getElementById('btn_pay_mp').innerHTML = "Procesando pago...";
 
-                        console.log('cardFormData received, creating payment...');
-                        fetch("https://test.api.palermomateriales.com.ar/api/orden/process_payment", {
+                        fetch("https://api.palermomateriales.com.ar/api/orden/process_payment", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json",
@@ -917,7 +916,7 @@
                             //  callback llamado cuando el usuario haga clic en el botón enviar los datos
                             //  ejemplo de envío de los datos recolectados por el Brick a su servidor
                             return new Promise((resolve, reject) => {
-                              fetch('https://test.api.palermomateriales.com.ar/api/orden/process_payment', {
+                              fetch('https://api.palermomateriales.com.ar/api/orden/process_payment', {
                                 method: "POST",
                                 headers: {
                                   "Content-Type": "application/json",
