@@ -3,15 +3,15 @@
     <head>
         
         <meta charset="UTF-8">
-        <meta http-equiv=Content-Security-Policy content="
+        <!-- <meta http-equiv=Content-Security-Policy content="
                 default-src 'self'; 
                 script-src * https://www.googletagmanager.com/ https://*.palermomateriales.com.ar/ https://sdk.mercadopago.com/js/v2 https://api.palermomateriales.com.ar/contenido-app.json 'unsafe-eval' 'unsafe-inline' ; 
                 connect-src *  blob: data:; 
                 style-src 'self' data: chrome-extension-resource: 'unsafe-inline'; 
-                img-src 'self' https://*.palermomateriales.com.ar/ https://sdk.mercadopago.com/js/v2 https://www.mercadolibre.com/* blob: data: chrome-extension-resource:; 
+                img-src 'self' https://*.palermomateriales.com.ar/* https://*.palermomateriales.com.ar/ https://sdk.mercadopago.com/js/v2 https://www.mercadolibre.com/* blob: data: chrome-extension-resource:; 
                 frame-src 'self' https://www.google.com/ https://sdk.mercadopago.com/js/v2 data: chrome-extension-resource:; 
                 font-src 'self' data: chrome-extension-resource:; 
-                media-src *;">
+                media-src *;"> -->
         <script src="https://sdk.mercadopago.com/js/v2"></script>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -355,10 +355,10 @@
                     </div>
                 </div>
                 <div class="cont-input-cotizar">
-                    <p class="comentario">Ingrese metro cuadrado</p>
+                    <p class="comentario">Ingrese cantidad</p>
                     <div class="btn-set-cant" >
                         <span  data-set-cant="bajar" data-id-input="cant_cot_pro">-</span>
-                        <input type="number" value="1" id="cant_cot_pro" name="cantidad">
+                            <input type="number" value="1" id="cant_cot_pro" name="cantidad" onkeyup="handleCantInputKeyUp(event)">
                         <span  data-set-cant="subir" data-id-input="cant_cot_pro">+</span>
                     </div>
                     <button class="button primary" type="button" onclick="cotizarProductoSimple('cant_cot_pro', 'btn_add_cot_pro')" id="btn_add_cot_pro">AGREGAR AL CARRITO</button>
@@ -638,7 +638,7 @@
                     <form action="#" method="post" class="cont-set-cant" id="form-envio-coti-combinado">
                         <div class="btn-set-cant" >
                             <span  data-set-cant="bajar" data-id-input="mt-cuadrados-cot">-</span>
-                            <input type="number" value="1" id="mt-cuadrados-cot" name="cantidad">
+                            <input type="number" value="1" id="mt-cuadrados-cot" name="cantidad" onkeyup="handleCantMtInputKeyUp(event)">
                             <input type="hidden" value="" id="id-prodcombi-coti" name="producto_combinado_id">
                             <span  data-set-cant="subir" data-id-input="mt-cuadrados-cot">+</span>
                         </div>
@@ -653,15 +653,15 @@
                     </div>
                     <div id="items-resul-cotizacion">
                         <div class="item-list-res">
-                            <p>Placa durlock STD 9.5 1200x2400</p>
-                            <p>1</p>
-                            <p>$1456</p>
+                            <p>-</p>
+                            <p>-</p>
+                            <p>-</p>
                         </div>
                     </div>
                     <div class="footer-list-cot">
                         <p>TOTAL</p>
-                        <p id="total-items-cot">4</p>
-                        <p id="total-cot">$6608</p>
+                        <p id="total-items-cot"></p>
+                        <p id="total-cot">-</p>
                     </div>
                 </div>
                 
@@ -737,11 +737,6 @@
                         <div class="item-terminos-per">
                             <span class="info-text">Términos y Condiciones</span>
                             <div id="nuestros-telefonos">
-                                <p class="terminos-data">Si tenés o estás desarrollando una aplicación, una plataforma o un E-commerce, es necesario que cumplas con algunas obligaciones como por ejemplo contar con términos y condiciones, políticas de privacidad, registrar tus bases de datos, y otras cosas más. Te ofrecemos packs accesibles para que cumplas con todas tus obligaciones y además puedas proteger tu proyecto. Redactamos términos y condiciones  y políticas de privacidad.  Pagá en cuotas con mercado pago.</p>
-                                <p class="terminos-data">Si tenés o estás desarrollando una aplicación, una plataforma o un E-commerce, es necesario que cumplas con algunas obligaciones como por ejemplo contar con términos y condiciones, políticas de privacidad, registrar tus bases de datos, y otras cosas más. Te ofrecemos packs accesibles para que cumplas con todas tus obligaciones y además puedas proteger tu proyecto. Redactamos términos y condiciones  y políticas de privacidad.  Pagá en cuotas con mercado pago.</p>
-                                <p class="terminos-data">Si tenés o estás desarrollando una aplicación, una plataforma o un E-commerce, es necesario que cumplas con algunas obligaciones como por ejemplo contar con términos y condiciones, políticas de privacidad, registrar tus bases de datos, y otras cosas más. Te ofrecemos packs accesibles para que cumplas con todas tus obligaciones y además puedas proteger tu proyecto. Redactamos términos y condiciones  y políticas de privacidad.  Pagá en cuotas con mercado pago.</p>
-                                <p class="terminos-data">Si tenés o estás desarrollando una aplicación, una plataforma o un E-commerce, es necesario que cumplas con algunas obligaciones como por ejemplo contar con términos y condiciones, políticas de privacidad, registrar tus bases de datos, y otras cosas más. Te ofrecemos packs accesibles para que cumplas con todas tus obligaciones y además puedas proteger tu proyecto. Redactamos términos y condiciones  y políticas de privacidad.  Pagá en cuotas con mercado pago.</p>
-                                <p class="terminos-data">Si tenés o estás desarrollando una aplicación, una plataforma o un E-commerce, es necesario que cumplas con algunas obligaciones como por ejemplo contar con términos y condiciones, políticas de privacidad, registrar tus bases de datos, y otras cosas más. Te ofrecemos packs accesibles para que cumplas con todas tus obligaciones y además puedas proteger tu proyecto. Redactamos términos y condiciones  y políticas de privacidad.  Pagá en cuotas con mercado pago.</p>
                             </div>
                         </div>
                     </div>
@@ -788,12 +783,12 @@
                                 <tr class="detalle">
                                     <td>Piedra partida </td>
                                     <td>Cant.: 2</td>
-                                    <td colspan="2">Precio: $42769</td>
+                                    <td colspan="2">Precio: *</td>
                                 </tr>
                                 <tr class="detalle">
                                     <td>Placa durlock plata simil STD 9.5 1200x2400</td>
                                     <td>Cant.: 1</td>
-                                    <td colspan="2">Precio: $7679</td>
+                                    <td colspan="2">Precio: *</td>
                                 </tr>
                             </table>
                         </div>
@@ -801,7 +796,7 @@
                     <table class="tfoot">
                         <tr>
                           <td class="text-bajada" colspan="2">Total</td>
-                          <td class="text-bajada" colspan="2" id="valor_total_carrito">$6608</td>
+                          <td class="text-bajada" colspan="2" id="valor_total_carrito">*</td>
                         </tr>
                     </table>
                     <table class="btn-add-produc">

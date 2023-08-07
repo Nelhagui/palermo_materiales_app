@@ -60,56 +60,7 @@ const ProcessResponseMP = (status_detail) => {
 }
 
 //carga iniciar
-{
-    procesa_respuesta_inicial = function(data)
-    {
-        if(data.hasOwnProperty('terminos'))
-        {
-            document.getElementById('terminos-condiciones').innerHTML = data.terminos;
-        }
-        if(data.hasOwnProperty('informacion'))
-        {
-            let informacion = data.informacion;
-
-            document.getElementById("nuestros-telefonos").innerHTML = '';
-            informacion.telefonos.forEach(telefono => {
-                let p = document.createElement('p');
-                    p.innerHTML = telefono;
-                    document.getElementById("nuestros-telefonos").appendChild(p);
-            });
-
-            document.getElementById("consultas-por-mail").innerHTML = '';
-            informacion.emails.forEach(email => {
-                let p = document.createElement('p');
-                    p.innerHTML = email;
-                    document.getElementById("consultas-por-mail").appendChild(p);
-            });
-
-            document.getElementById("horarios-de-atencion").innerHTML = '';
-            informacion.horarios.forEach(horario => {
-                let p = document.createElement('p');
-                    p.innerHTML = horario;
-                    document.getElementById("horarios-de-atencion").appendChild(p);
-            });
-
-            document.getElementById("ubicaciones").innerHTML = '';
-            informacion.ubicaciones.forEach(ubicacion => {
-                let p = document.createElement('p');
-                    p.innerHTML = ubicacion;
-                    document.getElementById("ubicaciones").appendChild(p);
-            });
-
-            document.getElementById("sitio-web").innerHTML = informacion.sitio;
-
-        }
-
-    }
-    let _obd = {"url": url_public+'contenido-app.json', "metodo": 'GET', "datos": 'h=categorias', "recibe": procesa_respuesta_inicial };
-    $r.ajax(_obd);
-    delete procesa_respuesta_inicial, _obd;
-
-    cargaInicialHome();
-}
+cargaInicialHome();
 
 //fin carga inicial
 
@@ -180,26 +131,50 @@ document.querySelectorAll('a[data-link]').forEach(element =>
     }
 });
 
-// seteo de cantidades
+// seteo de cantidades y validacion
 document.querySelectorAll('span[data-set-cant]').forEach(bton => 
 {
+    let producto = JSON.parse(localStorage.getItem('cotizar_producto'))
     bton.onclick = function() 
     {
         let valueActual = document.getElementById(this.dataset.idInput).value
         if(this.dataset.setCant == 'subir')
         {
-            valueActual = Number(Number(valueActual)+1);
+            if(Number(Number(valueActual)+1) > producto.productos_simples[0].stock){
+                valueActual = producto.productos_simples[0].stock;
+            } else {
+                valueActual = Number(Number(valueActual)+1);
+            }
         }
         else if(this.dataset.setCant == 'bajar')
         {
             if(valueActual>1)
             {
-                valueActual = Number(Number(valueActual)-1);
+                if(Number(valueActual)-1 > 0){
+                    valueActual = Number(Number(valueActual)-1);
+                }
             }
         }
         document.getElementById(this.dataset.idInput).value = valueActual
     }
 })
+
+function handleCantInputKeyUp(event) {
+    let producto = JSON.parse(localStorage.getItem('cotizar_producto'))
+    const valueActual = event.target.value;
+    if (Number(valueActual) <= 0 && valueActual.length > 0) {
+        event.target.value = 1;
+    }
+    if(valueActual.length > 0 && Number(valueActual) > producto.productos_simples[0].stock){
+        event.target.value = producto.productos_simples[0].stock;
+    }
+}
+function handleCantMtInputKeyUp(event) {
+    const valueActual = event.target.value;
+    if (Number(valueActual) <= 0 && valueActual.length > 0) {
+        event.target.value = 1;
+    }
+}
 
 
 //funcion que solo valida si algunos datos están actualizados o no para volver a descargarlos
@@ -1108,17 +1083,14 @@ function mostrarSeccion(seccion)
             if(document.querySelector('[data-seccion="carrito"').classList.contains('show') == false)
             {
                 ocultarElementoEmergente();
-
-                document.querySelector('[data-paso="detalle"]').classList.add('paso-actual')
-                document.querySelector('[data-paso="pago"]').classList.remove('paso-actual')
-
-                document.querySelector('[data-seccion="carrito"').classList.add('show');
-
                 let carrito = $r.gls('carrito');
+
                 if(carrito.length > 0) 
                 {
+                    document.querySelector('[data-paso="detalle"]').classList.add('paso-actual')
+                    document.querySelector('[data-paso="pago"]').classList.remove('paso-actual')
+                    document.querySelector('[data-seccion="carrito"').classList.add('show');
                     mostrarItemsCarrito(carrito);
-                    console.log('voy 3')
                 }
                 else {
                     mostrar = false;
@@ -1126,21 +1098,9 @@ function mostrarSeccion(seccion)
                 }
             } else {
                 mostrar = false;
-                console.log('es false')
             }
         break;
-
-        case 'informacion':    
-            console.log('en informacion')
-        break;
-
-
-        case 'terminos':
-            console.log('terminos');
-        break;
-    
         default:
-            console.log('estoy en default')
         break;
     }
 
@@ -1195,7 +1155,6 @@ function cargaInicialHome()
         document.getElementById('cont_btn_cat_home').innerHTML = '';
         data.forEach( categoria => {
             let boton = document.createElement('button');
-            console.log(_variableGlobal)
             if(_variableGlobal.vuelta == 0)
             {
                 boton.classList.add('btselected');
@@ -1242,7 +1201,6 @@ function seleccionarCategoriaHome(categoria_id)
                                 <div class="btn-item loading">\
                                 </div>';
     document.getElementById('lista_items_home').appendChild(div1);
-    console.log(categoria_id);
     procesa_cat_home = function(data)
     {
         maquetarProductoSimple(data, 'lista_items_home')
