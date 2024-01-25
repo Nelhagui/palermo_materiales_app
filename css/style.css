@@ -24,6 +24,10 @@ main {padding-top: var(--height-header);}
 .title-p{
     font-family: 'gotham-b';
 }
+
+*{
+    font-family: 'gotham-l';
+}
 /* spinner */
 .spinner {
     /* Size */
@@ -852,9 +856,14 @@ div.datos-user .user-title
     display: flex;
     background-color: white;
     padding: 1rem;
-    margin-top: 3rem;
+    margin-top: 1rem;
     box-sizing: border-box;
     border-radius: var(--border-radius-btn);
+}
+.mt-22
+{
+    margin-top: 1rem;
+    margin-left: 0.5rem;
 }
 .card-cotizar .cont-img {
     min-width: 30%;
@@ -1026,7 +1035,7 @@ tr.tr-thead {
     background: var(--color-one);
 }
 tr.tr-thead th {
-    padding: 1rem 0;
+    padding: 1rem 0.5rem;
 }
 tr.tr-thead th:first-child {
     padding-left: 1rem;
@@ -1058,17 +1067,21 @@ tr.detalle td {
     border-bottom: .5px solid var(--border-color);
 }
 tr.detalle td:first-child {
-    padding-left: 1.8rem !important;
+    padding-left: 0.8rem !important;
     padding-right: 0.5rem;
 }
 tr.detalle td:last-child {
     padding-right: .8rem;
+    text-align: right;
 }
 div#carrito-detalle {
     border-left: .5px solid var(--border-color);
     border-right: .5px solid var(--border-color);
 }
 
+a.one {
+    color: var(--color-one);
+}
 tr.item-combinado td {
     border-bottom: .5px solid var(--border-color);
 }
@@ -1707,4 +1720,12 @@ input[type="number"] {
     max-width: 80px;
     border: none;
     border-bottom: 1px solid #cdcdcd;
+}
+span.bgcerrar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
 }

@@ -135,7 +135,7 @@
             </ul>
         </nav>
         <div class="cont-elementos-emergentes">
-            <div class="elemento-emergente" data-show="iniciar">
+            <div class="elemento-emergente" data-show="iniciar"> <span class="bgcerrar" data-accion="cerrar"></span>
                 <div class="login">
                     <div class="btn-cerrar" data-accion="cerrar">x</div>
                     <form action="#" id="form-login">
@@ -159,7 +159,7 @@
                     <button data-accion='registrarme' class="button secundary">REGISTRARME</button>
                 </div>
             </div>
-            <div class="elemento-emergente" data-show="registrarme">
+            <div class="elemento-emergente" data-show="registrarme"> <span class="bgcerrar" data-accion="cerrar"></span>
                 <div class="registro">
                     <div class="btn-cerrar" data-accion="cerrar">x</div>
                     <form action="" method="post" autocomplete="off" id="form-registro">
@@ -194,7 +194,7 @@
                     <button data-accion='iniciar' class="button secundary">INICIAR SESION</button>
                 </div>
             </div>
-            <div class="elemento-emergente" data-show="edit-perfil" data-user>
+            <div class="elemento-emergente" data-show="edit-perfil" data-user> <span class="bgcerrar" data-accion="cerrar"></span>
                 <div class="edit-perfil">
                     <div class="btn-cerrar" data-accion="cerrar">x</div>
                     <form action="" id="form-edit-perfil" autocomplete="off">
@@ -228,7 +228,7 @@
                     </form>
                 </div>
             </div>
-            <div class="elemento-emergente" data-show="add-items-cart">
+            <div class="elemento-emergente" data-show="add-items-cart"> <span class="bgcerrar" data-accion="cerrar"></span>
                 <div class="resp-add-items-cart">
                     <div class="btn-cerrar" data-accion="cerrar">x</div>
                     <div class="icon-animado">
@@ -241,7 +241,7 @@
                     
                 </div>
             </div>
-            <div class="elemento-emergente" data-show="abonar-mp">
+            <div class="elemento-emergente" data-show="abonar-mp"> <span class="bgcerrar" data-accion="cerrar"></span>
                 <div class="abononar-mp">
                     <div class="btn-cerrar" data-accion="cerrar">x</div>
                     <div>
@@ -256,7 +256,7 @@
                         <button type="button" class="button primary approved" onclick="createPayment();" id="btn_pay_mp">PAGAR</button>
                 </div>
             </div>
-            <div class="elemento-emergente" data-show="coordinar-mail">
+            <div class="elemento-emergente" data-show="coordinar-mail"> <span class="bgcerrar" data-accion="cerrar"></span>
                 <div class="coordi-mail">
                     <div class="btn-cerrar" data-accion="cerrar">x</div>
                     <div>
@@ -266,9 +266,9 @@
                         <h1>Coordinar pago por email</h1>
                         <br>
                         <br>
-                        <p>Escribimos a pedidos@palermomateriales.com.ar, haciendo referencia a tu número de orden con 72hs. de anticipación para poder coordinar la forma de pago y la entrega.</p>
+                        <p>Escribinos a <a href="mailto:clientes@palermomateriales.com.ar" target="_blank" class="one">clientes@palermomateriales.com.ar</a>, haciendo referencia a tu número de orden con 72hs. de anticipación para poder coordinar la forma de pago y la entrega.</p>
                         <br>
-                        <p>También podés hacerlo a través de nuestro WhatsApp (011) 8986-767756 de Lunes a viernes.</p>
+                        <p>También podés hacerlo a través de nuestro WhatsApp <a href="https://wa.me/+541121849984" class="one" target="_blank">(011) 2184-9984</a> opción G de Lunes a viernes.</p>
                         <br>
                     </div>
                     <div>
@@ -311,7 +311,7 @@
                 <div class="op-seccion">
                     <div class="cont-buscador">
                         <div class="search">
-                            <input type="text" value="" name="buscar" id="buscar_prod_home" placeholder="buscar producto">
+                            <input type="text" value="" name="buscar" id="buscar_prod_home" placeholder="Buscar producto">
                         </div>
                     </div>
                     <button class="button primary" type="button" onclick="buscar_producto('lista_items_home', 'buscar_prod_home' )">BUSCAR</button>
@@ -343,6 +343,9 @@
                 </div> 
             </div>
             <div data-seccion="cotizar_producto" class="seccion">
+                <a href="#home" class="mt-22" onclick="mostrarSeccion('home')">
+                    < Regresar
+                </a>
                 <div class="card-cotizar" id="card_cotizar_producto">
                     <div class="cont-img loading">
                     </div>
@@ -394,7 +397,7 @@
                 <div class="op-seccion">
                     <div class="cont-buscador">
                         <div class="search">
-                            <input type="text" value="" name="producto_buscado" id="producto_buscado" placeholder="buscar producto">
+                            <input type="text" value="" name="producto_buscado" id="producto_buscado" placeholder="Buscar producto">
                         </div>
                         <button class="button primary" type="button" onclick="buscar_producto('lista_items_productos', 'producto_buscado', 'cant_form_buscar_prod' )">BUSCAR</button>
                     </div>
@@ -802,7 +805,7 @@
                     <table class="btn-add-produc">
                         <tr>
                             <td>
-                                <a class="button secundary" type="button" data-link="cotizar" ><img class="img_descarga" src="./resources/Carrito_DescargaOrden.svg">AGREGAR MÁS PRODUCTOS</a>
+                                <a class="button secundary" href="#productos" onclick="mostrarSeccion('productos')" ><img class="img_descarga" src="./resources/Carrito_DescargaOrden.svg">AGREGAR MÁS PRODUCTOS</a>
                             </td>
                         </tr>
                     </table>
@@ -822,7 +825,7 @@
                     </div>
                     <div class="opc-pagos" id="opc_pagos">
                         <p class="text-cotizar">Formas de pago</p>
-                        <span class="text-bajada">Para coordinar la entrega deberás constacarte al (011) 2184-9984 Opcion 4 <br> de Lunes a Viernes. </span>
+                        <span class="text-bajada">Para coordinar la entrega deberás contactar al <a href="https://wa.me/+541121849984" class="one" target="_blank">(011) 2184-9984</a> Opcion G<br> de Lunes a Viernes. </span>
                         <label for="mp_radio" class="opcion-pago button secundary"> 
                             <input type="radio" class="metodo_pago_radio" id="mp_radio" value="mp" name="metodo-pago"> Abonar con Mercado Pago
                         </label>

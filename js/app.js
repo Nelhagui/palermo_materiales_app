@@ -162,7 +162,7 @@ document.querySelectorAll('span[data-set-cant]').forEach(bton =>
 function handleCantInputKeyUp(event) {
     let producto = JSON.parse(localStorage.getItem('cotizar_producto'))
     const valueActual = event.target.value;
-    if (Number(valueActual) <= 0 && valueActual.length > 0) {
+    if ((Number(valueActual) <= 0 && valueActual.length > 0)) {
         event.target.value = 1;
     }
     if(valueActual.length > 0 && Number(valueActual) > producto.productos_simples[0].stock){
@@ -350,7 +350,7 @@ function traerSubcategorias(idElemento, tipo, idCategoria)
                                         document.querySelector('[data-seccion="cotizar-calculo"]').classList.add('show');
                                         document.getElementById('cod-cot-cal').innerHTML = this.data.id;
                                         document.getElementById('titulo-cot-cal').innerHTML = this.data.titulo != null || this.data.titulo != undefined ? this.data.titulo : '';
-                                        document.getElementById('descrip-cot-cal').innerHTML = this.data.descripcion_corta != null || this.data.descripcion_corta != undefined ? this.data.descripcion_corta : '';
+                                        document.getElementById('descrip-cot-cal').innerHTML = this.data.descripcion_larga != null || this.data.descripcion_larga != undefined ? this.data.descripcion_larga : '';
                                         document.getElementById('img-cot-cal').src = this.data.foto
                                     };
                                     btnCotizar.innerHTML = '<img src="./resources/icon-cotizar.svg" alt="">\
@@ -729,25 +729,28 @@ delete _envio_coti_combi;
 //sacar producto de  
 function sacarProductoDeCarrito(idElmente)
 {
-    let carrito = $r.gls('carrito');
-    let newCarrito = [];
-    if(carrito.length > 0 )
+    if(confirm("¿Desea eliminar el producto?"))
     {
-        carrito.forEach(item => {
-            if(item.id !== idElmente)
-                newCarrito.push(item);
-        });
-        if(newCarrito.length > 0)
+        let carrito = $r.gls('carrito');
+        let newCarrito = [];
+        if(carrito.length > 0 )
         {
-            document.getElementById('cant-items-cart').innerHTML = newCarrito.length;
-            document.getElementById('cant-items-cart').classList.remove('dinone');
+            carrito.forEach(item => {
+                if(item.id !== idElmente)
+                    newCarrito.push(item);
+            });
+            if(newCarrito.length > 0)
+            {
+                document.getElementById('cant-items-cart').innerHTML = newCarrito.length;
+                document.getElementById('cant-items-cart').classList.remove('dinone');
+            }
+            else {
+                document.getElementById('cant-items-cart').innerHTML = '';
+                document.getElementById('cant-items-cart').classList.add('dinone');
+            }
+            $r.cls('carrito', JSON.stringify(newCarrito));
+            mostrarItemsCarrito($r.gls('carrito'));
         }
-        else {
-            document.getElementById('cant-items-cart').innerHTML = '';
-            document.getElementById('cant-items-cart').classList.add('dinone');
-        }
-        $r.cls('carrito', JSON.stringify(newCarrito));
-        mostrarItemsCarrito($r.gls('carrito'));
     }
 }
 
@@ -1040,7 +1043,7 @@ function mostrarSeccion(seccion)
                                                                                             <h2>'+producto.productos_simples[0]['titulo']+'</h2>\
                                                                                             <span class="comentario" id="pre_cot_pro"> $'+producto.productos_simples[0]['precio_x_unidad']+'</span>\
                                                                                         </div>\
-                                                                                        <p class="comentario">'+producto.productos_simples[0]['descripcion_corta']+'</p>\
+                                                                                        <p class="comentario">'+producto.productos_simples[0]['descripcion_larga']+'</p>\
                                                                                 </div>';
             }
         break;
@@ -1130,21 +1133,30 @@ function cotizarProductoSimple(id_cantidad, boton_id)
         method: 'POST',
         redirect: 'follow'
     };
-    fetch(url_ajax+"/cotizador/cotizar?cantidad="+cantidad+"&producto_combinado_id="+producto.id+"", requestOptions)
-    .then(response => response.json())
-    .then(result => {
-        addCart(result)
-        document.getElementById(boton_id).disabled = false;
-        document.getElementById(boton_id).innerHTML = "AGREGAR AL CARRITO";
-        document.getElementById(boton_id).classList.remove('loading');
-        toggleEmergente('add-items-cart');
-    })
-    .catch(error => {
-        console.log('error', error)
-        document.getElementById(boton_id).disabled = false;
-        document.getElementById(boton_id).innerHTML = "AGREGAR AL CARRITO";
-        document.getElementById(boton_id).classList.remove('loading');
-    });
+
+    if(cantidad != "")
+    {
+        fetch(url_ajax+"/cotizador/cotizar?cantidad="+cantidad+"&producto_combinado_id="+producto.id+"", requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            addCart(result)
+            document.getElementById(boton_id).disabled = false;
+            document.getElementById(boton_id).innerHTML = "AGREGAR AL CARRITO";
+            document.getElementById(boton_id).classList.remove('loading');
+            toggleEmergente('add-items-cart');
+        })
+        .catch(error => {
+            console.log('error', error)
+            document.getElementById(boton_id).disabled = false;
+            document.getElementById(boton_id).innerHTML = "AGREGAR AL CARRITO";
+            document.getElementById(boton_id).classList.remove('loading');
+        });
+    }
+    else
+    {
+        alert("Ingrese una cantidad válida");
+        document.getElementById(id_cantidad).value = 1;
+    }
    
 }
 
