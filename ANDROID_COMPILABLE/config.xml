@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="rd.palermomateriales.rc" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Palermo Materiales</name>
+    <description>
+        Sistema de e-commerce para venta mayorista de los clientes de PM Argentina
+    </description>
+    <author email="dev@cordova.apache.org" href="https://cordova.apache.org">
+        RDigital Team
+    </author>
+    <content src="index.html" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <access origin="*" />
+    <platform name="android">
+        <preference name="android-targetSdkVersion" value="33" />
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
+            <application android:usesCleartextTraffic="true" />
+        </edit-config>
+        <icon src="www/res/mipmap-hdpi/icon.png" density="ldpi" />
+        <icon src="www/res/mipmap-hdpi/icon.png" density="hdpi" />
+        <icon src="www/res/mipmap-mdpi/icon.png" density="mdpi" />
+        <icon src="www/res/mipmap-xhdpi/icon.png" density="xhdpi" />
+        <icon src="www/res/mipmap-xxhdpi/icon.png" density="xxhdpi" />
+        <icon src="www/res/mipmap-xxxhdpi/icon.png" density="xxxhdpi" />
+        
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="www/res/mipmap-xxxhdpi/icon.png" />
+
+        <preference name="FadeSplashScreen" value="true"/>
+        <preference name="FadeSplashScreenDuration" value="1"/>
+        <preference name="AutoHideSplashScreen" value="true" />
+    </platform>
+    <preference name="Orientation" value="portrait" />
+    <preference name="android-windowSoftInputMode" value="stateVisible|adjustResize" />
+</widget>
