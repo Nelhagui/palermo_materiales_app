@@ -1,2 +1,4 @@
 
 .DS_Store
+ANDROID_COMPILABLE/node_modules/
+ANDROID_COMPILABLE/platforms/

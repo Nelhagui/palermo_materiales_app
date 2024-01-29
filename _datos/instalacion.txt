@@ -1,0 +1,51 @@
+--- Paso 1 ----
+keytool -genkey -v -keystore R:\servers\htdocs\clientes\PALERMOMATERIALES\palermo_materiales_app\_datos/corralones.keystore -alias corralones -keyalg RSA -keysize 2048 -validity 10000
+
+Volver a escribir la contraseña nueva: 
+C0rralon!
+
+¿Cuáles son su nombre y su apellido?
+  [Unknown]:  Palermo Materiales
+¿Cuál es el nombre de su unidad de organización?
+  [Unknown]:  Palermo Materiales
+¿Cuál es el nombre de su organización?
+  [Unknown]:  Palermo Materiales
+¿Cuál es el nombre de su ciudad o localidad?
+  [Unknown]:  CABA
+¿Cuál es el nombre de su estado o provincia?
+  [Unknown]:  Buenos Aires
+¿Cuál es el código de país de dos letras de la unidad?
+  [Unknown]:  AR
+¿Es correcto CN=Palermo Materiales, OU=Palermo Materiales, O=Palermo Materiales, L=CABA, ST=Buenos Aires, C=AR?
+  [no]:  si
+
+---- Paso 2 -----  Una vez creada la keystore, se comienza por paso 2
+cordova build android --release
+
+----- Paso 2.1 ----- [PRUEBA DE FUNCIONAMIENTO]
+cd {Ruta donde esta la raiz de la app}./platforms/android
+gradle bundle
+
+----- Paso 2.2 ----- [PRUEBA DE FUNCIONAMIENTO - CAMBIA LA RUTA DE EXPORTACION] 
+C:\Program Files (x86)\Java\jre1.8.0_251\bin
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore R:\servers\htdocs\clientes\PALERMOMATERIALES\palermo_materiales_app\_datos/corralones.keystore  "R:\servers\htdocs\clientes\PALERMOMATERIALES\palermo_materiales_app\ANDROID_COMPILABLE\platforms\android\app\build\outputs\bundle\release\app-release.aab" corralones -storepass C0rralon!
+
+---- Paso 3 ----
+C:\Program Files\Java\jdk1.8.0_144\bin
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore R:\servers\htdocs\clientes\PALERMOMATERIALES\palermo_materiales_app\_datos/corralones.keystore C:\xampp\htdocs\Reiatsu\clientes\corralon\app_android\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk corralones
+
+C:\Users\reiat\AppData\Local\Android\sdk\build-tools\27.0.3  (o lugar de referencia del último zipalign)
+zipalign -v 4 C:\xampp\htdocs\Reiatsu\clientes\corralon\app_android\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk R:\servers\htdocs\clientes\PALERMOMATERIALES\palermo_materiales_app\_datos/versiones/corralones-v107.apk
+
+---- Paso 4 ----
+clientes@palermomateriales.com.ar
+Cabrera54542019pal
+
+---- Credenciales MP ----
+--- Modo Sandbox
+Public key:TEST-e8cbf9e0-5cc8-4291-998c-bc0040351799
+Access token:TEST-1202005748812342-060413-c91b355d63da58721bf8b8a50895caf4-202516856
+
+--- Modo Producción
+Public key: APP_USR-9a50cf8c-da4a-4a6d-9485-d30478fd7087
+Access token:APP_USR-1202005748812342-060413-f3b9101f08cfb722cbe547f116594378-202516856
